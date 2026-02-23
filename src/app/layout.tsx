@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter, Lexend } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 import Link from 'next/link';
@@ -7,14 +7,16 @@ import { Home, Zap, Server, Database, Layers, Code2, Cpu } from 'lucide-react';
 import { CopyrightYear } from "@/features/shared/components/CopyrightYear";
 import { ScrollToTop } from "@/features/shared/components/ScrollToTop";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
+  display: 'swap',
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const lexend = Lexend({
+  variable: "--font-lexend",
   subsets: ["latin"],
+  display: 'swap',
 });
 
 export const metadata: Metadata = {
@@ -91,14 +93,16 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased bg-black text-white min-h-screen flex flex-col`}>
+      <body className={`${inter.variable} ${lexend.variable} antialiased font-sans bg-black text-white min-h-screen flex flex-col`}>
         <header className="sticky top-0 z-50 border-b border-zinc-900 bg-black/80 backdrop-blur-md">
-          <div className="max-w-7xl mx-auto px-6 h-18 flex items-center justify-between">
-            <Link href="/" className="flex items-center gap-2 group shrink-0">
-              <div className="w-9 h-9 rounded-xl bg-blue-600 flex items-center justify-center group-hover:scale-110 transition-transform shadow-lg shadow-blue-500/20">
+          <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between gap-4">
+            <Link href="/" className="flex items-center gap-2 group shrink min-w-0">
+              <div className="w-9 h-9 rounded-xl bg-blue-600 flex items-center justify-center group-hover:scale-110 transition-transform shadow-lg shadow-blue-500/20 shrink-0">
                 <Code2 className="w-5 h-5 text-white" />
               </div>
-              <span className="font-bold tracking-tight text-lg sm:text-xl text-white">Performance<span className="text-blue-500 hidden sm:inline">Architecture</span><span className="text-blue-500 sm:hidden">Lab</span></span>
+              <span className="font-lexend font-bold tracking-tighter sm:tracking-tight text-sm sm:text-lg md:text-xl text-white truncate">
+                Performance<span className="text-blue-500">Architecture</span>
+              </span>
             </Link>
             
             <nav className="hidden lg:flex items-center gap-2">

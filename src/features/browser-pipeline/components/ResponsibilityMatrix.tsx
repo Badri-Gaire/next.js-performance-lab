@@ -124,7 +124,7 @@ export function ResponsibilityMatrix() {
          <h4 className="text-2xl font-bold text-white tracking-widest uppercase">The Bridge: Hydration</h4>
          <p className="text-sm text-zinc-400 max-w-3xl mx-auto font-medium leading-relaxed">
             Hydration is the critical moment where the <strong>Framework</strong> takes over the 
-            <strong> Browser&apos;s</strong> static DOM. It doesn&apos;t recreates the DOM from scratch—it 
+            <strong> Browser&apos;s</strong> static DOM. It doesn&apos;t recreate the DOM from scratch—it 
             walks the existing DOM and &quot;attaches&quot; event listeners, making the page interactive without a re-paint.
          </p>
          <div className="flex items-center justify-center gap-4">
@@ -137,7 +137,7 @@ export function ResponsibilityMatrix() {
   );
 }
 
-function ArrowRightIcon(props: any) {
+function ArrowRightIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
   );

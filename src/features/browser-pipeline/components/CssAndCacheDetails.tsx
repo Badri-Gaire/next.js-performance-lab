@@ -25,8 +25,8 @@ export function CssAndCacheDetails() {
       title: 'External (Link Tag)',
       icon: Globe,
       desc: 'Fetched via <link rel="stylesheet">.',
-      impact: 'Partial Blocking',
-      reason: 'Parallel fetch, but blocks render until downloaded.',
+      impact: 'Render Blocking',
+      reason: 'Standard fetch behavior. The browser halts painting until the file is fully downloaded.',
       color: 'text-green-400'
     }
   ];
