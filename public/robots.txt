@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://nextjs-performance-lab.vercel.app/sitemap-index.xml
