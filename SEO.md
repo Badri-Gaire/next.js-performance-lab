@@ -1,6 +1,6 @@
-# SEO & Performance Mastery Standards
+# SEO & Performance Architecture Mastery Standards
 
-This document defines the mandatory SEO and performance requirements for the **Next.js Performance Lab**. Every new feature, demo, or page MUST adhere to these standards to ensure maximum visibility and a premium user experience.
+This document defines the mandatory SEO and performance requirements for the **Next.js Performance Architecture Lab**. Every new feature, demo, or page MUST adhere to these standards to ensure maximum visibility and a premium user experience.
 
 ---
 

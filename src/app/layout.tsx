@@ -19,12 +19,12 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "Next.js Performance Lab | Advanced Rendering Showcase",
-    template: "%s | Next.js Performance Lab",
+    default: "Next.js Performance Architecture Lab | Advanced Rendering Showcase",
+    template: "%s | Next.js Performance Architecture Lab",
   },
   description: "Deep dive into Next.js 15+ architecture: SSR, SSG, ISR, CSR, and Browser Rendering Pipelines. Optimized for performance and Core Web Vitals.",
   alternates: {
-    canonical: "https://nextjs-performance-lab.vercel.app", // Update with your actual domain
+    canonical: "https://lab.badrigaire.com.np",
   },
   referrer: "strict-origin-when-cross-origin",
   robots: {
@@ -41,14 +41,14 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://nextjs-performance-lab.vercel.app",
-    title: "Next.js Performance Lab",
+    url: "https://lab.badrigaire.com.np",
+    title: "Next.js Performance Architecture Lab",
     description: "Master Next.js rendering strategies and browser pipelines.",
-    siteName: "Next.js Performance Lab",
+    siteName: "Next.js Performance Architecture Lab",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Next.js Performance Lab",
+    title: "Next.js Performance Architecture Lab",
     description: "Master Next.js rendering strategies and browser pipelines.",
   },
 };
@@ -70,9 +70,9 @@ export default function RootLayout({
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "WebPage",
-    "name": "Next.js Performance Lab",
+    "name": "Next.js Performance Architecture Lab",
     "description": "Advanced showcase of Rendering Strategies & Performance Patterns",
-    "url": "https://nextjs-performance-lab.vercel.app",
+    "url": "https://lab.badrigaire.com.np",
   };
 
   return (
@@ -93,7 +93,7 @@ export default function RootLayout({
               <div className="w-9 h-9 rounded-xl bg-blue-600 flex items-center justify-center group-hover:scale-110 transition-transform shadow-lg shadow-blue-500/20">
                 <Code2 className="w-5 h-5 text-white" />
               </div>
-              <span className="font-bold tracking-tight text-xl text-white">Performance<span className="text-blue-500">Lab</span></span>
+              <span className="font-bold tracking-tight text-xl text-white">Performance<span className="text-blue-500">Architecture</span></span>
             </Link>
             
             <nav className="hidden lg:flex items-center gap-2">
@@ -129,7 +129,7 @@ export default function RootLayout({
           <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-8">
             <div className="space-y-4 text-center md:text-left">
               <div className="flex items-center gap-2 justify-center md:justify-start">
-                <span className="font-bold text-lg text-white">Performance Lab</span>
+                <span className="font-bold text-lg text-white">Performance Architecture Lab</span>
               </div>
               <p className="text-sm text-zinc-500 max-w-xs leading-relaxed font-medium">
                 Advanced Next.js 15 demonstration project focusing on performance and architecture.

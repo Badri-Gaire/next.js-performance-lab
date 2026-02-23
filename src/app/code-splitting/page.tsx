@@ -7,7 +7,7 @@ import { Info } from 'lucide-react';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: "Next.js Code Splitting | Advanced Performance Lab",
+  title: "Next.js Code Splitting | Advanced Performance Architecture Lab",
   description: "Learn how to optimize Next.js applications using route-based and component-level code splitting. Reduce bundle sizes and improve Core Web Vitals with dynamic imports.",
   keywords: ["nextjs code splitting", "dynamic import nextjs", "next/dynamic guide", "optimizing nextjs bundles", "frontend performance optimization"],
 };

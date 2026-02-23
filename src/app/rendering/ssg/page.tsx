@@ -6,7 +6,7 @@ import { NextTopic } from '@/features/shared/components/NextTopic';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Next.js SSG | Static Site Generation Guide & Performance Lab',
+  title: 'Next.js SSG | Static Site Generation Guide & Architecture Lab',
   description: 'Learn how Next.js Static Site Generation (SSG) works at build time. Explore performance benefits, SEO advantages, and how to use generateStaticParams for dynamic routes.',
   keywords: ['nextjs ssg', 'static site generation nextjs', 'generateStaticParams example', 'nextjs performance', 'nextjs ssg vs ssr'],
 };

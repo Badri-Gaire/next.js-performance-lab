@@ -4,7 +4,7 @@ import { RenderingBadge } from '@/features/rendering/components/RenderingBadge';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: "Next.js Performance Lab | The Ultimate Architecture Sandbox",
+  title: "Next.js Performance Architecture Lab | The Ultimate Architecture Sandbox",
   description: "Master Next.js 15+ rendering strategies (SSR, SSG, ISR, CSR, RSC, PPR), browser pipelines, and performance optimization techniques. A comprehensive guide for senior frontend engineers.",
   keywords: ["nextjs performance guide", "nextjs architecture patterns", "rendering strategies nextjs 15", "browser rendering pipeline", "isr nextjs example", "rsc vs ssr"],
 };
@@ -96,7 +96,7 @@ export default function Home() {
         <h1 className="text-6xl md:text-8xl font-black tracking-tight text-white leading-[1.1]">
           Next.js <br />
           <span className="bg-linear-to-r from-blue-400 to-indigo-600 bg-clip-text text-transparent uppercase italic tracking-tighter">
-            Performance Lab
+            Performance Architecture Lab
           </span>
         </h1>
         <p className="text-zinc-400 max-w-2xl mx-auto text-xl leading-relaxed font-medium">

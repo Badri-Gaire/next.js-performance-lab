@@ -11,7 +11,7 @@ import { cn } from '@/lib/utils';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: "Partial Prerendering (PPR) | Next.js Performance Lab",
+  title: "Partial Prerendering (PPR) | Next.js Performance Architecture Lab",
   description: "Experience the future of Next.js with Partial Prerendering (PPR). Learn how to combine static shell performance with dynamic streaming content for the ultimate user experience.",
   keywords: ["nextjs 15 ppr", "partial prerendering guide", "nextjs experimental ppr", "static shell dynamic holes", "nextjs streaming performance"],
 };

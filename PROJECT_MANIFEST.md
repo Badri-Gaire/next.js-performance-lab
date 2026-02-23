@@ -1,4 +1,4 @@
-# Project Manifest: Next.js Performance Lab
+# Project Manifest: Next.js Performance Architecture Lab
 
 This document serves as the "Source of Truth" for AI agents and developers working on this project. It defines the architecture, design tokens, and implementation standards to ensure every new demo feature is consistent and premium.
 

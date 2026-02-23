@@ -1,9 +1,9 @@
-# 🧪 Next.js Performance Lab
+# 🧪 Next.js Performance Architecture Lab
 
 A premium, deep-dive demonstration project showcasing modern Next.js 15+ architecture, rendering strategies, and browser-level optimizations. Built to demonstrate mastery of Core Web Vitals and high-performance frontend engineering.
 
 ## 🚀 Live Demo
-**[View the Lab on Vercel](https://nextjs-performance-lab.vercel.app)** 
+**[View the Lab Live](https://lab.badrigaire.com.np)** 
 
 ---
 
