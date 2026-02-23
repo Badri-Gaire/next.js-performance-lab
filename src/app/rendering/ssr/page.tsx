@@ -6,9 +6,10 @@ import { NextTopic } from '@/features/shared/components/NextTopic';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: "Next.js SSR | Server-Side Rendering Deep Dive & Architecture Lab",
-  description: "Master Next.js Server-Side Rendering (SSR). Learn when to use force-dynamic, how to optimize TTFB, and implementation patterns for personalized data fetching.",
+  title: "SSR Architecture",
+  description: "Deep dive into Next.js Server-Side Rendering. Learn when to use force-dynamic and how to optimize TTFB performance.",
   keywords: ["nextjs ssr guide", "server side rendering nextjs", "force-dynamic nextjs", "ssr vs ssg nextjs", "dynamic rendering nextjs 15"],
+  alternates: { canonical: "https://lab.badrigaire.com.np/rendering/ssr" },
 };
 
 // Force SSR

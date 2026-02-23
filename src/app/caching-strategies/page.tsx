@@ -6,9 +6,10 @@ import { ShieldCheck } from 'lucide-react';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: "Next.js Caching Strategies | Advanced Performance Architecture Lab",
-  description: "Master the Next.js caching hierarchy. Learn how to coordinate browser, CDN, and server caches using Cache-Control, SSG, and ISR for global scale.",
+  title: "Caching Strategies",
+  description: "Master the Next.js caching hierarchy. Learn how to coordinate browser, CDN, and server caches for world-class performance.",
   keywords: ["nextjs caching guide", "cdn caching strategy", "browser cache control nextjs", "isr caching nextjs", "frontend performance optimization"],
+  alternates: { canonical: "https://lab.badrigaire.com.np/caching-strategies" },
 };
 
 export default function CachingPage() {

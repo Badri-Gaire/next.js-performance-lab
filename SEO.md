@@ -12,7 +12,7 @@ Next.js 15+ uses the `metadata` object or `generateMetadata` function. DO NOT us
 - [ ] **Title**: Unique per page. Format: `[Feature] | Next.js Performance Lab`.
 - [ ] **Description**: 150-160 characters. Must contain target keywords (e.g., "Next.js SSG", "Hydration").
 - [ ] **Canonical**: Always define `alternates.canonical` to avoid duplicate content issues from UTM parameters.
-- [ ] **OpenGraph/Twitter**: Provide absolute image URLs.
+- [x] **OpenGraph/Twitter**: Provide absolute image URLs.
 - [ ] **Referrer**: Set to `strict-origin-when-cross-origin`.
 
 ### Dynamic Metadata Pattern:

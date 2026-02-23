@@ -6,9 +6,10 @@ import { NextTopic } from '@/features/shared/components/NextTopic';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Next.js SSG | Static Site Generation Guide & Architecture Lab',
-  description: 'Learn how Next.js Static Site Generation (SSG) works at build time. Explore performance benefits, SEO advantages, and how to use generateStaticParams for dynamic routes.',
+  title: 'SSG Guide',
+  description: 'Master Static Site Generation in Next.js. Learn how to use generateStaticParams for world-class performance and SEO.',
   keywords: ['nextjs ssg', 'static site generation nextjs', 'generateStaticParams example', 'nextjs performance', 'nextjs ssg vs ssr'],
+  alternates: { canonical: "https://lab.badrigaire.com.np/rendering/ssg" },
 };
 
 // SSG is default for components that don't use dynamic data or force-dynamic

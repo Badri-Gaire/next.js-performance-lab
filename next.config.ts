@@ -1,7 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  // cacheComponents: true, // This was causing compatibility issues with 'force-dynamic'
+  // cacheComponents: true, // Merged with PPR in Next 16, currently conflicts with force-dynamic in demos
   images: {
     remotePatterns: [
       {

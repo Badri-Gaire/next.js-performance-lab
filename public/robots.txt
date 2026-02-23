@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://lab.badrigaire.com.np/sitemap-index.xml
+Sitemap: https://lab.badrigaire.com.np/sitemap.xml

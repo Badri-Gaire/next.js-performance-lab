@@ -19,10 +19,10 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "Next.js Performance Architecture Lab | Advanced Rendering Showcase",
-    template: "%s | Next.js Performance Architecture Lab",
+    default: "Next.js Performance Architecture Lab",
+    template: "%s | Next.js Performance Lab",
   },
-  description: "Deep dive into Next.js 15+ architecture: SSR, SSG, ISR, CSR, and Browser Rendering Pipelines. Optimized for performance and Core Web Vitals.",
+  description: "Advanced showcase of Rendering Strategies & Performance Patterns in Next.js 15+.",
   alternates: {
     canonical: "https://lab.badrigaire.com.np",
   },
@@ -51,6 +51,10 @@ export const metadata: Metadata = {
     title: "Next.js Performance Architecture Lab",
     description: "Master Next.js rendering strategies and browser pipelines.",
   },
+  icons: {
+    icon: "/icon.svg",
+    apple: "/icon.svg",
+  },
 };
 
 export default function RootLayout({
@@ -65,6 +69,7 @@ export default function RootLayout({
     { name: 'ISR', href: '/rendering/isr', icon: Database },
     { name: 'CSR', href: '/rendering/csr', icon: Layers },
     { name: 'RSC', href: '/rendering/rsc', icon: Cpu },
+    { name: 'PPR', href: '/rendering/ppr', icon: Zap },
   ];
 
   const jsonLd = {
@@ -141,6 +146,7 @@ export default function RootLayout({
                  <span className="text-[10px] font-bold text-zinc-600 uppercase tracking-[0.2em]">Concepts</span>
                  <Link href="/rendering/ssr" className="text-sm text-zinc-400 hover:text-blue-500 transition-colors">Server Rendering</Link>
                  <Link href="/rendering/isr" className="text-sm text-zinc-400 hover:text-blue-500 transition-colors">Revalidation</Link>
+                 <Link href="/rendering/ppr" className="text-sm text-zinc-400 hover:text-blue-500 transition-colors">Partial Prerendering</Link>
                </div>
                <div className="flex flex-col gap-3">
                  <span className="text-[10px] font-bold text-zinc-600 uppercase tracking-[0.2em]">Frontend</span>

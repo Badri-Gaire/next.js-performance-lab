@@ -11,9 +11,10 @@ import { NextTopic } from '@/features/shared/components/NextTopic';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: "Next.js ISR | Incremental Static Regeneration Mastery",
-  description: "Learn how to use Next.js ISR to update static content without a full rebuild. Master the Stale-While-Revalidate pattern for high-performance scale.",
+  title: "ISR Patterns",
+  description: "Learn how to use Next.js Incremental Static Regeneration to update static content instantly using the Stale-While-Revalidate pattern.",
   keywords: ["nextjs isr guide", "incremental static regeneration nextjs", "stale-while-revalidate nextjs", "nextjs isr vs ssg", "on-demand revalidation nextjs"],
+  alternates: { canonical: "https://lab.badrigaire.com.np/rendering/isr" },
 };
 
 export default async function ISRPage() {

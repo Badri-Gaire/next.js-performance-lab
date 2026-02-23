@@ -32,6 +32,7 @@ This project is a technical sandbox for exploring how data flows from the server
 - **Animations**: Framer Motion
 - **Icons**: Lucide React
 - **Typography**: Geist Sans & Mono
+- **Data Source**: [DummyJSON](https://dummyjson.com/) — Used for simulating realistic e-commerce data and API latency.
 
 ---
 

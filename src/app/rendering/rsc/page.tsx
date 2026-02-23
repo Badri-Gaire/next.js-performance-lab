@@ -7,9 +7,10 @@ import { Cpu, Box, Zap, History, Code2, ArrowDown } from 'lucide-react';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: "React Server Components (RSC) | Next.js Architecture Lab",
-  description: "Explore React Server Components (RSC) in Next.js 15. Learn how to eliminate client-side waterfalls, reduce bundle sizes, and optimize data fetching performance.",
+  title: "RSC & Waterfalls",
+  description: "Explore React Server Components in Next.js. Learn how to eliminate client-side waterfalls and reduce JavaScript bundles.",
   keywords: ["react server components guide", "rsc vs ssr", "nextjs rsc example", "waterfall optimization nextjs", "server components nextjs 15"],
+  alternates: { canonical: "https://lab.badrigaire.com.np/rendering/rsc" },
 };
 
 export default function RSCPage() {

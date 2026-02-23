@@ -9,9 +9,10 @@ import { cn } from '@/lib/utils';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: "Browser Rendering Pipeline | Next.js Architecture Lab",
-  description: "Master the Critical Rendering Path (CRP). Learn how browsers transform HTML, CSS, and JS into pixels, and how Next.js optimizes this process for instant interaction.",
+  title: "Browser Pipeline",
+  description: "Master the Critical Rendering Path (CRP). Learn how browsers transform HTML into pixels and how Next.js optimizes the process.",
   keywords: ["browser rendering pipeline", "critical rendering path guide", "dom cssom layout paint", "browser internals for devs", "nextjs rendering optimization"],
+  alternates: { canonical: "https://lab.badrigaire.com.np/browser-pipeline" },
 };
 
 export default function BrowserPipelinePage() {
