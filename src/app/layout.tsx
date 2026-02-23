@@ -94,11 +94,11 @@ export default function RootLayout({
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased bg-black text-white min-h-screen flex flex-col`}>
         <header className="sticky top-0 z-50 border-b border-zinc-900 bg-black/80 backdrop-blur-md">
           <div className="max-w-7xl mx-auto px-6 h-18 flex items-center justify-between">
-            <Link href="/" className="flex items-center gap-2 group">
+            <Link href="/" className="flex items-center gap-2 group shrink-0">
               <div className="w-9 h-9 rounded-xl bg-blue-600 flex items-center justify-center group-hover:scale-110 transition-transform shadow-lg shadow-blue-500/20">
                 <Code2 className="w-5 h-5 text-white" />
               </div>
-              <span className="font-bold tracking-tight text-xl text-white">Performance<span className="text-blue-500">Architecture</span></span>
+              <span className="font-bold tracking-tight text-lg sm:text-xl text-white">Performance<span className="text-blue-500 hidden sm:inline">Architecture</span><span className="text-blue-500 sm:hidden">Lab</span></span>
             </Link>
             
             <nav className="hidden lg:flex items-center gap-2">
@@ -116,9 +116,9 @@ export default function RootLayout({
             
             <div className="flex items-center gap-4">
               <Link 
-                href="https://github.com" 
+                href="https://github.com/Badri-Gaire/next.js-performance-lab" 
                 target="_blank"
-                className="px-5 py-2 rounded-xl bg-white text-black text-sm font-bold hover:bg-zinc-200 transition-all active:scale-95"
+                className="px-3 sm:px-5 py-2 rounded-xl bg-white text-black text-xs sm:text-sm font-bold hover:bg-zinc-200 transition-all active:scale-95 whitespace-nowrap"
               >
                 Source Code
               </Link>

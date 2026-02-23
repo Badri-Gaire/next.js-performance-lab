@@ -93,13 +93,13 @@ export default function Home() {
           <Cpu className="w-3.5 h-3.5" />
           System Architecture Demo
         </div>
-        <h1 className="text-6xl md:text-8xl font-black tracking-tight text-white leading-[1.1]">
+        <h1 className="text-5xl sm:text-6xl md:text-8xl font-black tracking-tight text-white leading-[1.1] px-4">
           Next.js <br />
-          <span className="bg-linear-to-r from-blue-400 to-indigo-600 bg-clip-text text-transparent uppercase italic tracking-tighter">
+          <span className="bg-linear-to-r from-blue-400 to-indigo-600 bg-clip-text text-transparent uppercase italic tracking-tighter block sm:inline mt-2 sm:mt-0">
             Performance Architecture Lab
           </span>
         </h1>
-        <p className="text-zinc-400 max-w-2xl mx-auto text-xl leading-relaxed font-medium">
+        <p className="text-zinc-400 max-w-2xl mx-auto text-lg sm:text-xl leading-relaxed font-medium px-6">
           A blueprint for modern Next.js 15 applications focusing on progressive hydration, 
           streaming patterns, and optimized caching strategies.
         </p>
