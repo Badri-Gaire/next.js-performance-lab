@@ -68,6 +68,30 @@ export default async function Page() {
           ))}
         </div>
       </section>
+
+      {/* NEW: Dynamic Triggers Section */}
+      <section id="triggers" className="p-10 rounded-4xl bg-zinc-950 border border-zinc-900 shadow-2xl space-y-8">
+        <div className="space-y-2">
+          <h3 className="text-2xl font-bold text-white tracking-widest uppercase italic">The Dynamic Triggers</h3>
+          <p className="text-sm text-zinc-500 font-medium tracking-tight">Any of these APIs will force Next.js to switch this route from Static to Server-Side Rendering (SSR):</p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {[
+            { name: 'cookies()', desc: 'Reading cookies for auth or personalization.' },
+            { name: 'headers()', desc: 'Accessing request headers like user-agent.' },
+            { name: 'searchParams', desc: 'The URL query string (e.g. ?search=next).' },
+            { name: "cache: 'no-store'", desc: 'Disabling caching for a specific fetch request.' },
+            { name: 'revalidate: 0', desc: 'Forcing data to bypass the cache every time.' },
+            { name: 'unstable_noStore()', desc: 'The explicit API to opt-out of static generation.' }
+          ].map((trigger) => (
+            <div key={trigger.name} className="p-6 rounded-2xl bg-zinc-900 border border-zinc-800 hover:border-blue-500/30 transition-colors group">
+              <code className="text-blue-400 font-mono text-sm block mb-2 group-hover:text-blue-300 tracking-tighter">{trigger.name}</code>
+              <p className="text-[11px] text-zinc-500 font-medium tracking-tight leading-relaxed">{trigger.desc}</p>
+            </div>
+          ))}
+        </div>
+      </section>
       
       {products.length === 0 && (
          <div className="text-center py-20 text-zinc-500 border border-dashed border-zinc-800 rounded-3xl">
