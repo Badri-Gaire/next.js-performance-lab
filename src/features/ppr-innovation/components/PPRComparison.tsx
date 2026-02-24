@@ -1,4 +1,4 @@
-import { Zap, ShieldAlert, CheckCircle2, Globe } from 'lucide-react';
+import { Zap, ShieldAlert, CheckCircle2, Globe, Info } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 export function PPRvsSSRComparison() {
@@ -17,7 +17,7 @@ export function PPRvsSSRComparison() {
       ]
     },
     {
-      label: 'Partial Prerendering (PPR)',
+      label: 'Partial Prerendering (Goal)',
       icon: Zap,
       color: 'text-blue-500',
       bgColor: 'bg-blue-500/10',
@@ -35,10 +35,18 @@ export function PPRvsSSRComparison() {
     <section id="why-ppr" className="space-y-12">
       <div className="text-center space-y-4">
         <h2 className="text-3xl font-bold text-white tracking-tight">The &quot;Why&quot;: PPR vs Standard Dynamic Rendering</h2>
-        <p className="text-zinc-500 max-w-3xl mx-auto text-sm leading-relaxed">
-          You might ask: <span className="text-zinc-300 italic"> &quot;If I use Layouts and Suspense, why do I need PPR?&quot;</span> 
-          The answer isn&apos;t about <strong>what</strong> is rendered, but <strong>where</strong> it comes from.
-        </p>
+        <div className="flex flex-col items-center gap-2">
+          <p className="text-zinc-500 max-w-3xl mx-auto text-sm leading-relaxed">
+            You might ask: <span className="text-zinc-300 italic"> &quot;If I use Layouts and Suspense, why do I need PPR?&quot;</span> 
+            The answer isn&apos;t about <strong>what</strong> is rendered, but <strong>where</strong> it comes from.
+          </p>
+          <div className="px-4 py-2 rounded-xl bg-orange-500/10 border border-orange-500/20 flex items-center gap-3">
+             <Info className="w-4 h-4 text-orange-400" />
+             <p className="text-[10px] text-zinc-400 font-bold uppercase tracking-widest">
+                Experimental Note: PPR is currently defaulting to SSR in your Local Build
+             </p>
+          </div>
+        </div>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">

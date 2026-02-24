@@ -17,7 +17,8 @@ export const metadata: Metadata = {
 export const dynamic = 'force-dynamic';
 
 export default async function SSRPage() {
-  const products = await getProducts(8, 1000); // Simulate 1s server delay
+  // We pass cache: 'no-store' to ensure the database call is NEVER cached
+  const products = await getProducts(8, 1000, { cache: 'no-store' }); 
 
   const ssrSteps: { icon: 'User' | 'Server' | 'Database' | 'Globe'; title: string; desc: string }[] = [
     { icon: 'User', title: 'Request Received', desc: 'Browser requests the page. No cached version is served.' },
@@ -31,7 +32,7 @@ export const dynamic = 'force-dynamic';
 
 export default async function Page() {
   // Fetched on the server for EVERY request
-  const data = await fetch('https://api.com/data');
+  const data = await fetch('https://api.com/data', { cache: 'no-store' });
   
   return (
     <div>
@@ -58,10 +59,21 @@ export default async function Page() {
       />
 
       <section className="space-y-8">
-        <h2 id="demo" className="text-3xl font-bold text-white flex items-center gap-3">
-          <Database className="w-6 h-6 text-blue-500" />
-          Live Demo
-        </h2>
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
+          <div className="space-y-2">
+            <h2 id="demo" className="text-3xl font-bold text-white flex items-center gap-3">
+              <Database className="w-6 h-6 text-blue-500" />
+              Live Demo
+            </h2>
+            <p className="text-xs text-zinc-500 font-medium">
+              These products were fetched using <span className="text-blue-400 font-bold italic underline decoration-blue-500/30">Server-Side Rendering (SSR)</span> logic.
+            </p>
+          </div>
+          <div className="px-4 py-2 rounded-xl bg-blue-500/10 border border-blue-500/20">
+             <span className="text-[10px] font-black text-blue-400 uppercase tracking-widest block mb-1">Testing Tip</span>
+             <p className="text-[9px] text-zinc-400 font-medium">Hit <kbd className="bg-zinc-800 px-1 rounded text-zinc-200">F5</kbd> to see the server re-fetch. Navigating via links might show a cached view.</p>
+          </div>
+        </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {products.map((product) => (
             <ProductCard key={product.id} product={product} />

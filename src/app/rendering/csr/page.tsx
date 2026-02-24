@@ -9,6 +9,7 @@ import { Product } from '@/features/rendering/types';
 import { LazyHydrate } from '@/features/shared/components/LazyHydrate';
 import { NextTopic } from '@/features/shared/components/NextTopic';
 import { MousePointer2, Loader2, Search } from 'lucide-react';
+import { cn } from '@/lib/utils';
 
 export default function CSRPage() {
   const [products, setProducts] = useState<Product[]>([]);
@@ -84,7 +85,22 @@ export default function Page() {
       </div>
 
       <section id="demo" className="space-y-8">
-        <h2 className="sr-only">Live Demo</h2>
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
+          <div className="space-y-2">
+            <h2 id="demo-title" className="text-3xl font-bold text-white flex items-center gap-3">
+              <Loader2 className={cn("w-6 h-6 text-blue-500", loading && "animate-spin")} />
+              Live Demo
+            </h2>
+            <p className="text-xs text-zinc-500 font-medium">
+              These products were fetched using <span className="text-blue-400 font-bold italic underline decoration-blue-500/30">Client-Side Rendering (CSR)</span> in your browser.
+            </p>
+          </div>
+          <div className="px-4 py-2 rounded-xl bg-blue-500/10 border border-blue-500/20">
+             <span className="text-[10px] font-black text-blue-400 uppercase tracking-widest block mb-1">Testing Tip</span>
+             <p className="text-[9px] text-zinc-400 font-medium">Refresh to see the &quot;Initializing&quot; state. Notice how the page shell loads first.</p>
+          </div>
+        </div>
+        
         {loading ? (
           <div className="flex flex-col items-center justify-center py-40 gap-4">
             <Loader2 className="w-10 h-10 text-blue-500 animate-spin" />

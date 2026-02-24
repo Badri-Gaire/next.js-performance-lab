@@ -1,10 +1,10 @@
 'use client';
 
 import { cn } from '@/lib/utils';
-import { Server, Globe, User, ArrowRight, Zap, Loader2, Database } from 'lucide-react';
+import { LucideIcon, Server, Globe, User, ArrowRight, Zap, Loader2, Database } from 'lucide-react';
 
 interface PipelineStepProps {
-  icon: any;
+  icon: LucideIcon;
   title: string;
   desc: string;
   status: 'static' | 'dynamic' | 'active';
@@ -54,7 +54,8 @@ export function PPRPipeline() {
         </div>
         <div>
           <h3 className="text-xl font-bold text-white">The PPR Request Pipeline</h3>
-          <p className="text-xs text-zinc-500 font-medium tracking-wide">Step-by-step visual of "Static Shell + Dynamic Streaming"</p>
+          <p className="text-xs text-zinc-500 font-medium tracking-wide">Step-by-step visual of &quot;Static Shell + Dynamic Streaming&quot;</p>
+          <p className="text-[9px] text-orange-400/80 font-bold uppercase mt-1 tracking-tighter italic">Note: Fallback to SSR might occur in experimental builds</p>
         </div>
       </div>
 

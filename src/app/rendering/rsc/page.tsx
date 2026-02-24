@@ -13,7 +13,17 @@ export const metadata: Metadata = {
   alternates: { canonical: "https://lab.badrigaire.com.np/rendering/rsc" },
 };
 
-export default function RSCPage() {
+// Force RSC to be dynamic for this demonstration
+export const dynamic = 'force-dynamic';
+
+import { getProducts } from '@/features/rendering/services/product-service';
+import { ProductCard } from '@/features/rendering/components/ProductCard';
+import { Database } from 'lucide-react';
+
+export default async function RSCPage() {
+  // RSC data fetching (at request time due to force-dynamic)
+  const products = await getProducts(4, 800, { cache: 'no-store' });
+
   const rscSteps: { icon: 'Server' | 'Database' | 'Layers' | 'Globe'; title: string; desc: string }[] = [
     { icon: 'Server', title: 'Server Execution', desc: 'The component executes ONLY on the server. Zero JS is sent to the client for this logic.' },
     { icon: 'Database', title: 'Direct DB Access', desc: 'RSCs can query databases or call internal APIs without needing a REST/GraphQL endpoint.' },
@@ -54,6 +64,30 @@ export default async function Page() {
         steps={rscSteps}
       />
 
+      {/* Live Demo Section */}
+      <section className="space-y-8">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
+          <div className="space-y-2">
+            <h2 id="demo" className="text-3xl font-bold text-white flex items-center gap-3">
+              <Database className="w-6 h-6 text-indigo-500" />
+              Live RSC Fetch
+            </h2>
+            <p className="text-xs text-zinc-500 font-medium">
+              These products were fetched inside a <span className="text-indigo-400 font-bold italic underline decoration-indigo-500/30">React Server Component (RSC)</span>.
+            </p>
+          </div>
+          <div className="px-4 py-2 rounded-xl bg-indigo-500/10 border border-indigo-500/20">
+             <span className="text-[10px] font-black text-indigo-400 uppercase tracking-widest block mb-1">Testing Tip</span>
+             <p className="text-[9px] text-zinc-400 font-medium">RSCs that fetch data often use SSR. Hard Refresh (<kbd className="bg-zinc-800 px-1 rounded text-zinc-200">F5</kbd>) to force re-render.</p>
+          </div>
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {products.map((product) => (
+            <ProductCard key={product.id} product={product} />
+          ))}
+        </div>
+      </section>
+
       {/* Code Comparison - NEW */}
       <section id="code-transformation" className="max-w-5xl mx-auto space-y-8">
         <div className="text-center space-y-3">
@@ -81,7 +115,7 @@ export default async function Page() {
       </section>
 
       {/* History & Theory Section */}
-      <section id="evolution" className="p-10 rounded-[2.5rem] bg-zinc-950 border border-zinc-900 shadow-2xl space-y-10">
+      <section id="evolution" className="p-10 rounded-4xl bg-zinc-950 border border-zinc-900 shadow-2xl space-y-10">
         <div className="flex items-center gap-4">
           <div className="p-3 rounded-2xl bg-indigo-600 shadow-lg shadow-indigo-500/20">
             <History className="w-6 h-6 text-white" />

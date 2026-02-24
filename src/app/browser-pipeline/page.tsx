@@ -26,7 +26,7 @@ export default function BrowserPipelinePage() {
   return (
     <div className="space-y-32 pb-20 animate-in fade-in duration-1000">
       <RenderingHeader 
-        type="RSC"
+        type="CRP"
         title="Browser Rendering Pipeline"
         description="Understanding how a request transforms from a string of bytes into a fully interactive user interface. This is the 'Secret Sauce' of high-performance web engineering."
         strategyMarkdown="The Critical Rendering Path (CRP) is the sequence of steps the browser goes through to convert HTML, CSS, and JS into pixels on the screen."

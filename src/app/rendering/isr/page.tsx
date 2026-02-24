@@ -61,10 +61,21 @@ export default async function Page() {
       />
 
       <section className="space-y-8">
-        <h2 id="demo" className="text-3xl font-bold text-white flex items-center gap-3">
-          <RefreshCcw className="w-6 h-6 text-blue-500" />
-          Live Demo
-        </h2>
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
+          <div className="space-y-2">
+            <h2 id="demo" className="text-3xl font-bold text-white flex items-center gap-3">
+              <RefreshCcw className="w-6 h-6 text-blue-500" />
+              Live Demo
+            </h2>
+            <p className="text-xs text-zinc-500 font-medium">
+              These products were fetched using <span className="text-blue-400 font-bold italic underline decoration-blue-500/30">Incremental Static Regeneration (ISR)</span> with a 30s window.
+            </p>
+          </div>
+          <div className="px-4 py-2 rounded-xl bg-blue-500/10 border border-blue-500/20">
+             <span className="text-[10px] font-black text-blue-400 uppercase tracking-widest block mb-1">Testing Tip</span>
+             <p className="text-[9px] text-zinc-400 font-medium">Refresh after 30s. The 1st refresh triggers the update, the 2nd shows it.</p>
+          </div>
+        </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {products.map((product) => (
             <ProductCard key={product.id} product={product} />

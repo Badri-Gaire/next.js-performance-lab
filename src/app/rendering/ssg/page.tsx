@@ -57,10 +57,21 @@ export default async function Page() {
       />
 
       <section className="space-y-8">
-        <h2 id="demo" className="text-3xl font-bold text-white flex items-center gap-3">
-          <Layout className="w-6 h-6 text-green-500" />
-          Live Demo
-        </h2>
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
+          <div className="space-y-2">
+            <h2 id="demo" className="text-3xl font-bold text-white flex items-center gap-3">
+              <Layout className="w-6 h-6 text-green-500" />
+              Live Demo
+            </h2>
+            <p className="text-xs text-zinc-500 font-medium">
+              These products were fetched using <span className="text-green-400 font-bold italic underline decoration-green-500/30">Static Site Generation (SSG)</span> at Build Time.
+            </p>
+          </div>
+          <div className="px-4 py-2 rounded-xl bg-green-500/10 border border-green-500/20">
+             <span className="text-[10px] font-black text-green-400 uppercase tracking-widest block mb-1">Testing Tip</span>
+             <p className="text-[9px] text-zinc-400 font-medium">Refreshing won&apos;t change the time. This HTML is a physical file on the server.</p>
+          </div>
+        </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {products.map((product) => (
             <ProductCard key={product.id} product={product} />

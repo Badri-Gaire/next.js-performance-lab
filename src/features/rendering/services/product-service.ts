@@ -2,13 +2,13 @@ import { Product } from '../types';
 
 const DUMMY_API = 'https://dummyjson.com/products';
 
-export async function getProducts(limit = 10, delay = 0) {
+export async function getProducts(limit = 10, delay = 0, options: RequestInit = {}) {
   if (delay > 0) {
     await new Promise((resolve) => setTimeout(resolve, delay));
   }
 
   try {
-    const res = await fetch(`${DUMMY_API}?limit=${limit}`);
+    const res = await fetch(`${DUMMY_API}?limit=${limit}`, options);
 
     if (!res.ok) throw new Error('Failed to fetch products');
     

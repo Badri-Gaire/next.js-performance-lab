@@ -136,15 +136,31 @@ export default async function PPRPage() {
                 </div>
               ))}
             </div>
+            <div className="pt-4 border-t border-zinc-900 space-y-3">
+               <p className="text-[10px] text-zinc-600 font-bold uppercase tracking-widest leading-relaxed">
+                 Architecture Goal: <span className="text-green-500">Static Shell</span><br/>
+                 <span className="text-[8px] opacity-70 italic text-orange-400/70">Build fallback: Dynamic SSR</span>
+               </p>
+               <div className="p-3 rounded-xl bg-orange-500/5 border border-orange-500/10">
+                  <p className="text-[9px] text-zinc-500 leading-tight">
+                    <span className="text-orange-400 font-bold italic uppercase tracking-tighter block mb-1">Network Reality:</span> 
+                    Even with a static shell, your <strong>Cache-Control</strong> will be <strong>no-store</strong>. Next.js does this to ensure the dynamic stream isn&apos;t cached by intermediate layers.
+                  </p>
+               </div>
+            </div>
           </div>
 
           {/* Main Content Area */}
           <div className="lg:col-span-3 space-y-12">
-            <div>
-               <div className="flex items-center gap-2 mb-6">
-                  <div className="h-0.5 flex-1 bg-zinc-900" />
-                  <span className="text-[10px] font-black text-zinc-600 uppercase tracking-widest whitespace-nowrap">Instantly Rendered Inventory</span>
-                  <div className="h-0.5 flex-1 bg-zinc-900" />
+            <div className="space-y-6">
+               <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                  <div className="flex items-center gap-2">
+                    <span className="text-[10px] font-black text-green-500 uppercase tracking-widest whitespace-nowrap">Instantly Rendered Inventory</span>
+                    <div className="h-0.5 w-12 bg-green-500/20" />
+                  </div>
+                  <div className="px-3 py-1 rounded-full bg-zinc-900 border border-zinc-800">
+                    <p className="text-[9px] text-zinc-500 font-medium italic">Pattern: <span className="text-zinc-300">PPR Shell</span> (Defaults to <span className="text-orange-400">Dynamic</span> in Build)</p>
+                  </div>
                </div>
                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                  {products.map((product) => (
@@ -154,10 +170,21 @@ export default async function PPRPage() {
             </div>
 
             {/* DYNAMIC HOLE (Suspense) */}
-            <div className="space-y-8 mt-12">
-               <div className="flex items-center gap-3 p-4 rounded-2xl bg-purple-600/5 border border-purple-500/20">
-                  <Layout className="w-5 h-5 text-purple-500 animate-pulse" />
-                  <span className="text-xs font-bold text-purple-300 uppercase tracking-widest">Streaming Deep Dynamic Slot (Simulated Delay)</span>
+            <div className="space-y-8 mt-12 p-8 rounded-[2.5rem] bg-zinc-950 border border-zinc-900/50 shadow-inner">
+               <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                  <div className="flex items-center gap-3">
+                    <div className="p-2 rounded-lg bg-purple-600/10 border border-purple-500/20">
+                      <Layout className="w-4 h-4 text-purple-500 animate-pulse" />
+                    </div>
+                    <div>
+                      <span className="text-xs font-bold text-purple-300 uppercase tracking-widest block">Streaming Recommendations</span>
+                      <p className="text-[10px] text-zinc-600 font-medium">This hole fetches data <span className="text-purple-400">Dynamically</span>. In an ideal PPR build, only this part streams.</p>
+                    </div>
+                  </div>
+                  <div className="px-4 py-2 rounded-xl bg-purple-500/5 border border-purple-500/10 shrink-0">
+                    <span className="text-[9px] font-black text-purple-400 uppercase tracking-widest block mb-0.5">Verification Tip</span>
+                    <p className="text-[8px] text-zinc-500 leading-tight">Notice how the top section loads <strong>instantly</strong> while this section stays in &quot;Skeleton&quot; mode for 2.5s.</p>
+                  </div>
                </div>
                
                <Suspense fallback={
@@ -299,7 +326,7 @@ function ArrowRightIcon(props: React.SVGProps<SVGSVGElement>) {
 async function DynamicRecommendations({ delay }: { delay: number }) {
   // Simulate slow dynamic data source (e.g. Recommendations Engine)
   await new Promise(resolve => setTimeout(resolve, delay));
-  const dynamicProducts = await getProducts(2, 4);
+  const dynamicProducts = await getProducts(2, 4, { cache: 'no-store' });
   
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 animate-in fade-in slide-in-from-bottom-8 duration-1000">
