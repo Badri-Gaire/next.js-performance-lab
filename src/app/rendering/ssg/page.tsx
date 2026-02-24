@@ -4,6 +4,7 @@ import { RenderingHeader } from '@/features/rendering/components/RenderingHeader
 import { CodeBlueprint } from '@/features/rendering/components/CodeBlueprint';
 import { NextTopic } from '@/features/shared/components/NextTopic';
 import { Metadata } from 'next';
+import { Layout } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: 'SSG Guide',
@@ -55,14 +56,20 @@ export default async function Page() {
         steps={ssgSteps}
       />
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        {products.map((product) => (
-          <ProductCard key={product.id} product={product} />
-        ))}
-      </div>
+      <section className="space-y-8">
+        <h2 id="demo" className="text-3xl font-bold text-white flex items-center gap-3">
+          <Layout className="w-6 h-6 text-green-500" />
+          Live Demo
+        </h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {products.map((product) => (
+            <ProductCard key={product.id} product={product} />
+          ))}
+        </div>
+      </section>
       
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="p-8 rounded-3xl bg-zinc-950 border border-zinc-900 space-y-4">
+        <div id="standard-pages" className="p-8 rounded-3xl bg-zinc-950 border border-zinc-900 space-y-4">
           <h3 className="text-xl font-bold flex items-center gap-2">
             <span className="w-8 h-8 rounded-lg bg-green-500/10 flex items-center justify-center text-green-500">1</span>
             Normal Pages
@@ -71,7 +78,7 @@ export default async function Page() {
             Standard pages like <code className="text-green-400">/about</code> or <code className="text-green-400">/contact</code> are automatically generated as static HTML files during the build process if they don&apos;t use dynamic functions like <code className="text-zinc-500 text-sm">cookies()</code> or <code className="text-zinc-500 text-sm">headers()</code>.
           </p>
         </div>
-        <div className="p-8 rounded-3xl bg-zinc-950 border border-zinc-900 space-y-4 shadow-2xl shadow-green-500/5">
+        <div id="dynamic-params" className="p-8 rounded-3xl bg-zinc-950 border border-zinc-900 space-y-4 shadow-2xl shadow-green-500/5">
           <h3 className="text-xl font-bold flex items-center gap-2">
             <span className="w-8 h-8 rounded-lg bg-green-500/10 flex items-center justify-center text-green-500">2</span>
             Dynamic ID Pages

@@ -88,17 +88,20 @@ export default function Home() {
   return (
     <div className="space-y-20 animate-in fade-in slide-in-from-bottom-6 duration-1000">
       {/* Hero Section */}
-      <section className="text-center space-y-8 py-16">
+      <section className="text-center space-y-8 py-16 relative">
+        <h1 className="sr-only">
+          Next.js Architecture, Next.js Performance, and Advanced Next.js Development Lab
+        </h1>
         <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-zinc-900 border border-zinc-800 text-[11px] font-bold text-blue-400 uppercase tracking-widest mb-4 shadow-xl">
           <Cpu className="w-3.5 h-3.5" />
           System Architecture Demo
         </div>
-        <h1 className="text-5xl sm:text-6xl md:text-8xl font-black tracking-tight text-white leading-[1.1] px-4">
+        <h2 className="text-5xl sm:text-6xl md:text-8xl font-black tracking-tight text-white leading-[1.1] px-4">
           Next.js <br />
           <span className="bg-linear-to-r from-blue-400 to-indigo-600 bg-clip-text text-transparent uppercase italic tracking-tighter block sm:inline mt-2 sm:mt-0">
             Performance Architecture Lab
           </span>
-        </h1>
+        </h2>
         <p className="text-zinc-400 max-w-2xl mx-auto text-lg sm:text-xl leading-relaxed font-medium px-6">
           A blueprint for modern Next.js 15 applications focusing on progressive hydration, 
           streaming patterns, and optimized caching strategies.

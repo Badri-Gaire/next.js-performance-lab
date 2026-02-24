@@ -27,7 +27,7 @@ export function RenderingHeader({ type, title, description, strategyMarkdown }: 
               {formatDate(timestamp)}
             </span>
           </div>
-          <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-white mb-4">
+          <h1 id="overview" className="text-4xl md:text-5xl font-bold tracking-tight text-white mb-4">
             {title}
           </h1>
           <p className="text-zinc-400 max-w-2xl text-lg leading-relaxed">

@@ -4,6 +4,7 @@ import { RenderingHeader } from '@/features/rendering/components/RenderingHeader
 import { CodeBlueprint } from '@/features/rendering/components/CodeBlueprint';
 import { NextTopic } from '@/features/shared/components/NextTopic';
 import { Metadata } from 'next';
+import { Database } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: "SSR Architecture",
@@ -56,11 +57,17 @@ export default async function Page() {
         steps={ssrSteps}
       />
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        {products.map((product) => (
-          <ProductCard key={product.id} product={product} />
-        ))}
-      </div>
+      <section className="space-y-8">
+        <h2 id="demo" className="text-3xl font-bold text-white flex items-center gap-3">
+          <Database className="w-6 h-6 text-blue-500" />
+          Live Demo
+        </h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {products.map((product) => (
+            <ProductCard key={product.id} product={product} />
+          ))}
+        </div>
+      </section>
       
       {products.length === 0 && (
          <div className="text-center py-20 text-zinc-500 border border-dashed border-zinc-800 rounded-3xl">

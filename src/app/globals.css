@@ -32,3 +32,28 @@ body {
 * {
   border-color: var(--border);
 }
+
+/* Custom Scrollbar - Clean & Subtle */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #18181b; /* zinc-900 */
+  border-radius: 20px;
+  border: 1px solid transparent;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #27272a; /* zinc-800 */
+}
+
+/* For Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #18181b transparent;
+}

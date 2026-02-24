@@ -37,7 +37,7 @@ export function CodeBlueprint({ type, title, description, code, steps }: CodeBlu
                 <Icons.Server className="w-5 h-5" />
              </div>
              <div>
-                <h3 className="text-xl font-bold text-white">{title.endsWith('Pipeline') ? title : `${title} Pipeline`}</h3>
+                <h3 id="implementation" className="text-xl font-bold text-white">{title.endsWith('Pipeline') ? title : `${title} Pipeline`}</h3>
                 <p className="text-xs text-zinc-500 font-medium">Order of operations</p>
              </div>
           </div>

@@ -72,7 +72,7 @@ export default function Page() {
       />
 
       {/* Interactive Feature: Real-time Search */}
-      <div className="relative max-w-md mx-auto group">
+      <div id="search" className="relative max-w-md mx-auto group">
         <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-500 group-focus-within:text-blue-500 transition-colors" />
         <input 
           type="text"
@@ -83,28 +83,31 @@ export default function Page() {
         />
       </div>
 
-      {loading ? (
-        <div className="flex flex-col items-center justify-center py-40 gap-4">
-          <Loader2 className="w-10 h-10 text-blue-500 animate-spin" />
-          <p className="text-zinc-500 font-medium animate-pulse">Initializing Client Hydration...</p>
-        </div>
-      ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {filteredProducts.map((product, idx) => (
-            /* We wrap the later products in LazyHydrate to show our special pattern */
-            idx > 3 ? (
-              <LazyHydrate key={product.id}>
-                 <ProductCard product={product} />
-              </LazyHydrate>
-            ) : (
-              <ProductCard key={product.id} product={product} />
-            )
-          ))}
-        </div>
-      )}
+      <section id="demo" className="space-y-8">
+        <h2 className="sr-only">Live Demo</h2>
+        {loading ? (
+          <div className="flex flex-col items-center justify-center py-40 gap-4">
+            <Loader2 className="w-10 h-10 text-blue-500 animate-spin" />
+            <p className="text-zinc-500 font-medium animate-pulse">Initializing Client Hydration...</p>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {filteredProducts.map((product, idx) => (
+              /* We wrap the later products in LazyHydrate to show our special pattern */
+              idx > 3 ? (
+                <LazyHydrate key={product.id}>
+                   <ProductCard product={product} />
+                </LazyHydrate>
+              ) : (
+                <ProductCard key={product.id} product={product} />
+              )
+            ))}
+          </div>
+        )}
+      </section>
 
       {/* Technical Deep Dive */}
-      <div className="mt-20 p-8 rounded-3xl bg-zinc-900 border border-zinc-800 border-dashed">
+      <div id="selective-rendering" className="mt-20 p-8 rounded-3xl bg-zinc-900 border border-zinc-800 border-dashed">
         <div className="flex items-center gap-3 mb-6">
           <MousePointer2 className="w-5 h-5 text-purple-500" />
           <h3 className="text-xl font-bold text-white">Advanced Pattern: Selective Rendering</h3>
@@ -122,9 +125,9 @@ export default function Page() {
       </div>
 
       <NextTopic 
-        title="Code Splitting"
-        href="/code-splitting"
-        description="Learn how to break your heavy client-side applications into smaller, manageable bundles."
+        title="React Server Components"
+        href="/rendering/rsc"
+        description="Consolidate data fetching on the server and eliminate client-side waterfalls."
       />
     </div>
   );

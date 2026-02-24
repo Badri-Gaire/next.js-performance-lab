@@ -19,12 +19,12 @@ export function NextTopic({ title, href, description }: NextTopicProps) {
       className="mt-32 p-1 rounded-[2.5rem] bg-linear-to-b from-zinc-800 to-zinc-950 border border-zinc-900 shadow-3xl"
     >
       <Link href={href} className="group block">
-        <div className="p-8 md:p-12 rounded-[2.2rem] bg-black/40 backdrop-blur-3xl flex flex-col md:flex-row items-center justify-between gap-8 group-hover:bg-blue-600/5 transition-all duration-500">
+        <div className="p-8 md:p-10 rounded-[2.2rem] bg-black/40 backdrop-blur-3xl flex flex-col md:flex-row items-center justify-between gap-8 group-hover:bg-blue-600/5 transition-all duration-500">
           <div className="space-y-4 text-center md:text-left">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-[10px] font-black uppercase tracking-widest text-blue-400">
               Next Topic
             </div>
-            <h3 className="text-4xl md:text-5xl font-black text-white tracking-tighter">
+            <h3 id="next-steps" className="text-4xl md:text-5xl font-black text-white tracking-tighter">
               {title}
             </h3>
             <p className="text-zinc-500 font-medium max-w-xl text-lg leading-relaxed">

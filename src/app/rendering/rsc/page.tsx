@@ -55,7 +55,7 @@ export default async function Page() {
       />
 
       {/* Code Comparison - NEW */}
-      <section className="max-w-5xl mx-auto space-y-8">
+      <section id="code-transformation" className="max-w-5xl mx-auto space-y-8">
         <div className="text-center space-y-3">
           <h2 className="text-3xl font-bold text-white">The Code Transformation</h2>
           <p className="text-zinc-500 max-w-2xl mx-auto text-sm">
@@ -67,7 +67,7 @@ export default async function Page() {
       </section>
 
       {/* Comparison Grid */}
-      <section className="space-y-8">
+      <section id="waterfall-viz" className="space-y-8">
         <div className="text-center space-y-3">
           <h2 className="text-3xl font-bold text-white">Visualization of the Waterfall</h2>
           <p className="text-zinc-500 max-w-2xl mx-auto text-sm">
@@ -81,7 +81,7 @@ export default async function Page() {
       </section>
 
       {/* History & Theory Section */}
-      <section className="p-10 rounded-[2.5rem] bg-zinc-950 border border-zinc-900 shadow-2xl space-y-10">
+      <section id="evolution" className="p-10 rounded-[2.5rem] bg-zinc-950 border border-zinc-900 shadow-2xl space-y-10">
         <div className="flex items-center gap-4">
           <div className="p-3 rounded-2xl bg-indigo-600 shadow-lg shadow-indigo-500/20">
             <History className="w-6 h-6 text-white" />
@@ -129,7 +129,7 @@ export default async function Page() {
       </section>
 
       {/* Documentation Link */}
-      <div className="p-8 rounded-3xl bg-linear-to-r from-zinc-900 to-black border border-zinc-800 flex flex-col md:flex-row items-center justify-between gap-6 shadow-3xl">
+      <div id="resources" className="p-8 rounded-3xl bg-linear-to-r from-zinc-900 to-black border border-zinc-800 flex flex-col md:flex-row items-center justify-between gap-6 shadow-3xl">
         <div className="flex items-center gap-4">
           <div className="p-3 rounded-2xl bg-zinc-800 border border-zinc-700">
             <Cpu className="w-6 h-6 text-blue-400" />

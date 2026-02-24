@@ -24,7 +24,7 @@ export default function CodeSplittingPage() {
       />
 
       {/* Intro Stats */}
-      <div className="max-w-6xl mx-auto p-12 rounded-[3rem] bg-linear-to-br from-zinc-900 to-black border border-zinc-800 shadow-3xl text-center space-y-8 relative overflow-hidden">
+      <div id="burden" className="max-w-6xl mx-auto p-12 rounded-[3rem] bg-linear-to-br from-zinc-900 to-black border border-zinc-800 shadow-3xl text-center space-y-8 relative overflow-hidden">
         <div className="absolute top-0 left-0 w-full h-1 bg-linear-to-r from-blue-500 via-purple-500 to-green-500" />
         <h2 className="text-4xl font-black text-white italic uppercase tracking-tighter leading-none">The Burden of JavaScript</h2>
         <p className="text-zinc-500 max-w-2xl mx-auto font-medium leading-relaxed">
@@ -48,7 +48,7 @@ export default function CodeSplittingPage() {
         </div>
       </div>
 
-      <section className="space-y-16">
+      <section id="route-splitting" className="space-y-16">
         <div className="text-center space-y-4 px-6">
           <h2 className="text-5xl font-black text-white tracking-widest uppercase italic leading-none">1. Route-Based Splitting</h2>
           <p className="text-zinc-500 max-w-xl mx-auto font-medium italic underline decoration-blue-500/20 underline-offset-8">Automatic physical partitioning by Next.js App Router.</p>
@@ -56,7 +56,7 @@ export default function CodeSplittingPage() {
         <AppLevelSplitting />
       </section>
 
-      <section className="space-y-16">
+      <section id="component-splitting" className="space-y-16">
         <div className="text-center space-y-4 px-6">
           <h2 className="text-5xl font-black text-white tracking-widest uppercase italic leading-none">2. Component-Level</h2>
           <p className="text-zinc-500 max-w-xl mx-auto font-medium italic underline decoration-purple-500/20 underline-offset-8">Manual optimization for heavy interaction islands.</p>
@@ -64,7 +64,7 @@ export default function CodeSplittingPage() {
         <ComponentLevelSplitting />
       </section>
 
-      <section className="space-y-16">
+      <section id="bundle-comparison" className="space-y-16">
         <div className="text-center space-y-4 px-6">
           <h2 className="text-5xl font-black text-white tracking-widest uppercase italic leading-none">Bundle Comparison</h2>
           <p className="text-zinc-500 max-w-xl mx-auto font-medium underline decoration-green-500/20 underline-offset-8">Visualizing the impact on real-world mobile devices.</p>
@@ -73,7 +73,7 @@ export default function CodeSplittingPage() {
       </section>
 
       {/* Technical Tip */}
-      <div className="max-w-4xl mx-auto p-8 rounded-3xl bg-blue-600 shadow-2xl shadow-blue-500/20 flex gap-6 items-center">
+      <div id="tree-shaking" className="max-w-4xl mx-auto p-8 rounded-3xl bg-blue-600 shadow-2xl shadow-blue-500/20 flex gap-6 items-center">
          <div className="p-4 rounded-2xl bg-white/10 shrink-0">
             <Info className="w-8 h-8 text-white" />
          </div>
@@ -87,9 +87,9 @@ export default function CodeSplittingPage() {
       </div>
 
       <NextTopic 
-        title="React Server Components"
-        href="/rendering/rsc"
-        description="See how moves logic to the server can eliminate the need for heavy client bundles entirely."
+        title="Browser Rendering Pipeline"
+        href="/browser-pipeline"
+        description="Understanding how the browser processes the code of your Next.js application."
       />
     </div>
   );

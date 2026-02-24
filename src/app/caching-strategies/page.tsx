@@ -22,11 +22,11 @@ export default function CachingPage() {
         strategyMarkdown="Next.js handles most of this automatically. By using static rendering (SSG/ISR), your application is globally cached by default."
       />
 
-      <section className="space-y-12">
+      <section id="caching-hierarchy" className="space-y-12">
         <CachingHierarchy />
       </section>
 
-      <section className="space-y-12">
+      <section id="dev-tools" className="space-y-12">
         <div className="text-center space-y-4">
           <h2 className="text-4xl font-black text-white tracking-widest uppercase italic leading-none">Developer Tools Deep Dive</h2>
           <p className="text-zinc-500 max-w-2xl mx-auto font-medium">How to verify your caching strategy using the browser&apos;s Network tab.</p>
@@ -35,7 +35,7 @@ export default function CachingPage() {
       </section>
 
       {/* Logic Note */}
-      <div className="max-w-4xl mx-auto p-12 rounded-[3.5rem] bg-zinc-950 border border-zinc-900 flex flex-col items-center text-center space-y-8 relative overflow-hidden group">
+      <div id="framework-guarantee" className="max-w-4xl mx-auto p-12 rounded-[3.5rem] bg-zinc-950 border border-zinc-900 flex flex-col items-center text-center space-y-8 relative overflow-hidden group">
          <div className="absolute top-0 left-0 w-full h-1 bg-linear-to-r from-blue-500 via-purple-500 to-green-500" />
          <div className="p-4 rounded-3xl bg-blue-600 shadow-2xl shadow-blue-500/40 relative">
             <ShieldCheck className="w-12 h-12 text-white" />
@@ -64,9 +64,9 @@ export default function CachingPage() {
       </div>
 
       <NextTopic 
-        title="Mastery Dashboard"
-        href="/"
-        description="You've completed the full engineering journey. Explore the dashboard for more insights."
+        title="Code Splitting"
+        href="/code-splitting"
+        description="Learn how to break your heavy client-side applications into smaller, manageable bundles."
       />
     </div>
   );

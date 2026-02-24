@@ -36,7 +36,7 @@ export default async function PPRPage() {
         strategyMarkdown="Experimental Stage: Currently available in Next.js 14/15 via an experimental flag. It enables 'incremental' rollout, allowing you to opt-in per route."
       />
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+      <div id="pipeline" className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
         {/* Step-by-step Pipeline */}
         <PPRPipeline />
         
@@ -85,7 +85,7 @@ export default async function PPRPage() {
       </div>
 
       {/* Code Implementation Guide - NEW */}
-      <section className="max-w-5xl mx-auto space-y-10">
+      <section id="blueprint" className="max-w-5xl mx-auto space-y-10">
         <div className="text-center space-y-3">
           <h2 className="text-3xl font-bold text-white">The Technical Blueprint</h2>
           <p className="text-zinc-500 max-w-2xl mx-auto text-sm font-medium">
@@ -97,7 +97,7 @@ export default async function PPRPage() {
       </section>
 
       {/* The Visual Explanation Component */}
-      <div className="space-y-8">
+      <div id="visualization" className="space-y-8">
         <div className="text-center">
            <h3 className="text-2xl font-bold text-white mb-2 underline decoration-teal-500/30">Architecture visualization</h3>
            <p className="text-sm text-zinc-500 font-medium">Concept: Static Shell + Dynamic Holes</p>
@@ -106,7 +106,7 @@ export default async function PPRPage() {
       </div>
 
       {/* Interactive Demo Section */}
-      <section className="space-y-12 pb-20">
+      <section id="demo" className="space-y-12 pb-20">
         <div className="flex flex-col items-center text-center space-y-3">
           <div className="p-3 rounded-2xl bg-orange-600/10 shadow-lg shadow-orange-500/5">
             <Sparkles className="w-6 h-6 text-orange-400" />
@@ -171,9 +171,9 @@ export default async function PPRPage() {
       </section>
 
       <NextTopic 
-        title="Browser Rendering Pipeline"
-        href="/browser-pipeline"
-        description="Understanding how the browser processes the code of your Next.js application."
+        title="Caching Strategies"
+        href="/caching-strategies"
+        description="Learn how browsers, CDNs, and frameworks coordinate to store data as close to the user as possible."
       />
     </div>
   );

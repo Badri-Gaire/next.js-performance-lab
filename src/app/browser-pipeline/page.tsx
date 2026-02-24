@@ -47,7 +47,7 @@ export default function BrowserPipelinePage() {
         ))}
       </div>
 
-      <section className="space-y-12">
+      <section id="visual-journey" className="space-y-12">
         <div className="text-center space-y-4">
           <h2 className="text-5xl font-black text-white tracking-widest uppercase italic leading-none">The Visual Journey</h2>
           <p className="text-zinc-500 max-w-2xl mx-auto font-medium">Click through the stages of the Critical Rendering Path to see how the browser builds this very page.</p>
@@ -55,11 +55,15 @@ export default function BrowserPipelinePage() {
         <CriticalRenderingPath />
       </section>
 
-      <ResponsibilityMatrix />
+      <div id="responsibility-matrix">
+        <ResponsibilityMatrix />
+      </div>
 
-      <ArchitectureComparison />
+      <div id="architecture-comparison">
+        <ArchitectureComparison />
+      </div>
 
-      <section className="space-y-12">
+      <section id="deep-technical-details" className="space-y-12">
         <div className="text-center space-y-4">
           <h2 className="text-4xl font-black text-white tracking-tighter italic uppercase">Deep Technical Details</h2>
           <p className="text-zinc-500 max-w-2xl mx-auto font-medium">Parsing strategies and memory management for modern applications.</p>
@@ -68,7 +72,7 @@ export default function BrowserPipelinePage() {
       </section>
 
       {/* Interaction Observer Note */}
-      <div className="max-w-4xl mx-auto p-12 rounded-[3.5rem] bg-zinc-950 border border-zinc-900 text-center space-y-8 relative overflow-hidden">
+      <div id="navbar-recalc" className="max-w-4xl mx-auto p-12 rounded-[3.5rem] bg-zinc-950 border border-zinc-900 text-center space-y-8 relative overflow-hidden">
         <div className="absolute inset-0 bg-blue-600/5 blur-3xl" />
         <div className="relative z-10 flex flex-col items-center gap-6">
           <div className="p-4 rounded-3xl bg-blue-600 shadow-2xl shadow-blue-500/40">
@@ -85,9 +89,9 @@ export default function BrowserPipelinePage() {
       </div>
 
       <NextTopic 
-        title="Caching Strategies"
-        href="/caching-strategies"
-        description="Learn how browsers, CDNs, and frameworks coordinate to store data as close to the user as possible."
+        title="Mastery Dashboard"
+        href="/"
+        description="You've completed the full engineering journey. Explore the dashboard for more insights."
       />
     </div>
   );

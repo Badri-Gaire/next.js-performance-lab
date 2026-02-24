@@ -2,7 +2,7 @@ import { getProducts } from '@/features/rendering/services/product-service';
 import { ProductCard } from '@/features/rendering/components/ProductCard';
 import { RenderingHeader } from '@/features/rendering/components/RenderingHeader';
 import { CodeBlueprint } from '@/features/rendering/components/CodeBlueprint';
-import { ArrowUpRight } from 'lucide-react';
+import { ArrowUpRight, RefreshCcw } from 'lucide-react';
 
 // ISR: Revalidate every 30 seconds
 export const revalidate = 30;
@@ -60,13 +60,19 @@ export default async function Page() {
         steps={isrSteps}
       />
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        {products.map((product) => (
-          <ProductCard key={product.id} product={product} />
-        ))}
-      </div>
+      <section className="space-y-8">
+        <h2 id="demo" className="text-3xl font-bold text-white flex items-center gap-3">
+          <RefreshCcw className="w-6 h-6 text-blue-500" />
+          Live Demo
+        </h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {products.map((product) => (
+            <ProductCard key={product.id} product={product} />
+          ))}
+        </div>
+      </section>
       
-      <div className="py-12 text-center">
+      <div id="trigger" className="py-12 text-center">
         <button className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-zinc-900 border border-zinc-800 text-sm font-bold text-white hover:bg-zinc-800 transition-all active:scale-95 shadow-2xl">
           Trigger Background Revalidation
           <ArrowUpRight className="w-4 h-4 text-blue-500" />
