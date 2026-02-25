@@ -1,3 +1,6 @@
+'use client';
+
+import { useState, useEffect } from 'react';
 import { RenderingType } from '../types';
 import { RenderingBadge } from './RenderingBadge';
 import { formatDate } from '@/lib/utils';
@@ -11,8 +14,18 @@ interface RenderingHeaderProps {
 }
 
 export function RenderingHeader({ type, title, description, strategyMarkdown }: RenderingHeaderProps) {
-  // We use current time. Note: In SSR/ISR, this runs on server. In CSR, it runs on browser.
-  const timestamp = new Date();
+  // We use a single state object to avoid cascading render lint errors
+  const [hydrationState, setHydrationState] = useState({
+    mounted: false,
+    timestamp: new Date()
+  });
+
+  useEffect(() => {
+    setHydrationState({
+      mounted: true,
+      timestamp: new Date()
+    });
+  }, []);
 
   return (
     <div className="mb-12 p-10 rounded-4xl bg-zinc-950 border border-zinc-900 shadow-2xl relative overflow-hidden">
@@ -34,7 +47,7 @@ export function RenderingHeader({ type, title, description, strategyMarkdown }: 
               suppressHydrationWarning
             >
               <Clock className="w-3.5 h-3.5 text-blue-500" />
-              Generated: {formatDate(timestamp)}
+              Generated: {hydrationState.mounted ? formatDate(hydrationState.timestamp) : 'Calculating...'}
             </span>
           </div>
           
@@ -110,7 +123,7 @@ export function RenderingHeader({ type, title, description, strategyMarkdown }: 
             <code className="text-orange-400 mx-1 bg-zinc-900 px-1 py-0.5 rounded">Cache-Control</code> 
             header. For {type}, you will see 
             <span className="text-zinc-300 ml-1 italic font-mono uppercase">
-              {type === 'SSR' || type === 'RSC' || type === 'PPR'
+              {type === 'SSR' || type === 'RSC' || type === 'PPR' || type === 'CSR'
                 ? 'no-store / no-cache' 
                 : type === 'CRP'
                   ? 's-maxage=31536000'

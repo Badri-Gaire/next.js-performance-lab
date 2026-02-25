@@ -76,9 +76,12 @@ export default async function Page() {
               These products were fetched inside a <span className="text-indigo-400 font-bold italic underline decoration-indigo-500/30">React Server Component (RSC)</span>.
             </p>
           </div>
-          <div className="px-4 py-2 rounded-xl bg-indigo-500/10 border border-indigo-500/20">
+          <div className="px-4 py-2 rounded-xl bg-indigo-500/10 border border-indigo-500/20 max-w-xs">
              <span className="text-[10px] font-black text-indigo-400 uppercase tracking-widest block mb-1">Testing Tip</span>
-             <p className="text-[9px] text-zinc-400 font-medium">RSCs that fetch data often use SSR. Hard Refresh (<kbd className="bg-zinc-800 px-1 rounded text-zinc-200">F5</kbd>) to force re-render.</p>
+             <p className="text-[9px] text-zinc-400 font-medium leading-relaxed">
+               RSCs fetch on the server. Hard Refresh (<kbd className="bg-zinc-800 px-1 rounded text-zinc-200">F5</kbd>) to force re-render.
+               <span className="text-indigo-300/80 block mt-1">Inter-page navigation is cached by the Browser Router for 30s.</span>
+             </p>
           </div>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">

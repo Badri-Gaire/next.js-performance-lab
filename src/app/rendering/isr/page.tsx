@@ -71,9 +71,12 @@ export default async function Page() {
               These products were fetched using <span className="text-blue-400 font-bold italic underline decoration-blue-500/30">Incremental Static Regeneration (ISR)</span> with a 30s window.
             </p>
           </div>
-          <div className="px-4 py-2 rounded-xl bg-blue-500/10 border border-blue-500/20">
+          <div className="px-4 py-2 rounded-xl bg-blue-500/10 border border-blue-500/20 max-w-xs">
              <span className="text-[10px] font-black text-blue-400 uppercase tracking-widest block mb-1">Testing Tip</span>
-             <p className="text-[9px] text-zinc-400 font-medium">Refresh after 30s. The 1st refresh triggers the update, the 2nd shows it.</p>
+             <p className="text-[9px] text-zinc-400 font-medium leading-relaxed">
+               Refresh after 30s. The 1st refresh triggers the update, the 2nd shows it.
+               <span className="text-blue-300/80 block mt-1 italic">Note: Internal links might stay stale longer due to the 30s Client Router Cache.</span>
+             </p>
           </div>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
