@@ -22,11 +22,6 @@ export default function DomVdomPage() {
 
       <DomVdomDemo />
 
-      <NextTopic
-        title="Mastery Dashboard"
-        href="/"
-        description="You've completed the architectural journey. Return to the dashboard to explore other performance labs."
-      />
     </div>
   );
 }
