@@ -14,6 +14,8 @@ const colors: Record<RenderingType, string> = {
   PPR: 'bg-teal-500/10 text-teal-400 border-teal-500/20',
   RSC: 'bg-indigo-500/10 text-indigo-400 border-indigo-500/20',
   CRP: 'bg-pink-500/10 text-pink-400 border-pink-500/20',
+  DOM: 'bg-zinc-500/10 text-zinc-400 border-zinc-500/20',
+  HYBRID: 'bg-fuchsia-500/10 text-fuchsia-400 border-fuchsia-500/20',
 };
 
 export function RenderingBadge({ type, className }: RenderingBadgeProps) {

@@ -209,6 +209,60 @@ export default function Home() {
         </Link>
       </section>
 
+      {/* DOM & Virtual-DOM Deep Dive - BENTO STYLE */}
+      <section className="max-w-7xl mx-auto space-y-12 px-6">
+        <div className="space-y-4">
+          <h2 className="text-4xl md:text-5xl font-black text-white tracking-widest uppercase italic">The Reactivity Lab</h2>
+          <p className="text-zinc-500 max-w-xl font-medium">Internalizing the difference between absolute DOM manipulation and virtual reconciliation.</p>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          {/* Main Feature - Large Card */}
+          <Link href="/dom-vdom" className="lg:col-span-2 group relative overflow-hidden rounded-[3rem] bg-zinc-950 border border-zinc-900 p-12 hover:border-indigo-500/50 transition-all duration-500">
+            <div className="absolute top-0 right-0 w-96 h-96 bg-indigo-600/10 blur-[100px] -mr-32 -mt-32 transition-colors group-hover:bg-indigo-600/20" />
+            
+            <div className="relative z-10 h-full flex flex-col justify-between">
+              <div className="space-y-6">
+                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-600/10 border border-indigo-500/20 text-indigo-400 text-[10px] font-black uppercase tracking-widest">
+                    Architecture
+                 </div>
+                 <h3 className="text-5xl font-black text-white leading-tight tracking-tighter">
+                   Virtual‑DOM <br /> Reconciliation
+                 </h3>
+                 <p className="text-zinc-400 text-lg font-medium leading-relaxed max-w-md">
+                   Explore the heartbeat of React. Learn how the diffing algorithm minimizes 
+                   expensive browser reflows by calculating state deltas in memory.
+                 </p>
+              </div>
+
+              <div className="pt-12 flex items-center gap-4 text-white font-black uppercase tracking-widest text-sm group-hover:gap-6 transition-all">
+                Enter The Lab
+                <ArrowRight className="w-5 h-5 text-indigo-500" />
+              </div>
+            </div>
+          </Link>
+
+          {/* Side Info Cards */}
+          <div className="flex flex-col gap-8">
+            <Link href="/dom-vdom" className="flex-1 group p-8 rounded-[2.5rem] bg-zinc-950 border border-zinc-900 hover:border-purple-500/50 transition-all">
+              <Layers className="w-8 h-8 text-purple-500 mb-4 group-hover:scale-110 transition-transform" />
+              <h4 className="text-xl font-bold text-white mb-2 italic">No VDOM?</h4>
+              <p className="text-sm text-zinc-500 font-medium">
+                Why new frameworks like Solid and Svelte are moving away from the Virtual‑DOM for direct compilation.
+              </p>
+            </Link>
+            
+            <Link href="/dom-vdom" className="flex-1 group p-8 rounded-[2.5rem] bg-zinc-950 border border-zinc-900 hover:border-teal-500/50 transition-all">
+              <Zap className="w-8 h-8 text-teal-500 mb-4 group-hover:scale-110 transition-transform" />
+              <h4 className="text-xl font-bold text-white mb-2 italic">Fiber Engine</h4>
+              <p className="text-sm text-zinc-500 font-medium">
+                Understanding concurrent rendering and how React prioritizes user interactions during heavy updates.
+              </p>
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* Features Detail */}
       <div className="max-w-6xl mx-auto p-12 rounded-[2.5rem] bg-linear-to-br from-zinc-900 via-black to-black border border-zinc-800 shadow-3xl">
         <div className="flex items-center gap-4 mb-12">

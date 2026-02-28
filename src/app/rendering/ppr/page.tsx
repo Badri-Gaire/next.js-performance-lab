@@ -308,9 +308,9 @@ export default async function PPRPage() {
       </section>
 
       <NextTopic 
-        title="Caching Strategies"
-        href="/caching-strategies"
-        description="Learn how browsers, CDNs, and frameworks coordinate to store data as close to the user as possible."
+        title="Hybrid Architecture Lab"
+        href="/rendering/hybrid"
+        description="Master the orchestration of RSC and Client components. See how they merge during the request lifecycle."
       />
     </div>
   );

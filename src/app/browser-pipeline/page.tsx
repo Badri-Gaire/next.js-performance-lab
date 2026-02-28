@@ -98,9 +98,9 @@ export default function BrowserPipelinePage() {
       </div>
 
       <NextTopic 
-        title="Mastery Dashboard"
-        href="/"
-        description="You've completed the full engineering journey. Explore the dashboard for more insights."
+        title="DOM & Virtual-DOM "
+        href="/dom-vdom"
+        description="Visualize the Reconciliation lifecycle and how React diffs the state to update the UI."
       />
     </div>
   );

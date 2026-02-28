@@ -77,7 +77,7 @@ export function RenderingHeader({ type, title, description, strategyMarkdown }: 
            <div className="p-4 rounded-2xl bg-blue-500/5 border border-blue-500/10 space-y-2">
               <span className="text-[9px] font-black uppercase text-blue-400 tracking-widest block">Verification Lab</span>
               <p className="text-[10px] text-zinc-500 font-medium leading-relaxed">
-                {type === 'SSR' || type === 'RSC' 
+                {type === 'SSR' || type === 'RSC' || type === 'HYBRID'
                   ? "Hit F5 (Hard Refresh) to see the server re-render. Internal navigation might use client-cache."
                   : type === 'PPR'
                   ? "In this experimental build, PPR defaults to Dynamic Streaming. Refresh to see the server-side time update."
@@ -123,7 +123,7 @@ export function RenderingHeader({ type, title, description, strategyMarkdown }: 
             <code className="text-orange-400 mx-1 bg-zinc-900 px-1 py-0.5 rounded">Cache-Control</code> 
             header. For {type}, you will see 
             <span className="text-zinc-300 ml-1 italic font-mono uppercase">
-              {type === 'SSR' || type === 'RSC' || type === 'PPR' || type === 'CSR'
+              {type === 'SSR' || type === 'RSC' || type === 'PPR' || type === 'CSR' || type === 'HYBRID'
                 ? 'no-store / no-cache' 
                 : type === 'CRP'
                   ? 's-maxage=31536000'

@@ -11,7 +11,7 @@ export interface Product {
   };
 }
 
-export type RenderingType = 'SSR' | 'SSG' | 'ISR' | 'CSR' | 'PPR' | 'RSC' | 'CRP';
+export type RenderingType = 'SSR' | 'SSG' | 'ISR' | 'CSR' | 'PPR' | 'RSC' | 'CRP' | 'DOM' | 'HYBRID';
 
 export interface RenderingMeta {
   type: RenderingType;
