@@ -1,5 +1,6 @@
 import { RenderingHeader } from '@/features/rendering/components/RenderingHeader';
 import { CriticalRenderingPath } from '@/features/browser-pipeline/components/CriticalRenderingPath';
+import { NetworkLifecycle } from '@/features/browser-pipeline/components/NetworkLifecycle';
 import { ArchitectureComparison } from '@/features/browser-pipeline/components/ArchitectureComparison';
 import { CssAndCacheDetails } from '@/features/browser-pipeline/components/CssAndCacheDetails';
 import { ResponsibilityMatrix } from '@/features/browser-pipeline/components/ResponsibilityMatrix';
@@ -46,6 +47,14 @@ export default function BrowserPipelinePage() {
           </div>
         ))}
       </div>
+
+      <section id="network-lifecycle" className="space-y-12">
+        <div className="text-center space-y-4">
+          <h2 className="text-5xl font-black text-white tracking-widest uppercase italic leading-none">The Network Phase</h2>
+          <p className="text-zinc-500 max-w-2xl mx-auto font-medium">Before the browser can parse code, it must first navigate the wires. Here is the journey of a request.</p>
+        </div>
+        <NetworkLifecycle />
+      </section>
 
       <section id="visual-journey" className="space-y-12">
         <div className="text-center space-y-4">
