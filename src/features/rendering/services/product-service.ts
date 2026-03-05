@@ -1,4 +1,5 @@
 import { Product } from '../types';
+import { ApiError } from '@/features/error-handling/utils/ApiError';
 
 const DUMMY_API = 'https://dummyjson.com/products';
 
@@ -10,12 +11,19 @@ export async function getProducts(limit = 10, delay = 0, options: RequestInit = 
   try {
     const res = await fetch(`${DUMMY_API}?limit=${limit}`, options);
 
-    if (!res.ok) throw new Error('Failed to fetch products');
+    if (!res.ok) {
+      throw new ApiError(
+        'Failed to fetch products', 
+        res.status, 
+        res.url, 
+        res.statusText
+      );
+    }
     
     const data = await res.json();
-    return data.products.map((p: { 
-      id: number; title: string; price: number; description: string; 
-      category: string; thumbnail: string; rating: number; stock: number 
+    return data.products.map((p: {
+      id: number; title: string; price: number; description: string;
+      category: string; thumbnail: string; rating: number; stock: number
     }) => ({
       id: p.id,
       title: p.title,
@@ -29,7 +37,11 @@ export async function getProducts(limit = 10, delay = 0, options: RequestInit = 
       }
     })) as Product[];
   } catch (error) {
-    console.error('Error fetching products:', error);
+    if (error instanceof ApiError) {
+      console.error(`[ApiError] ${error.statusCode}: ${error.message} at ${error.url}`);
+    } else {
+      console.error('Unexpected error fetching products:', error);
+    }
     return [];
   }
 }
@@ -41,7 +53,15 @@ export async function getProductById(id: string | number, delay = 0) {
 
   try {
     const res = await fetch(`${DUMMY_API}/${id}`);
-    if (!res.ok) throw new Error('Failed to fetch product');
+    
+    if (!res.ok) {
+      throw new ApiError(
+        `Failed to fetch product with ID: ${id}`, 
+        res.status, 
+        res.url, 
+        res.statusText
+      );
+    }
     
     const p = await res.json();
     return {
@@ -57,7 +77,11 @@ export async function getProductById(id: string | number, delay = 0) {
       }
     } as Product;
   } catch (error) {
-    console.error(`Error fetching product ${id}:`, error);
+    if (error instanceof ApiError) {
+      console.error(`[ApiError] ${error.statusCode}: ${error.message}`);
+    } else {
+      console.error(`Unexpected error fetching product ${id}:`, error);
+    }
     return null;
   }
 }

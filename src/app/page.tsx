@@ -1,16 +1,19 @@
 import Link from 'next/link';
-import { Server, Zap, Database, Layers, ArrowRight, Globe, Cpu, Flame, Scaling } from 'lucide-react';
+import { 
+  Server, Zap, Database, Layers, ArrowRight, Globe, Cpu, Flame, 
+  ShieldCheck, Split, Boxes, Activity, ShieldAlert 
+} from 'lucide-react';
 import { RenderingBadge } from '@/features/rendering/components/RenderingBadge';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: "Next.js Performance Architecture Lab | The Ultimate Architecture Sandbox",
-  description: "Master Next.js 15+ rendering strategies (SSR, SSG, ISR, CSR, RSC, PPR), browser pipelines, and performance optimization techniques. A comprehensive guide for senior frontend engineers.",
-  keywords: ["nextjs performance guide", "nextjs architecture patterns", "rendering strategies nextjs 15", "browser rendering pipeline", "isr nextjs example", "rsc vs ssr"],
+  description: "Master Next.js 15+ rendering strategies (SSR, SSG, ISR, CSR, RSC, PPR, Hybrid), browser pipelines, and performance optimization techniques.",
 };
 
 export default function Home() {
   const demos = [
+    // Methods
     {
       title: 'Server-Side Rendering',
       type: 'SSR' as const,
@@ -48,27 +51,9 @@ export default function Home() {
       bg: 'bg-purple-500/10',
     },
     {
-      title: 'Code Splitting',
-      type: 'CSR' as const,
-      description: 'Optimize bundle delivery with route-based and dynamic partitioning.',
-      href: '/code-splitting',
-      icon: Scaling,
-      color: 'text-amber-400',
-      bg: 'bg-amber-500/10',
-    },
-    {
-      title: 'Caching Strategies',
-      type: 'SSG' as const,
-      description: 'Distributed delivery and multi-level caching for global performance.',
-      href: '/caching-strategies',
-      icon: Database,
-      color: 'text-emerald-400',
-      bg: 'bg-emerald-500/10',
-    },
-    {
       title: 'React Server Components',
-      type: 'SSR' as const,
-      description: 'Explore how Server Components eliminate client-side data fetching waterfalls.',
+      type: 'RSC' as const,
+      description: 'Eliminate client-side data fetching waterfalls with Server Components.',
       href: '/rendering/rsc',
       icon: Cpu,
       color: 'text-indigo-400',
@@ -83,28 +68,85 @@ export default function Home() {
       color: 'text-teal-400',
       bg: 'bg-teal-500/10',
     },
+    {
+      title: 'Hybrid Architecture',
+      type: 'HYBRID' as const,
+      description: 'Mixing rendering strategies for optimal performance and flexibility.',
+      href: '/rendering/hybrid',
+      icon: Boxes,
+      color: 'text-fuchsia-400',
+      bg: 'bg-fuchsia-500/10',
+    },
+    // Performance
+    {
+      title: 'Caching Strategies',
+      type: 'SSG' as const, // Reusing existing color/badge type
+      description: 'Distributed delivery and multi-level caching for global performance.',
+      href: '/caching-strategies',
+      icon: ShieldCheck,
+      color: 'text-emerald-400',
+      bg: 'bg-emerald-500/10',
+    },
+    {
+      title: 'Code Splitting',
+      type: 'CSR' as const, // Reusing existing color/badge type
+      description: 'Optimize bundle delivery with route-based and dynamic partitioning.',
+      href: '/code-splitting',
+      icon: Split,
+      color: 'text-amber-400',
+      bg: 'bg-amber-500/10',
+    },
+    // Architecture
+    {
+      title: 'Browser Pipeline',
+      type: 'CRP' as const,
+      description: 'Deep dive into DOM, CSSOM, and the Critical Rendering Path.',
+      href: '/browser-pipeline',
+      icon: Globe,
+      color: 'text-zinc-400',
+      bg: 'bg-zinc-500/10',
+    },
+    {
+      title: 'DOM-VDOM Lab',
+      type: 'DOM' as const,
+      description: 'Understanding Virtual DOM reconciliation vs direct DOM updates.',
+      href: '/dom-vdom',
+      icon: Activity,
+      color: 'text-sky-400',
+      bg: 'bg-sky-500/10',
+    },
+    {
+      title: 'Error Handling Lab',
+      type: 'ERROR' as const,
+      description: 'Master resilient architecture with Fetch vs Axios error patterns.',
+      href: '/error-handling',
+      icon: ShieldAlert,
+      color: 'text-red-400',
+      bg: 'bg-red-500/10',
+    },
   ];
 
+  const methods = demos.slice(0, 7);
+  const performance = demos.slice(7, 9);
+  const architecture = demos.slice(9);
+
   return (
-    <div className="space-y-20 animate-in fade-in slide-in-from-bottom-6 duration-1000">
+    <div className="space-y-24 animate-in fade-in slide-in-from-bottom-6 duration-1000">
       {/* Hero Section */}
       <section className="text-center space-y-8 py-16 relative">
-        <h1 className="sr-only">
-          Next.js Architecture, Next.js Performance, and Advanced Next.js Development Lab
-        </h1>
+        <div className="absolute inset-0 bg-blue-600/5 blur-[120px] -z-10" />
         <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-zinc-900 border border-zinc-800 text-[11px] font-bold text-blue-400 uppercase tracking-widest mb-4 shadow-xl">
           <Cpu className="w-3.5 h-3.5" />
-          System Architecture Demo
+          Advanced System Architecture
         </div>
-        <h2 className="text-5xl sm:text-6xl md:text-8xl font-black tracking-tight text-white leading-[1.1] px-4">
+        <h1 className="text-5xl sm:text-6xl md:text-8xl font-black tracking-tight text-white leading-[1.1] px-4">
           Next.js <br />
           <span className="bg-linear-to-r from-blue-400 to-indigo-600 bg-clip-text text-transparent uppercase italic tracking-tighter block sm:inline mt-2 sm:mt-0">
-            Performance Architecture Lab
+            Performance Lab
           </span>
-        </h2>
+        </h1>
         <p className="text-zinc-400 max-w-2xl mx-auto text-lg sm:text-xl leading-relaxed font-medium px-6">
-          A blueprint for modern Next.js 15 applications focusing on progressive hydration, 
-          streaming patterns, and optimized caching strategies.
+          Advanced showcase of Rendering Strategies & Performance Patterns in Next.js 15+ and modern architecture.
         </p>
 
         <div className="flex justify-center pt-4">
@@ -112,180 +154,125 @@ export default function Home() {
             href="/rendering/ssr" 
             className="px-8 py-4 rounded-2xl bg-blue-600 text-white font-black uppercase tracking-widest text-sm hover:bg-blue-500 transition-all shadow-2xl shadow-blue-500/20 active:scale-95 flex items-center gap-3"
           >
-            Start Learning Path
+            Explore Labs
             <ArrowRight className="w-5 h-5" />
           </Link>
         </div>
       </section>
 
-      {/* Grid Section */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
-        {demos.map((demo) => (
-          <Link 
-            key={demo.type} 
-            href={demo.href}
-            className="group relative p-10 rounded-3xl bg-zinc-950 border border-zinc-900 transition-all duration-500 hover:border-zinc-700 hover:bg-zinc-950/50 hover:-translate-y-2 shadow-2xl"
-          >
-            <div className="flex items-start justify-between mb-8">
-              <div className={`p-5 rounded-2xl ${demo.bg}`}>
-                <demo.icon className={`w-9 h-9 ${demo.color}`} />
-              </div>
-              <RenderingBadge type={demo.type} className="px-3 py-1 text-[11px]" />
-            </div>
-            
-            <h2 className="text-3xl font-bold text-white mb-4 group-hover:text-blue-400 transition-colors">
-              {demo.title}
-            </h2>
-            <p className="text-zinc-400 text-base leading-relaxed mb-10 font-medium">
-              {demo.description}
-            </p>
-            
-            <div className="flex items-center text-sm font-black text-white gap-2 uppercase tracking-widest">
-              View Implementation 
-              <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform text-blue-500" />
-            </div>
-          </Link>
-        ))}
-      </div>
-
-      {/* Advanced Browser Internals - NEW FEATURE */}
-      <section className="max-w-7xl mx-auto space-y-12">
-        <div className="flex flex-col md:flex-row items-end justify-between gap-6 px-6">
-          <div className="space-y-4">
-            <h2 className="text-4xl md:text-5xl font-black text-white tracking-widest uppercase italic">The Engine Room</h2>
-            <p className="text-zinc-500 max-w-xl font-medium">Beyond simple rendering. Explore how browsers parse DOM, calculate Layout, and handle GPU compositing in modern frameworks.</p>
-          </div>
-          <Link 
-            href="/browser-pipeline" 
-            className="group flex items-center gap-4 px-6 py-3 rounded-2xl bg-zinc-900 border border-zinc-800 text-sm font-black text-zinc-400 hover:text-white hover:border-zinc-600 transition-all"
-          >
-            Explore Browser Pipeline
-            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-          </Link>
+      {/* Methods Section - Compact Cards */}
+      <section className="space-y-10">
+        <div className="flex items-center gap-4 px-4">
+          <div className="h-px bg-zinc-900 flex-1" />
+          <h2 className="text-xs font-black text-zinc-600 uppercase tracking-[0.3em] italic">Rendering Methods</h2>
+          <div className="h-px bg-zinc-900 flex-1" />
         </div>
-
-        <Link href="/browser-pipeline" className="group block relative p-1 rounded-[3rem] bg-linear-to-r from-blue-600/20 via-transparent to-purple-600/20 border border-zinc-900 hover:border-zinc-700 transition-all">
-          <div className="p-12 rounded-[2.8rem] bg-black/40 backdrop-blur-3xl overflow-hidden relative">
-            {/* Abstract Visual Elements */}
-            <div className="absolute top-0 right-0 p-12 opacity-10 group-hover:scale-110 transition-transform duration-1000">
-               <Cpu className="w-64 h-64 text-blue-500" />
-            </div>
-            
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 relative z-10">
-              <div className="space-y-8">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-600 text-white text-[10px] font-black uppercase tracking-widest shadow-2xl shadow-blue-500/40">
-                  New Feature
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 px-4">
+          {methods.map((demo) => (
+            <Link 
+              key={demo.href} 
+              href={demo.href}
+              className="group p-6 rounded-3xl bg-zinc-950 border border-zinc-900 transition-all duration-300 hover:border-zinc-700 hover:bg-zinc-900/40 hover:-translate-y-1 shadow-xl flex flex-col justify-between h-full"
+            >
+              <div>
+                <div className={`w-10 h-10 rounded-xl ${demo.bg} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform`}>
+                  <demo.icon className={`w-5 h-5 ${demo.color}`} />
                 </div>
-                <h3 className="text-5xl font-black text-white leading-tight tracking-tighter">
-                  From Bytes <br /> to Pixels
+                <h3 className="text-lg font-bold text-white mb-2 group-hover:text-blue-400 transition-colors line-clamp-1">
+                  {demo.title}
                 </h3>
-                <p className="text-zinc-500 text-lg font-medium leading-relaxed max-w-md">
-                  Deep dive into DOM trees, CSSOM calculation, and why Next.js layouts feel so performant 
-                  during navigation.
+                <p className="text-zinc-500 text-xs leading-relaxed mb-6 font-medium line-clamp-2">
+                  {demo.description}
                 </p>
-                <div className="flex flex-wrap gap-3">
-                   {['DOM/CSSOM', 'Layout Engine', 'GPU Compositing', 'HTTP Caching'].map(tag => (
-                     <span key={tag} className="px-4 py-2 rounded-xl bg-zinc-900 border border-zinc-800 text-xs font-bold text-zinc-400 capitalize">
-                       {tag}
-                     </span>
-                   ))}
+              </div>
+              <div className="flex items-center justify-between">
+                <RenderingBadge type={demo.type} className="px-2 py-0.5 text-[8px]" />
+                <ArrowRight className="w-3 h-3 text-zinc-700 group-hover:text-blue-500 group-hover:translate-x-1 transition-all" />
+              </div>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      {/* Performance Section */}
+      <section className="space-y-10">
+        <div className="flex items-center gap-4 px-4">
+          <div className="h-px bg-zinc-900 flex-1" />
+          <h2 className="text-xs font-black text-zinc-600 uppercase tracking-[0.3em] italic">Optimization Labs</h2>
+          <div className="h-px bg-zinc-900 flex-1" />
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 px-4">
+          {performance.map((demo) => (
+            <Link 
+              key={demo.href} 
+              href={demo.href}
+              className="group relative p-10 rounded-4xl bg-zinc-950 border border-zinc-900 transition-all duration-500 hover:border-zinc-700 hover:bg-zinc-950/50 hover:shadow-2xl hover:shadow-blue-500/5 flex flex-col md:flex-row gap-8 items-center text-center md:text-left"
+            >
+              <div className={`p-8 rounded-4xl ${demo.bg} shrink-0 group-hover:scale-105 transition-transform duration-500 shadow-2xl`}>
+                <demo.icon className={`w-12 h-12 ${demo.color}`} />
+              </div>
+              <div className="space-y-4 flex-1">
+                <div className="flex items-center justify-center md:justify-start gap-4">
+                  <h3 className="text-3xl font-black text-white italic tracking-tighter uppercase group-hover:text-blue-400 transition-colors">
+                    {demo.title}
+                  </h3>
+                  <RenderingBadge type={demo.type} className="px-3 py-1 text-[9px]" />
+                </div>
+                <p className="text-zinc-400 text-sm leading-relaxed font-medium max-w-md">
+                  {demo.description}
+                </p>
+                <div className="flex items-center justify-center md:justify-start pt-2 text-[10px] font-black text-zinc-600 uppercase tracking-[0.2em] group-hover:text-white transition-colors">
+                  Explore Lab
+                  <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-2 transition-transform text-blue-500" />
                 </div>
               </div>
-
-              <div className="flex flex-col justify-center gap-4">
-                 {[
-                   { label: 'Browser Responsibility', value: 'Parsing, Styling, Painting', color: 'blue' },
-                   { label: 'Framework Responsibility', value: 'Reconciliation, Hydration', color: 'purple' },
-                   { label: 'Persistent State', value: 'Shared Navbar & Layouts', color: 'teal' }
-                 ].map((item) => (
-                   <div key={item.label} className="p-6 rounded-2xl bg-zinc-950/50 border border-zinc-900 group-hover:translate-x-4 transition-transform duration-500">
-                      <div className="text-[10px] font-black text-zinc-600 uppercase tracking-widest mb-1">{item.label}</div>
-                      <div className="text-sm font-bold text-white tracking-tight">{item.value}</div>
-                   </div>
-                 ))}
-              </div>
-            </div>
-          </div>
-        </Link>
-      </section>
-
-      {/* DOM & Virtual-DOM Deep Dive - BENTO STYLE */}
-      <section className="max-w-7xl mx-auto space-y-12 px-6">
-        <div className="space-y-4">
-          <h2 className="text-4xl md:text-5xl font-black text-white tracking-widest uppercase italic">The Reactivity Lab</h2>
-          <p className="text-zinc-500 max-w-xl font-medium">Internalizing the difference between absolute DOM manipulation and virtual reconciliation.</p>
-        </div>
-
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Main Feature - Large Card */}
-          <Link href="/dom-vdom" className="lg:col-span-2 group relative overflow-hidden rounded-[3rem] bg-zinc-950 border border-zinc-900 p-12 hover:border-indigo-500/50 transition-all duration-500">
-            <div className="absolute top-0 right-0 w-96 h-96 bg-indigo-600/10 blur-[100px] -mr-32 -mt-32 transition-colors group-hover:bg-indigo-600/20" />
-            
-            <div className="relative z-10 h-full flex flex-col justify-between">
-              <div className="space-y-6">
-                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-600/10 border border-indigo-500/20 text-indigo-400 text-[10px] font-black uppercase tracking-widest">
-                    Architecture
-                 </div>
-                 <h3 className="text-5xl font-black text-white leading-tight tracking-tighter">
-                   Virtual‑DOM <br /> Reconciliation
-                 </h3>
-                 <p className="text-zinc-400 text-lg font-medium leading-relaxed max-w-md">
-                   Explore the heartbeat of React. Learn how the diffing algorithm minimizes 
-                   expensive browser reflows by calculating state deltas in memory.
-                 </p>
-              </div>
-
-              <div className="pt-12 flex items-center gap-4 text-white font-black uppercase tracking-widest text-sm group-hover:gap-6 transition-all">
-                Enter The Lab
-                <ArrowRight className="w-5 h-5 text-indigo-500" />
-              </div>
-            </div>
-          </Link>
-
-          {/* Side Info Cards */}
-          <div className="flex flex-col gap-8">
-            <Link href="/dom-vdom" className="flex-1 group p-8 rounded-[2.5rem] bg-zinc-950 border border-zinc-900 hover:border-purple-500/50 transition-all">
-              <Layers className="w-8 h-8 text-purple-500 mb-4 group-hover:scale-110 transition-transform" />
-              <h4 className="text-xl font-bold text-white mb-2 italic">No VDOM?</h4>
-              <p className="text-sm text-zinc-500 font-medium">
-                Why new frameworks like Solid and Svelte are moving away from the Virtual‑DOM for direct compilation.
-              </p>
             </Link>
-            
-            <Link href="/dom-vdom" className="flex-1 group p-8 rounded-[2.5rem] bg-zinc-950 border border-zinc-900 hover:border-teal-500/50 transition-all">
-              <Zap className="w-8 h-8 text-teal-500 mb-4 group-hover:scale-110 transition-transform" />
-              <h4 className="text-xl font-bold text-white mb-2 italic">Fiber Engine</h4>
-              <p className="text-sm text-zinc-500 font-medium">
-                Understanding concurrent rendering and how React prioritizes user interactions during heavy updates.
-              </p>
-            </Link>
-          </div>
+          ))}
         </div>
       </section>
 
-      {/* Features Detail */}
-      <div className="max-w-6xl mx-auto p-12 rounded-[2.5rem] bg-linear-to-br from-zinc-900 via-black to-black border border-zinc-800 shadow-3xl">
-        <div className="flex items-center gap-4 mb-12">
-          <div className="p-3 rounded-2xl bg-blue-600 shadow-lg shadow-blue-500/20">
-            <Globe className="w-6 h-6 text-white" />
-          </div>
-          <h3 className="text-2xl font-bold text-white">Engineering Patterns</h3>
+      {/* Architecture Section */}
+      <section className="space-y-10 pb-12">
+        <div className="flex items-center gap-4 px-4">
+          <div className="h-px bg-zinc-900 flex-1" />
+          <h2 className="text-xs font-black text-zinc-600 uppercase tracking-[0.3em] italic">Deep Architecture</h2>
+          <div className="h-px bg-zinc-900 flex-1" />
         </div>
-        
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-          <div className="space-y-4">
-            <h4 className="text-lg font-bold text-white">Selective Hydration</h4>
-            <p className="text-sm text-zinc-400 leading-relaxed font-medium">Leveraging Intersection Observer to defer React hydration, reducing Main Thread blockage for a faster TBT.</p>
-          </div>
-          <div className="space-y-4">
-            <h4 className="text-lg font-bold text-white">Streaming Suspense</h4>
-            <p className="text-sm text-zinc-400 leading-relaxed font-medium">Utilizing server-side streaming to progressively deliver HTML units, providing immediate visual feedback via Skeletons.</p>
-          </div>
-          <div className="space-y-4">
-            <h4 className="text-lg font-bold text-white">Feature-First Logic</h4>
-            <p className="text-sm text-zinc-400 leading-relaxed font-medium">Domain-driven design folder structure ensuring scalability and strict separation between UI and business services.</p>
-          </div>
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 px-4">
+          {architecture.map((demo) => (
+            <Link 
+              key={demo.href} 
+              href={demo.href}
+              className="group p-8 rounded-4xl bg-zinc-950 border border-zinc-900 transition-all duration-500 hover:border-zinc-700 hover:bg-zinc-950/50 hover:shadow-2xl hover:shadow-indigo-500/5 flex flex-col h-full"
+            >
+              <div className={`p-6 rounded-3xl ${demo.bg} mb-8 w-fit group-hover:scale-105 transition-transform duration-500 shadow-xl`}>
+                <demo.icon className={`w-10 h-10 ${demo.color}`} />
+              </div>
+              <div className="space-y-4 flex-1">
+                <div className="flex items-center gap-4">
+                  <h3 className="text-2xl font-black text-white italic tracking-tighter uppercase group-hover:text-blue-400 transition-colors line-clamp-1">
+                    {demo.title}
+                  </h3>
+                </div>
+                <p className="text-zinc-400 text-sm leading-relaxed font-medium line-clamp-3">
+                  {demo.description}
+                </p>
+              </div>
+              <div className="flex items-center justify-between mt-8 pt-6 border-t border-zinc-900/50 group-hover:border-zinc-800 transition-colors">
+                <RenderingBadge type={demo.type} className="px-3 py-1 text-[9px]" />
+                <ArrowRight className="w-4 h-4 text-blue-500 group-hover:translate-x-2 transition-transform" />
+              </div>
+            </Link>
+          ))}
         </div>
+      </section>
+
+      {/* Engineering Standards Footer */}
+      <div className="max-w-4xl mx-auto p-8 rounded-3xl bg-zinc-900/50 border border-zinc-800 text-center">
+        <h3 className="text-xl font-bold text-white mb-2">Engineering Standards</h3>
+        <p className="text-zinc-500 text-sm">
+          Built with Next.js 15, React 19, and TypeScript. All examples use best practices for performance and scalability.
+        </p>
       </div>
     </div>
   );

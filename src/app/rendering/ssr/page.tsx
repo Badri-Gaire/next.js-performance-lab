@@ -17,6 +17,7 @@ export const metadata: Metadata = {
 export const dynamic = 'force-dynamic';
 
 export default async function SSRPage() {
+  const requestTime = new Date().toISOString();
   // We pass cache: 'no-store' to ensure the database call is NEVER cached
   const products = await getProducts(8, 1000, { cache: 'no-store' }); 
 
@@ -47,6 +48,7 @@ export default async function Page() {
         type="SSR"
         title="Server-Side Rendering"
         description="Every time you refresh this page, the server fetches fresh data from the API and generates the HTML. This ensures the content is always up-to-date and personalized for the user."
+        serverTime={requestTime}
         strategyMarkdown="Fetch data at request time using `force-dynamic` or `cache: 'no-store'`. Best for dynamic content that changes per-user or per-request."
       />
 

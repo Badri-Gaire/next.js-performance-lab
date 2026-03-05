@@ -11,21 +11,25 @@ interface RenderingHeaderProps {
   title: string;
   description: string;
   strategyMarkdown: string;
+  serverTime?: string; // Optional: provided by server components
 }
 
-export function RenderingHeader({ type, title, description, strategyMarkdown }: RenderingHeaderProps) {
-  // We use a single state object to avoid cascading render lint errors
+export function RenderingHeader({ type, title, description, strategyMarkdown, serverTime }: RenderingHeaderProps) {
   const [hydrationState, setHydrationState] = useState({
     mounted: false,
-    timestamp: new Date()
+    // Use serverTime if provided, otherwise fallback to hydration time
+    displayTime: serverTime || (typeof window !== 'undefined' ? new Date().toISOString() : '')
   });
 
   useEffect(() => {
     setHydrationState({
       mounted: true,
-      timestamp: new Date()
+      displayTime: serverTime || new Date().toISOString()
     });
-  }, []);
+  }, [serverTime]);
+
+  // Determine final time to show
+  const finalTimeDisplay = serverTime || hydrationState.displayTime;
 
   return (
     <div className="mb-12 p-10 rounded-4xl bg-zinc-950 border border-zinc-900 shadow-2xl relative overflow-hidden">
@@ -39,7 +43,7 @@ export function RenderingHeader({ type, title, description, strategyMarkdown }: 
             <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-zinc-900 border border-zinc-800">
                <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
                <span className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest">
-                  {type === 'CSR' ? 'Client Fetching' : type === 'CRP' ? 'Static Edge' : `Fetched via ${type} Logic`}
+                  {type === 'CSR' ? 'Client Fetching' : (type === 'CRP' || type === 'DOM') ? 'Browser Rendering' : `Fetched via ${type} Logic`}
                </span>
             </div>
             <span 
@@ -47,7 +51,7 @@ export function RenderingHeader({ type, title, description, strategyMarkdown }: 
               suppressHydrationWarning
             >
               <Clock className="w-3.5 h-3.5 text-blue-500" />
-              Generated: {hydrationState.mounted ? formatDate(hydrationState.timestamp) : 'Calculating...'}
+              Generated: {hydrationState.mounted ? formatDate(finalTimeDisplay) : 'Calculating...'}
             </span>
           </div>
           

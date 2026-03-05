@@ -17,6 +17,7 @@ export const metadata: Metadata = {
 export const dynamic = 'force-static';
 
 export default async function SSGPage() {
+  const buildTime = new Date().toISOString();
   const products = await getProducts(8, 0); // No artificial delay needed for static
 
   const ssgSteps: { icon: 'Cpu' | 'Package' | 'Cloud' | 'Globe'; title: string; desc: string }[] = [
@@ -45,6 +46,7 @@ export default async function Page() {
         type="SSG"
         title="Static Site Generation"
         description="This page was generated during the build process. When you visit it, you are receiving a pre-built HTML file from the CDN, making it incredibly fast. This is the foundation of the Jamstack approach."
+        serverTime={buildTime}
         strategyMarkdown="Generated at build time. For static content that doesn't change often, like landing pages or blog posts."
       />
 

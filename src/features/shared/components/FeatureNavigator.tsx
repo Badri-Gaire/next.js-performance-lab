@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
-import { Server, Zap, Database, Layers, Cpu, Flame, ShieldCheck, Split, Boxes, Globe, Activity } from 'lucide-react';
+import { Server, Zap, Database, Layers, Cpu, Flame, ShieldCheck, Split, Boxes, Globe, Activity, ShieldAlert } from 'lucide-react';
 
 const features = [
   { name: 'Server-Side Rendering', href: '/rendering/ssr', icon: Server, type: 'SSR' },
@@ -131,6 +131,24 @@ export function FeatureNavigator() {
             <Activity className="w-3.5 h-3.5" />
           </div>
           <span>DOM‑VDOM Lab</span>
+        </Link>
+        <Link
+          href="/error-handling"
+          className={cn(
+            "group flex items-center gap-3 px-3 py-2 rounded-xl text-sm font-semibold transition-all duration-200",
+            pathname === '/error-handling'
+              ? "bg-indigo-600/10 text-indigo-400 border border-indigo-600/20 shadow-lg shadow-indigo-500/5"
+              : "text-zinc-500 hover:text-white hover:bg-zinc-900 border border-transparent"
+          )}
+        >
+          <div className={cn(
+            "p-1.5 rounded-lg shrink-0 transition-colors",
+            pathname === '/error-handling' ? "bg-indigo-600 text-white" : "bg-zinc-900 text-zinc-600 group-hover:text-zinc-300"
+          )}
+          >
+            <ShieldAlert className="w-3.5 h-3.5" />
+          </div>
+          <span>Error Handling Lab</span>
         </Link>
       </div>
     </nav>

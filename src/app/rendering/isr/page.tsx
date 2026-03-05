@@ -18,6 +18,7 @@ export const metadata: Metadata = {
 };
 
 export default async function ISRPage() {
+  const revalidationTime = new Date().toISOString();
   const products = await getProducts(8, 0);
 
   const isrSteps: { icon: 'Globe' | 'RefreshCcw' | 'Server' | 'Database'; title: string; desc: string }[] = [
@@ -49,6 +50,7 @@ export default async function Page() {
         type="ISR"
         title="Incremental Static Regeneration"
         description="This page is cached as a static file. After 30 seconds, the cache becomes 'stale'. The next visitor triggers a background regeneration, and the visitor after that gets the fresh version."
+        serverTime={revalidationTime}
         strategyMarkdown="Stale-While-Revalidate: Serve static, trigger background update, then serve fresh. Perfect for blogs, catalogs, and high-traffic sites."
       />
 
