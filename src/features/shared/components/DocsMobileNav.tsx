@@ -10,7 +10,7 @@ export function DocsMobileNav() {
   return (
     <>
       {/* Mobile Top Bar */}
-      <div className="lg:hidden sticky top-20 z-40 w-full bg-zinc-950/80 backdrop-blur-md border-b border-zinc-900 px-6 py-3">
+      <div className="lg:hidden sticky top-20 z-40 w-full bg-zinc-950/80 backdrop-blur-md border-b border-zinc-900 px-6 py-3 mb-5">
         <button 
           onClick={() => setIsOpen(true)}
           className="flex items-center gap-2 text-blue-400 font-bold text-xs uppercase tracking-widest"
