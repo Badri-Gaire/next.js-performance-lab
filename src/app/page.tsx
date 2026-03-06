@@ -186,8 +186,8 @@ export default function Home() {
                 </p>
               </div>
               <div className="flex items-center justify-between">
-                <RenderingBadge type={demo.type} className="px-2 py-0.5 text-[8px]" />
-                <ArrowRight className="w-3 h-3 text-zinc-700 group-hover:text-blue-500 group-hover:translate-x-1 transition-all" />
+                <RenderingBadge type={demo.type} className="px-2 py-0.5 text-[10px]" />
+                <ArrowRight className="w-8 h-8 text-zinc-700 group-hover:text-blue-500 group-hover:translate-x-1 transition-all" />
               </div>
             </Link>
           ))}

@@ -32,7 +32,7 @@ export function RenderingHeader({ type, title, description, strategyMarkdown, se
   const finalTimeDisplay = serverTime || hydrationState.displayTime;
 
   return (
-    <div className="mb-12 p-10 rounded-4xl bg-zinc-950 border border-zinc-900 shadow-2xl relative overflow-hidden">
+    <div className="mb-12  rounded-4xl bg-zinc-950 border border-zinc-900 shadow-2xl relative overflow-hidden">
       {/* Visual Glare */}
       <div className="absolute top-0 right-0 w-64 h-64 bg-blue-500/5 blur-[120px] -mr-32 -mt-32 pointer-events-none" />
       
