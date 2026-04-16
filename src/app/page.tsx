@@ -168,7 +168,7 @@ export default function Home() {
   return (
     <div className="space-y-24 animate-in fade-in slide-in-from-bottom-6 duration-1000">
       {/* Hero Section */}
-      <section className="text-center space-y-8 py-16 relative">
+      <section className="text-center space-y-8 md:py-16 relative">
         <div className="absolute inset-0 bg-blue-600/5 blur-[120px] -z-10" />
         <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-zinc-900 border border-zinc-800 text-[11px] font-bold text-blue-400 uppercase tracking-widest mb-4 shadow-xl">
           <Cpu className="w-3.5 h-3.5" />
@@ -178,17 +178,17 @@ export default function Home() {
           Next.js <br />
           <span className="relative group block sm:inline mt-2 sm:mt-0 px-4 cursor-default py-1 min-w-[280px] h-[1em] sm:h-auto inline-flex items-center justify-center overflow-visible">
             {/* The Text - Entirely hidden on hover */}
-            <span className="relative z-10 bg-linear-to-r from-blue-400 to-indigo-600 bg-clip-text text-transparent uppercase italic tracking-tighter transition-all duration-300 group-hover:opacity-0 group-hover:scale-50 group-hover:blur-sm px-2">
+            <span className="relative z-10 bg-linear-to-r from-blue-400 to-indigo-600 bg-clip-text text-transparent uppercase italic tracking-tighter transition-all duration-300 group-hover:opacity-0 group-active:opacity-0 group-hover:scale-50 group-active:scale-50 group-hover:blur-sm group-active:blur-sm px-2">
               Performance Lab
             </span>
             
-            {/* TURBO MODE OVERDRIVE ANIMATION (Hover only) */}
-            <div className="absolute inset-0 z-20 flex items-center justify-center pointer-events-none opacity-0 group-hover:opacity-100 transition-all duration-300 scale-75 group-hover:scale-100">
+            {/* TURBO MODE OVERDRIVE ANIMATION (Hover & Tap) */}
+            <div className="absolute inset-0 z-20 flex items-center justify-center pointer-events-none opacity-0 group-hover:opacity-100 group-active:opacity-100 transition-all duration-300 scale-75 group-hover:scale-100 group-active:scale-100">
                {/* 10 concentric rings with varying sizes and speeds */}
                {[...Array(10)].map((_, i) => (
                  <div 
                    key={i} 
-                   className="absolute border-[1px] border-blue-500/20 rounded-full animate-spin transition-all duration-700 group-hover:translate-y-0 translate-y-12 opacity-0 group-hover:opacity-100"
+                   className="absolute border-[1px] border-blue-500/20 rounded-full animate-spin transition-all duration-700 group-hover:translate-y-0 group-active:translate-y-0 translate-y-12 opacity-0 group-hover:opacity-100 group-active:opacity-100"
                    style={{ 
                      width: `${60 + i * 12}px`, 
                      height: `${60 + i * 12}px`, 
@@ -222,7 +222,7 @@ export default function Home() {
                </div>
 
                {/* High Speed Scanning Beam */}
-               <div className="absolute inset-0 bg-linear-to-r from-transparent via-blue-400/30 to-transparent -translate-x-full animate-speed-scan opacity-0 group-hover:opacity-100" />
+               <div className="absolute inset-0 bg-linear-to-r from-transparent via-blue-400/30 to-transparent -translate-x-full animate-speed-scan opacity-0 group-hover:opacity-100 group-active:opacity-100" />
             </div>
           </span>
         </h1>
