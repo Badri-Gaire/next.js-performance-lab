@@ -193,9 +193,9 @@ export function DomVdomDemo() {
       </section>
 
       <NextTopic 
-        title="Mastery Dashboard"
-        href="/"
-        description="Explore more performance strategies and architectural deep-dives."
+        title="Error Handling"
+        href="/error-handling"
+        description="Explore how Next.js handles errors and fallback UI."
       />
     </div>
   );

@@ -7,9 +7,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "https://lab.badrigaire.com.np/rendering/csr" },
 };
 
-// Force this route to be dynamic at the server level
-// This ensures the "Shell" is served with fresh headers (no-store / no-cache)
-export const dynamic = 'force-dynamic';
+// CSR pages in Next.js 16 are dynamic by default (shell rendering).
 
 export default function CSRPage() {
   return <CSRPageClient />;

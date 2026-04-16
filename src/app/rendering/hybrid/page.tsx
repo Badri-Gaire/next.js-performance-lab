@@ -92,7 +92,7 @@ export default function HybridArchitecturePage() {
       <NextTopic
         title="Caching Strategies"
         href="/caching-strategies"
-        description="Learn how browsers, CDNs, and frameworks coordinate to store data as close to the user as possible."
+        description="Explore how Next.js handles caching and revalidation."
       />
     </div>
   );

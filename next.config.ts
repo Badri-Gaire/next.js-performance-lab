@@ -1,7 +1,8 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  // cacheComponents: true, // Merged with PPR in Next 16, currently conflicts with force-dynamic in demos
+  // @ts-ignore - Next.js 16 unified caching flag
+  cacheComponents: true, 
   images: {
     remotePatterns: [
       {

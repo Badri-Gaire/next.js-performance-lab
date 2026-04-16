@@ -13,12 +13,12 @@ export const metadata: Metadata = {
   alternates: { canonical: "https://lab.badrigaire.com.np/rendering/ssg" },
 };
 
-// SSG is default for components that don't use dynamic data or force-dynamic
-export const dynamic = 'force-static';
+// SSG is achieved via 'use cache' in the component body in Next.js 16.
 
 export default async function SSGPage() {
+  'use cache'; // 🟢 Next.js 16: Explicitly opt-in to Static Generation (Dynamic by Default model)
   const buildTime = new Date().toISOString();
-  const products = await getProducts(8, 0); // No artificial delay needed for static
+  const products = await getProducts(8, 0); 
 
   const ssgSteps: { icon: 'Cpu' | 'Package' | 'Cloud' | 'Globe'; title: string; desc: string }[] = [
     { icon: 'Cpu', title: 'Build Time', desc: 'Next.js fetches data and generates HTML during "npm run build".' },
@@ -45,9 +45,9 @@ export default async function Page() {
       <RenderingHeader 
         type="SSG"
         title="Static Site Generation"
-        description="This page was generated during the build process. When you visit it, you are receiving a pre-built HTML file from the CDN, making it incredibly fast. This is the foundation of the Jamstack approach."
+        description="With Next.js 16, everything is Dynamic by Default. We now use 'use cache' to explicitly pre-render this page at build time. This ensures you receive a pre-built HTML file from the CDN nearly instantly."
         serverTime={buildTime}
-        strategyMarkdown="Generated at build time. For static content that doesn't change often, like landing pages or blog posts."
+        strategyMarkdown="Static Opt-In: Using 'use cache', we manually restore the SSG behavior in the modern dynamic-first pipeline."
       />
 
       <CodeBlueprint 

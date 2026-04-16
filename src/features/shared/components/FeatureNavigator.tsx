@@ -6,12 +6,13 @@ import { cn } from '@/lib/utils';
 import { Server, Zap, Database, Layers, Cpu, Flame, ShieldCheck, Split, Boxes, Globe, Activity, ShieldAlert } from 'lucide-react';
 
 const features = [
+  { name: 'Client-Side Rendering', href: '/rendering/csr', icon: Layers, type: 'CSR' },
+  { name: 'React Server Components', href: '/rendering/rsc', icon: Cpu, type: 'RSC' },
   { name: 'Server-Side Rendering', href: '/rendering/ssr', icon: Server, type: 'SSR' },
   { name: 'Static Site Generation', href: '/rendering/ssg', icon: Zap, type: 'SSG' },
   { name: 'Incremental Static Regeneration', href: '/rendering/isr', icon: Database, type: 'ISR' },
-  { name: 'Client-Side Rendering', href: '/rendering/csr', icon: Layers, type: 'CSR' },
-  { name: 'React Server Components', href: '/rendering/rsc', icon: Cpu, type: 'RSC' },
   { name: 'Partial Prerendering', href: '/rendering/ppr', icon: Flame, type: 'PPR' },
+  { name: 'Cache Components', href: '/rendering/cache-components', icon: Activity, type: 'CACHE' },
   { name: 'Hybrid Architecture', href: '/rendering/hybrid', icon: Boxes, type: 'HYBRID' },
 ];
 

@@ -19,8 +19,6 @@ export const metadata: Metadata = {
 };
 
 export default async function PPRPage() {
-  const products = await getProducts(4);
-
   const useCaseData = [
     { title: 'Landing Pages', use: true, reason: 'Instant SEO Shell + Promo data' },
     { title: 'User Settings', use: false, reason: 'Highly private, no static benefit' },
@@ -34,8 +32,18 @@ export default async function PPRPage() {
         type="PPR"
         title="Partial Prerendering (PPR)"
         description="PPR is the ultimate rendering optimization. It pre-renders the static shell of your page at build time and streams dynamic content into 'holes' as soon as it's ready."
-        strategyMarkdown="Experimental Stage: Currently available in Next.js 14/15 via an experimental flag. It enables 'incremental' rollout, allowing you to opt-in per route."
+        strategyMarkdown="Evolutionary Path: Introduced as experimental in **Next.js 14**, refined in **v15**, and now fully integrated with the **Cache Components** model in **v16**. See our [Migration Guide](./NEXTJS_16_MIGRATION.md) for build details."
       />
+
+      <section className="p-8 rounded-4xl bg-orange-500/5 border border-orange-500/10 space-y-4">
+        <div className="flex items-center gap-3">
+          <Zap className="w-5 h-5 text-orange-400" />
+          <h3 className="text-xl font-bold text-white uppercase italic tracking-tighter">The Next.js 16 Paradigm</h3>
+        </div>
+        <p className="text-sm text-zinc-400 leading-relaxed font-medium">
+          In previous versions, Next.js tried to automatically guess what should be cached. In **Next.js 16 with dynamicIO**, this flips: everything is **Dynamic by Default**. To make a component fast, you now explicitly use the <code className="text-orange-400 bg-zinc-900 px-2 py-0.5 rounded">"use cache"</code> directive. This works perfectly with PPR by allowing you to pre-cache the contents of your "holes".
+        </p>
+      </section>
 
       <PPRvsSSRComparison />
 
@@ -143,8 +151,8 @@ export default async function PPRPage() {
                </p>
                <div className="p-3 rounded-xl bg-orange-500/5 border border-orange-500/10">
                   <p className="text-[9px] text-zinc-500 leading-tight">
-                    <span className="text-orange-400 font-bold italic uppercase tracking-tighter block mb-1">Network Reality:</span> 
-                    Even with a static shell, your <strong>Cache-Control</strong> will be <strong>no-store</strong>. Next.js does this to ensure the dynamic stream isn&apos;t cached by intermediate layers.
+                    <span className="text-orange-400 font-bold italic uppercase tracking-tighter block mb-1">Modern Network Reality:</span> 
+                    With <strong>dynamicIO</strong>, your <strong>Cache-Control</strong> defaults to <strong>no-store</strong>. However, if you use <strong>&quot;use cache&quot;</strong>, Next.js caches the component output on the server, serving the stream almost instantly without re-running DB queries.
                   </p>
                </div>
             </div>
@@ -163,9 +171,7 @@ export default async function PPRPage() {
                   </div>
                </div>
                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                 {products.map((product) => (
-                   <ProductCard key={product.id} product={product} />
-                 ))}
+                 <StaticProducts />
                </div>
             </div>
 
@@ -193,7 +199,7 @@ export default async function PPRPage() {
                    <div className="bg-zinc-900/50 rounded-3xl animate-pulse h-64 border border-zinc-800" />
                  </div>
                }>
-                 <DynamicRecommendations delay={2500} />
+                 <DynamicRecommendations />
                </Suspense>
             </div>
           </div>
@@ -308,9 +314,10 @@ export default async function PPRPage() {
       </section>
 
       <NextTopic 
-        title="Hybrid Architecture Lab"
-        href="/rendering/hybrid"
-        description="Master the orchestration of RSC and Client components. See how they merge during the request lifecycle."
+        title="Cache Components & Zones"
+        href="/rendering/cache-components"
+        description="Master surgical caching in Next.js 16. See how 'use cache' completes the PPR vision."
+        type="CACHE"
       />
     </div>
   );
@@ -323,10 +330,23 @@ function ArrowRightIcon(props: React.SVGProps<SVGSVGElement>) {
   );
 }
 
-async function DynamicRecommendations({ delay }: { delay: number }) {
-  // Simulate slow dynamic data source (e.g. Recommendations Engine)
-  await new Promise(resolve => setTimeout(resolve, delay));
-  const dynamicProducts = await getProducts(2, 4, { cache: 'no-store' });
+async function StaticProducts() {
+  'use cache'; // 🟢 Static Part of the Shell
+  const products = await getProducts(4);
+  return (
+    <>
+      {products.map((product) => (
+        <ProductCard key={product.id} product={product} />
+      ))}
+    </>
+  );
+}
+
+async function DynamicRecommendations() {
+  'use cache'; // 🚀 Next.js 16 Optimization: Cache the dynamic fragment independently
+  
+  // Real fetch (Next.js handles the prerender-switch internally)
+  const dynamicProducts = await getProducts(2, 4); 
   
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 animate-in fade-in slide-in-from-bottom-8 duration-1000">

@@ -4,8 +4,7 @@ import { RenderingHeader } from '@/features/rendering/components/RenderingHeader
 import { CodeBlueprint } from '@/features/rendering/components/CodeBlueprint';
 import { ArrowUpRight, RefreshCcw } from 'lucide-react';
 
-// ISR: Revalidate every 30 seconds
-export const revalidate = 30;
+// Revalidation is now managed via 'use cache' logic in Next.js 16.
 
 import { NextTopic } from '@/features/shared/components/NextTopic';
 import { Metadata } from 'next';
@@ -18,6 +17,7 @@ export const metadata: Metadata = {
 };
 
 export default async function ISRPage() {
+  'use cache'; // 🔵 Next.js 16: Combine 'use cache' with revalidate exports for Modern ISR.
   const revalidationTime = new Date().toISOString();
   const products = await getProducts(8, 0);
 
@@ -49,9 +49,9 @@ export default async function Page() {
       <RenderingHeader 
         type="ISR"
         title="Incremental Static Regeneration"
-        description="This page is cached as a static file. After 30 seconds, the cache becomes 'stale'. The next visitor triggers a background regeneration, and the visitor after that gets the fresh version."
+        description="In the new 'Dynamic by Default' model, we explicitly mark this component with 'use cache'. Next.js 16 will serve it from the static cache until the 30s revalidation period expires."
         serverTime={revalidationTime}
-        strategyMarkdown="Stale-While-Revalidate: Serve static, trigger background update, then serve fresh. Perfect for blogs, catalogs, and high-traffic sites."
+        strategyMarkdown="Explicit Revalidation: Uses the 'use cache' directive combined with page-level revalidation for the Stale-While-Revalidate pattern."
       />
 
       <CodeBlueprint 
@@ -96,9 +96,9 @@ export default async function Page() {
       </div>
 
       <NextTopic 
-        title="Client-Side Rendering"
-        href="/rendering/csr"
-        description="Learn about the traditional SPA approach and how hydration works in Next.js."
+        title="Partial Prerendering"
+        href="/rendering/ppr"
+        description="The ultimate hybrid: instant static shells with streamed dynamic holes."
       />
     </div>
   );

@@ -3,14 +3,17 @@
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
+import { RenderingBadge } from '@/features/rendering/components/RenderingBadge';
+import { RenderingType } from '@/features/rendering/types';
 
 interface NextTopicProps {
   title: string;
   href: string;
   description: string;
+  type?: RenderingType;
 }
 
-export function NextTopic({ title, href, description }: NextTopicProps) {
+export function NextTopic({ title, href, description, type }: NextTopicProps) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -21,8 +24,11 @@ export function NextTopic({ title, href, description }: NextTopicProps) {
       <Link href={href} className="group block">
         <div className="p-8 md:p-10 rounded-[2.2rem] bg-black/40 backdrop-blur-3xl flex flex-col md:flex-row items-center justify-between gap-8 group-hover:bg-blue-600/5 transition-all duration-500">
           <div className="space-y-4 text-center md:text-left">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-[10px] font-black uppercase tracking-widest text-blue-400">
-              Next Topic
+            <div className="flex items-center gap-3">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-[10px] font-black uppercase tracking-widest text-blue-400">
+                Next Topic
+              </div>
+              {type && <RenderingBadge type={type} className="px-2 py-0.5 text-[10px]" />}
             </div>
             <h3 id="next-steps" className="text-4xl md:text-5xl font-black text-white tracking-tighter">
               {title}

@@ -1,5 +1,6 @@
 import { ErrorVisualizer } from '@/features/error-handling/components/ErrorVisualizer';
 import { FetchVsAxios } from '@/features/error-handling/components/FetchVsAxios';
+import { NextTopic } from '@/features/shared/components/NextTopic';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -19,6 +20,11 @@ export default function ErrorHandlingPage() {
       <section>
         <FetchVsAxios />
       </section>
+       <NextTopic 
+              title="Mastery Dashboard"
+              href="/"
+              description="Explore more performance strategies and architectural deep-dives."
+            />
     </div>
   );
 }

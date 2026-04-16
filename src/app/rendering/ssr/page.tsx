@@ -5,6 +5,7 @@ import { CodeBlueprint } from '@/features/rendering/components/CodeBlueprint';
 import { NextTopic } from '@/features/shared/components/NextTopic';
 import { Metadata } from 'next';
 import { Database } from 'lucide-react';
+import { connection } from 'next/server';
 
 export const metadata: Metadata = {
   title: "SSR Architecture",
@@ -13,10 +14,10 @@ export const metadata: Metadata = {
   alternates: { canonical: "https://lab.badrigaire.com.np/rendering/ssr" },
 };
 
-// Force SSR
-export const dynamic = 'force-dynamic';
+// In Next.js 16 with cacheComponents, dynamic-by-default makes 'force-dynamic' redundant.
 
 export default async function SSRPage() {
+  await connection(); // ⚡ Next.js 16: Explicitly mark as dynamic request
   const requestTime = new Date().toISOString();
   // We pass cache: 'no-store' to ensure the database call is NEVER cached
   const products = await getProducts(8, 1000, { cache: 'no-store' }); 
@@ -28,8 +29,7 @@ export default async function SSRPage() {
     { icon: 'Globe', title: 'Stream HTML', desc: 'Full HTML is generated and sent back to the browser.' },
   ];
 
-  const ssrCode = `// Force every request to be fresh
-export const dynamic = 'force-dynamic';
+  const ssrCode = `// SSG is achieved via 'use cache' in the component body in Next.js 16.
 
 export default async function Page() {
   // Fetched on the server for EVERY request
@@ -47,7 +47,7 @@ export default async function Page() {
       <RenderingHeader 
         type="SSR"
         title="Server-Side Rendering"
-        description="Every time you refresh this page, the server fetches fresh data from the API and generates the HTML. This ensures the content is always up-to-date and personalized for the user."
+        description="In Next.js 16 with dynamicIO, this is the default state: Dynamic by Default. The server executes your logic on every request, ensuring fresh content without any specialized configuration."
         serverTime={requestTime}
         strategyMarkdown="Fetch data at request time using `force-dynamic` or `cache: 'no-store'`. Best for dynamic content that changes per-user or per-request."
       />
@@ -89,8 +89,8 @@ export default async function Page() {
       {/* NEW: Dynamic Triggers Section */}
       <section id="triggers" className="p-10 rounded-4xl bg-zinc-950 border border-zinc-900 shadow-2xl space-y-8">
         <div className="space-y-2">
-          <h3 className="text-2xl font-bold text-white tracking-widest uppercase italic">The Dynamic Triggers</h3>
-          <p className="text-sm text-zinc-500 font-medium tracking-tight">Any of these APIs will force Next.js to switch this route from Static to Server-Side Rendering (SSR):</p>
+          <h3 className="text-2xl font-bold text-white tracking-widest uppercase italic">The Dynamic Baseline</h3>
+          <p className="text-sm text-zinc-500 font-medium tracking-tight">With <strong>dynamicIO</strong>, everything is dynamic from the start. These APIs no longer &quot;force&quot; a switch—instead, they are simply parts of the dynamic runtime:</p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

@@ -17,7 +17,7 @@ export default function RenderingLayout({
 
         {/* Main Content */}
         <main className="flex-1 min-w-0 pb-20">
-          <div className="max-w-5xl mx-auto">
+          <div className="max-w-7xl mx-auto px-4 md:px-8 xl:px-0">
             {children}
           </div>
         </main>

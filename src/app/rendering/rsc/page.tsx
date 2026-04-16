@@ -3,8 +3,10 @@ import { WaterfallComparison } from '@/features/rsc-architecture/components/Wate
 import { CodeComparison } from '@/features/rsc-architecture/components/CodeComparison';
 import { CodeBlueprint } from '@/features/rendering/components/CodeBlueprint';
 import { NextTopic } from '@/features/shared/components/NextTopic';
-import { Cpu, Box, Zap, History, Code2, ArrowDown } from 'lucide-react';
+import { Cpu, Box, Zap, History, Code2, ArrowDown, Database } from 'lucide-react';
 import { Metadata } from 'next';
+import { getProducts } from '@/features/rendering/services/product-service';
+import { ProductCard } from '@/features/rendering/components/ProductCard';
 
 export const metadata: Metadata = {
   title: "RSC & Waterfalls",
@@ -13,16 +15,10 @@ export const metadata: Metadata = {
   alternates: { canonical: "https://lab.badrigaire.com.np/rendering/rsc" },
 };
 
-// Force RSC to be dynamic for this demonstration
-export const dynamic = 'force-dynamic';
-
-import { getProducts } from '@/features/rendering/services/product-service';
-import { ProductCard } from '@/features/rendering/components/ProductCard';
-import { Database } from 'lucide-react';
-
 export default async function RSCPage() {
-  // RSC data fetching (at request time due to force-dynamic)
-  const products = await getProducts(4, 800, { cache: 'no-store' });
+  'use cache'; // ⚡ Next.js 16 Optimization: Explicitly cache this Server Component
+  
+  const products = await getProducts(4, 800);
 
   const rscSteps: { icon: 'Server' | 'Database' | 'Layers' | 'Globe'; title: string; desc: string }[] = [
     { icon: 'Server', title: 'Server Execution', desc: 'The component executes ONLY on the server. Zero JS is sent to the client for this logic.' },
@@ -52,8 +48,8 @@ export default async function Page() {
       <RenderingHeader 
         type="RSC"
         title="RSC Architecture & Waterfalls"
-        description="React Server Components (RSC) redefine how data travels from your server to the screen. By moving fetching to the server, we eliminate the costly 'Request-Response' cycles that cause slow page loads."
-        strategyMarkdown="Server-First rendering introduced in React 18 (2022). Fixes the 'Waterfall' problem by consolidating data fetching on the server before client execution."
+        description="React Server Components (RSC) are now Dynamic by Default in Next.js 16. While they eliminate client-side waterfalls, they execute on the server for every request unless explicitly optimized with the 'use cache' directive."
+        strategyMarkdown="Modern Standard: Server-First rendering. In the latest Next.js versions, we shift from 'guessing' cache-ability to an explicit 'Opt-In' performance model."
       />
 
       <CodeBlueprint 
@@ -79,7 +75,7 @@ export default async function Page() {
           <div className="px-4 py-2 rounded-xl bg-indigo-500/10 border border-indigo-500/20 max-w-xs">
              <span className="text-[10px] font-black text-indigo-400 uppercase tracking-widest block mb-1">Testing Tip</span>
              <p className="text-[9px] text-zinc-400 font-medium leading-relaxed">
-               RSCs fetch on the server. Hard Refresh (<kbd className="bg-zinc-800 px-1 rounded text-zinc-200">F5</kbd>) to force re-render.
+               RSCs fetch on the server. Since we used <code className="text-indigo-400">"use cache"</code>, the result is stored on the server for ultra-fast subsequent loads.
                <span className="text-indigo-300/80 block mt-1">Inter-page navigation is cached by the Browser Router for 30s.</span>
              </p>
           </div>
@@ -125,7 +121,7 @@ export default async function Page() {
           </div>
           <div>
             <h2 className="text-2xl font-bold text-white">The RSC Evolution</h2>
-            <p className="text-sm text-zinc-500 font-medium">From Client-Heavy to Server-First (2020 - 2025)</p>
+            <p className="text-sm text-zinc-500 font-medium">From Client-Heavy to Server-First (2020 - 2026)</p>
           </div>
         </div>
 
@@ -155,11 +151,11 @@ export default async function Page() {
           <div className="space-y-4">
             <div className="flex items-center gap-2 text-purple-400">
               <Zap className="w-4 h-4" />
-              <span className="text-xs font-black uppercase tracking-widest">2024: Next.js 15</span>
+              <span className="text-xs font-black uppercase tracking-widest">2026: Next.js 16+</span>
             </div>
-            <h4 className="text-lg font-bold text-white">Full Maturity</h4>
+            <h4 className="text-lg font-bold text-white">The Explicit Cache Era</h4>
             <p className="text-sm text-zinc-400 leading-relaxed font-medium">
-              Streaming, Partial Prerendering (PPR), and Server Actions complete the ecosystem, making waterfalls a thing of the past.
+              Introduction of <strong>dynamicIO</strong> and <code>&quot;use cache&quot;</code>. The platform moves to <strong>Dynamic by Default</strong>, giving developers surgical control over component-level caching.
             </p>
           </div>
         </div>
@@ -183,9 +179,9 @@ export default async function Page() {
       </div>
 
       <NextTopic 
-        title="Partial Prerendering"
-        href="/rendering/ppr"
-        description="The ultimate hybrid: combine static speed with streaming dynamic content."
+        title="Server-Side Rendering"
+        href="/rendering/ssr"
+        description="Fetch data on every request. High performance for personalized content."
       />
     </div>
   );

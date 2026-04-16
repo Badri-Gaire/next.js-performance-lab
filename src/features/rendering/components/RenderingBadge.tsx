@@ -17,6 +17,7 @@ const colors: Record<RenderingType, string> = {
   DOM: 'bg-zinc-500/10 text-zinc-400 border-zinc-500/20',
   HYBRID: 'bg-fuchsia-500/10 text-fuchsia-400 border-fuchsia-500/20',
   ERROR: 'bg-red-500/10 text-red-500 border-red-500/20',
+  CACHE: 'bg-cyan-500/10 text-cyan-400 border-cyan-500/20',
 };
 
 export function RenderingBadge({ type, className }: RenderingBadgeProps) {

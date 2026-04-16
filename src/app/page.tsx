@@ -28,6 +28,26 @@ export default function Home() {
   const demos = [
     // Methods
     {
+      title: "Client-Side Rendering",
+      type: "CSR" as const,
+      description:
+        "Interactive browser rendering with real-time state management.",
+      href: "/rendering/csr",
+      icon: Layers,
+      color: "text-purple-400",
+      bg: "bg-purple-500/10",
+    },
+    {
+      title: "React Server Components",
+      type: "RSC" as const,
+      description:
+        "Eliminate client-side data fetching waterfalls with Server Components.",
+      href: "/rendering/rsc",
+      icon: Cpu,
+      color: "text-indigo-400",
+      bg: "bg-indigo-500/10",
+    },
+    {
       title: "Server-Side Rendering",
       type: "SSR" as const,
       description:
@@ -58,26 +78,6 @@ export default function Home() {
       bg: "bg-blue-500/10",
     },
     {
-      title: "Client-Side Rendering",
-      type: "CSR" as const,
-      description:
-        "Interactive browser rendering with real-time state management.",
-      href: "/rendering/csr",
-      icon: Layers,
-      color: "text-purple-400",
-      bg: "bg-purple-500/10",
-    },
-    {
-      title: "React Server Components",
-      type: "RSC" as const,
-      description:
-        "Eliminate client-side data fetching waterfalls with Server Components.",
-      href: "/rendering/rsc",
-      icon: Cpu,
-      color: "text-indigo-400",
-      bg: "bg-indigo-500/10",
-    },
-    {
       title: "Partial Prerendering",
       type: "PPR" as const,
       description:
@@ -86,6 +86,16 @@ export default function Home() {
       icon: Flame,
       color: "text-teal-400",
       bg: "bg-teal-500/10",
+    },
+    {
+      title: "Cache Components",
+      type: "CACHE" as const,
+      description:
+        "Surgical caching zones with 'use cache'. The evolution of PPR.",
+      href: "/rendering/cache-components",
+      icon: Activity,
+      color: "text-cyan-400",
+      bg: "bg-cyan-500/10",
     },
     {
       title: "Hybrid Architecture",
@@ -151,9 +161,9 @@ export default function Home() {
     },
   ];
 
-  const methods = demos.slice(0, 7);
-  const performance = demos.slice(7, 9);
-  const architecture = demos.slice(9);
+  const methods = demos.slice(0, 8);
+  const performance = demos.slice(8, 10);
+  const architecture = demos.slice(10);
 
   return (
     <div className="space-y-24 animate-in fade-in slide-in-from-bottom-6 duration-1000">
@@ -166,8 +176,54 @@ export default function Home() {
         </div>
         <h1 className="text-5xl sm:text-6xl md:text-8xl font-black tracking-tight text-white leading-[1.1] px-4">
           Next.js <br />
-          <span className="bg-linear-to-r from-blue-400 to-indigo-600 bg-clip-text text-transparent uppercase italic tracking-tighter block sm:inline mt-2 sm:mt-0">
-            Performance Lab
+          <span className="relative group block sm:inline mt-2 sm:mt-0 px-4 cursor-default py-1 min-w-[280px] h-[1em] sm:h-auto inline-flex items-center justify-center overflow-visible">
+            {/* The Text - Entirely hidden on hover */}
+            <span className="relative z-10 bg-linear-to-r from-blue-400 to-indigo-600 bg-clip-text text-transparent uppercase italic tracking-tighter transition-all duration-300 group-hover:opacity-0 group-hover:scale-50 group-hover:blur-sm px-2">
+              Performance Lab
+            </span>
+            
+            {/* TURBO MODE OVERDRIVE ANIMATION (Hover only) */}
+            <div className="absolute inset-0 z-20 flex items-center justify-center pointer-events-none opacity-0 group-hover:opacity-100 transition-all duration-300 scale-75 group-hover:scale-100">
+               {/* 10 concentric rings with varying sizes and speeds */}
+               {[...Array(10)].map((_, i) => (
+                 <div 
+                   key={i} 
+                   className="absolute border-[1px] border-blue-500/20 rounded-full animate-spin transition-all duration-700 group-hover:translate-y-0 translate-y-12 opacity-0 group-hover:opacity-100"
+                   style={{ 
+                     width: `${60 + i * 12}px`, 
+                     height: `${60 + i * 12}px`, 
+                     animationDuration: `${0.6 - i * 0.04}s`,
+                     borderTopColor: i % 2 === 0 ? '#60a5fa' : '#818cf8',
+                     borderRightColor: 'transparent',
+                     transitionDelay: `${i * 0.04}s`
+                   }}
+                 />
+               ))}
+               
+               {/* Core Overdrive Spark */}
+               <div className="absolute w-4 h-4 rounded-full bg-blue-500 shadow-[0_0_30px_rgba(59,130,246,1)] animate-ping" />
+               <div className="absolute w-2 h-2 rounded-full bg-white shadow-[0_0_10px_white]" />
+
+               {/* Rapid Performance Metrics */}
+               <div className="absolute -inset-10 flex items-center justify-center">
+                  <span className="absolute top-0 left-0 text-[10px] font-mono text-blue-400 animate-flash" style={{ animationDelay: '0s' }}>TTFB: 1.2ms</span>
+                  <span className="absolute bottom-0 right-0 text-[10px] font-mono text-green-400 animate-flash" style={{ animationDelay: '0.1s' }}>LCP: 0.4s</span>
+                  <span className="absolute top-1/4 right-0 text-[10px] font-mono text-indigo-400 animate-flash" style={{ animationDelay: '0.2s' }}>FPS: 144</span>
+                  <span className="absolute bottom-1/4 left-0 text-[10px] font-mono text-white animate-flash" style={{ animationDelay: '0.3s' }}>FID: 0ms</span>
+                  <span className="absolute top-0 right-4 text-[8px] font-mono text-zinc-500 animate-flash" style={{ animationDelay: '0.4s' }}>CLS: 0.00</span>
+               </div>
+
+               {/* Flying Data Particles */}
+               <div className="absolute inset-0">
+                  <div className="absolute top-1/2 left-0 w-1 h-1 bg-blue-400 rounded-full animate-float-up" style={{ animationDelay: '0.1s' }} />
+                  <div className="absolute top-1/3 right-1/4 w-1.5 h-1.5 bg-white rounded-full animate-float-up" style={{ animationDelay: '0.3s' }} />
+                  <div className="absolute bottom-1/4 left-1/3 w-1 h-1 bg-indigo-500 rounded-full animate-float-up" style={{ animationDelay: '0.5s' }} />
+                  <div className="absolute top-2/3 right-0 w-1 h-1 bg-blue-600 rounded-full animate-float-up" style={{ animationDelay: '0.7s' }} />
+               </div>
+
+               {/* High Speed Scanning Beam */}
+               <div className="absolute inset-0 bg-linear-to-r from-transparent via-blue-400/30 to-transparent -translate-x-full animate-speed-scan opacity-0 group-hover:opacity-100" />
+            </div>
           </span>
         </h1>
         <p className="text-zinc-400 max-w-2xl mx-auto text-lg sm:text-xl leading-relaxed font-medium px-6">
@@ -177,7 +233,7 @@ export default function Home() {
 
         <div className="flex justify-center pt-4">
           <Link
-            href="/rendering/ssr"
+            href="/rendering/csr"
             className="px-8 py-4 rounded-2xl bg-blue-600 text-white font-black uppercase tracking-widest text-sm hover:bg-blue-500 transition-all shadow-2xl shadow-blue-500/20 active:scale-95 flex items-center gap-3"
           >
             Explore Labs
