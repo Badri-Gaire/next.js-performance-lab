@@ -2,12 +2,13 @@ import { getProducts } from '@/features/rendering/services/product-service';
 import { ProductCard } from '@/features/rendering/components/ProductCard';
 import { RenderingHeader } from '@/features/rendering/components/RenderingHeader';
 import { CodeBlueprint } from '@/features/rendering/components/CodeBlueprint';
-import { ArrowUpRight, RefreshCcw } from 'lucide-react';
+import { RefreshCcw } from 'lucide-react';
 
 // Revalidation is now managed via 'use cache' logic in Next.js 16.
 
 import { NextTopic } from '@/features/shared/components/NextTopic';
 import { Metadata } from 'next';
+import { cacheLife } from 'next/cache';
 
 export const metadata: Metadata = {
   title: "ISR Patterns",
@@ -17,23 +18,33 @@ export const metadata: Metadata = {
 };
 
 export default async function ISRPage() {
-  'use cache'; // 🔵 Next.js 16: Combine 'use cache' with revalidate exports for Modern ISR.
+  'use cache'; 
+  // 🔵 Next.js 16: Use cacheLife to set the TTL for this cached scope.
+  // The 'seconds' profile typically maps to a short revalidation window.
+  cacheLife({stale: 0, revalidate: 30, expire: 60});
+
   const revalidationTime = new Date().toISOString();
   const products = await getProducts(8, 0);
 
   const isrSteps: { icon: 'Globe' | 'RefreshCcw' | 'Server' | 'Database'; title: string; desc: string }[] = [
-    { icon: 'Globe', title: 'Server Cache Hit', desc: 'Page is served instantly from the pre-built static cache.' },
-    { icon: 'RefreshCcw', title: 'Stale Check', desc: 'Next.js checks if 30s have passed. If yes, it "invalidates" the cache.' },
-    { icon: 'Server', title: 'Background Update', desc: 'The NEXT request triggers a background rebuild while serving the old page.' },
-    { icon: 'Database', title: 'Fresh Data', desc: 'Database is queried; once finished, the static cache is updated for the NEXT visitor.' },
+    { icon: 'Globe', title: 'Cache Hit', desc: 'The component is served from the Unified Cache.' },
+    { icon: 'RefreshCcw', title: 'TTL Expiry', desc: 'Next.js checks the cacheLife profile. If expired, it marks it for revalidation.' },
+    { icon: 'Server', title: 'Background Revalidation', desc: 'The NEXT request triggers a background update while serving the cached version.' },
+    { icon: 'Database', title: 'Unified Update', desc: 'Data is refreshed and the new version is persisted in the cache for the next visitor.' },
   ];
 
-  const isrCode = `// Revalidate every 30 seconds
-export const revalidate = 30;
+  const isrCode = `import { unstable_cacheLife as cacheLife } from 'next/cache';
 
 export default async function Page() {
-  // First build: Dynamic fetch
-  // Subequent requests: Static Cache
+  'use cache'; // ⚡ Mark as cached
+  
+  // ⏱️ Custom 30s revalidation
+  cacheLife({
+    stale: 0, 
+    revalidate: 30, 
+    expire: 60
+  }); 
+  
   const data = await fetch('https://api.com/data');
   
   return (
@@ -49,19 +60,123 @@ export default async function Page() {
       <RenderingHeader 
         type="ISR"
         title="Incremental Static Regeneration"
-        description="In the new 'Dynamic by Default' model, we explicitly mark this component with 'use cache'. Next.js 16 will serve it from the static cache until the 30s revalidation period expires."
+        description="With cacheComponents enabled, we no longer use page-level exports. Instead, we use the 'use cache' directive and the 'cacheLife' profile to define our revalidation window."
         serverTime={revalidationTime}
-        strategyMarkdown="Explicit Revalidation: Uses the 'use cache' directive combined with page-level revalidation for the Stale-While-Revalidate pattern."
+        strategyMarkdown="Unified ISR: Uses the 'use cache' directive paired with 'cacheLife' for granular, component-level revalidation."
       />
 
       <CodeBlueprint 
         type="ISR"
-        title="Regeneration Pipeline"
-        description="ISR provides the speed of static sites with the freshness of dynamic sites. It uses the 'Stale-While-Revalidate' pattern, ensuring no user ever has to wait for a database query."
+        title="Modern ISR Pipeline"
+        description="ISR provides the speed of static sites with the freshness of dynamic sites. In Next.js 16, this is achieved by caching the component's output and defining a TTL profile."
         code={isrCode}
         steps={isrSteps}
       />
 
+      {/* modern caching */}
+      <section className="space-y-8">
+        <div className="space-y-4">
+          <h2 className="text-2xl font-black text-white italic tracking-tighter uppercase flex items-center gap-3">
+            <div className="w-8 h-1 bg-blue-500" />
+            Modern ISR: The cacheLife Profile
+          </h2>
+          <p className="text-zinc-500 max-w-2xl text-sm font-medium">
+            In Next.js 16, <code className="text-blue-400">revalidate</code> is deprecated. The modern way is to use <code className="text-blue-400">cacheLife</code> profiles directly inside your cached scope.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {/* Profile: Seconds */}
+          <div className="p-6 rounded-3xl bg-zinc-950 border border-zinc-900 space-y-4">
+            <div className="text-blue-500 font-bold text-lg">"seconds"</div>
+            <div className="p-4 rounded-xl bg-black/40 border border-zinc-800 font-mono text-[10px] text-zinc-400">
+              'use cache';<br/>
+              cacheLife('seconds');<br/>
+              <span className="text-zinc-600">// Short TTL window</span>
+            </div>
+            <p className="text-[10px] text-zinc-500 leading-relaxed italic">
+              Ideal for stock prices or live scores.
+            </p>
+          </div>
+
+          {/* Profile: Minutes */}
+          <div className="p-6 rounded-3xl bg-zinc-950 border border-zinc-900 space-y-4">
+            <div className="text-teal-500 font-bold text-lg">"minutes"</div>
+            <div className="p-4 rounded-xl bg-black/40 border border-zinc-800 font-mono text-[10px] text-zinc-400">
+              'use cache';<br/>
+              cacheLife('minutes');<br/>
+              <span className="text-zinc-600">// Moderate TTL window</span>
+            </div>
+            <p className="text-[10px] text-zinc-500 leading-relaxed italic">
+              Perfect for weather or trending topics.
+            </p>
+          </div>
+
+          {/* Profile: Hours */}
+          <div className="p-6 rounded-3xl bg-zinc-950 border border-zinc-900 space-y-4">
+            <div className="text-purple-500 font-bold text-lg">"hours"</div>
+            <div className="p-4 rounded-xl bg-black/40 border border-zinc-800 font-mono text-[10px] text-zinc-400">
+              'use cache';<br/>
+              cacheLife('hours');<br/>
+              <span className="text-zinc-600">// Long TTL window</span>
+            </div>
+            <p className="text-[10px] text-zinc-500 leading-relaxed italic">
+              Best for blog posts or documentation.
+            </p>
+          </div>
+        </div>
+
+        <div className="space-y-6">
+          <h3 className="text-lg font-bold text-white flex items-center gap-2">
+            <div className="w-4 h-4 rounded bg-blue-500/20 border border-blue-500/30 flex items-center justify-center">
+              <span className="text-[8px] text-blue-500 italic">i</span>
+            </div>
+            Default Profile Values
+          </h3>
+          <div className="overflow-hidden rounded-2xl border border-zinc-900 bg-zinc-950/50">
+            <table className="w-full text-left text-[11px]">
+              <thead>
+                <tr className="bg-zinc-900/50 border-b border-zinc-900">
+                  <th className="px-4 py-3 font-bold text-zinc-300">Profile Name</th>
+                  <th className="px-4 py-3 font-bold text-zinc-300">Stale After</th>
+                  <th className="px-4 py-3 font-bold text-zinc-300">Revalidate After</th>
+                  <th className="px-4 py-3 font-bold text-zinc-300">Max Age (Expire)</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-zinc-900/50">
+                {[
+                  { name: 'seconds', stale: '1 second', revalidate: '1 minute', expire: '1 minute' },
+                  { name: 'minutes', stale: '1 minute', revalidate: '5 minutes', expire: '14 days' },
+                  { name: 'hours', stale: '1 hour', revalidate: '1 day', expire: '14 days' },
+                  { name: 'days', stale: '1 day', revalidate: '1 week', expire: '14 days' },
+                ].map((p) => (
+                  <tr key={p.name} className="hover:bg-zinc-900/20 transition-colors">
+                    <td className="px-4 py-3 font-mono text-blue-400">{`"${p.name}"`}</td>
+                    <td className="px-4 py-3 text-zinc-500">{p.stale}</td>
+                    <td className="px-4 py-3 text-zinc-400 font-medium">{p.revalidate}</td>
+                    <td className="px-4 py-3 text-zinc-500">{p.expire}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div className="p-6 rounded-[2rem] bg-blue-500/5 border border-blue-500/10">
+          <div className="flex items-start gap-4">
+            <div className="p-2 rounded-lg bg-blue-500/10">
+              <RefreshCcw className="w-4 h-4 text-blue-500" />
+            </div>
+            <div className="space-y-2">
+              <h4 className="text-sm font-bold text-white uppercase tracking-widest">Why switch to cacheLife?</h4>
+              <p className="text-xs text-zinc-500 leading-relaxed">
+                Unlike the page-level <code className="text-zinc-300">revalidate</code> export, <code className="text-blue-400">cacheLife</code> allows you to set different TTLs for different components on the <strong>same page</strong>. You can have a Navbar cached for "weeks" and a News Feed cached for "seconds".
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+{/* example live demo */}
       <section className="space-y-8">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
           <div className="space-y-2">
@@ -70,14 +185,14 @@ export default async function Page() {
               Live Demo
             </h2>
             <p className="text-xs text-zinc-500 font-medium">
-              These products were fetched using <span className="text-blue-400 font-bold italic underline decoration-blue-500/30">Incremental Static Regeneration (ISR)</span> with a 30s window.
+              These products are cached using <span className="text-blue-400 font-bold italic underline decoration-blue-500/30">Unified ISR</span> with a <code className="text-blue-300">"seconds"</code> profile.
             </p>
           </div>
           <div className="px-4 py-2 rounded-xl bg-blue-500/10 border border-blue-500/20 max-w-xs">
              <span className="text-[10px] font-black text-blue-400 uppercase tracking-widest block mb-1">Testing Tip</span>
              <p className="text-[9px] text-zinc-400 font-medium leading-relaxed">
-               Refresh after 30s. The 1st refresh triggers the update, the 2nd shows it.
-               <span className="text-blue-300/80 block mt-1 italic">Note: Internal links might stay stale longer due to the 30s Client Router Cache.</span>
+               Refresh after 30s. The 1st refresh triggers the background update, the 2nd shows it.
+               <span className="text-blue-300/80 block mt-1 italic">Note: Granular caching is now managed inside the component itself.</span>
              </p>
           </div>
         </div>
@@ -87,13 +202,7 @@ export default async function Page() {
           ))}
         </div>
       </section>
-      
-      <div id="trigger" className="py-12 text-center">
-        <button className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-zinc-900 border border-zinc-800 text-sm font-bold text-white hover:bg-zinc-800 transition-all active:scale-95 shadow-2xl">
-          Trigger Background Revalidation
-          <ArrowUpRight className="w-4 h-4 text-blue-500" />
-        </button>
-      </div>
+
 
       <NextTopic 
         title="Partial Prerendering"
@@ -103,3 +212,4 @@ export default async function Page() {
     </div>
   );
 }
+

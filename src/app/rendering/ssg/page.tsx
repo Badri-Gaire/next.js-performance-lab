@@ -128,6 +128,106 @@ export async function generateStaticParams() {
          <span className="text-xs text-zinc-500 font-mono tracking-tighter italic">next build -{">"} serverless architecture ready</span>
       </div>
 
+      {/* The SSG Evolution: Implicit vs Explicit */}
+      <section className="space-y-12">
+        <div className="space-y-4 text-center max-w-3xl mx-auto">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-green-500/10 border border-green-500/20 mb-2">
+            <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
+            <span className="text-[10px] font-black text-green-500 uppercase tracking-widest">Architectural Shift</span>
+          </div>
+          <h2 className="text-4xl font-black text-white italic tracking-tighter uppercase">
+            The SSG Evolution
+          </h2>
+          <p className="text-zinc-500 text-sm font-medium leading-relaxed">
+            Next.js 16 moves from <span className="text-zinc-300 italic">guessing</span> if a page is static to an <span className="text-green-400 font-bold underline decoration-green-500/30 underline-offset-4">Explicit Opt-in</span> model.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
+          {/* Legacy/Standard Approach */}
+          <div className="group relative p-8 rounded-[2.5rem] bg-zinc-950 border border-zinc-900 flex flex-col transition-all hover:border-zinc-800">
+            <div className="absolute top-6 right-8">
+               <span className="px-2 py-1 rounded bg-zinc-900 border border-zinc-800 text-[9px] font-bold text-zinc-500 uppercase tracking-tighter">Legacy Pattern</span>
+            </div>
+            <div className="space-y-4 mb-8">
+              <h4 className="text-xl font-black text-zinc-400 italic uppercase">Implicitly Static</h4>
+              <p className="text-xs text-zinc-500 leading-relaxed font-medium">
+                Next.js assumes static behavior by default. However, non-deterministic functions like <code className="text-zinc-400 italic">new Date()</code> will force the entire page to dynamic on every request.
+              </p>
+            </div>
+            
+            <div className="mt-auto p-6 rounded-2xl bg-black/60 border border-zinc-900 font-mono text-[11px] leading-relaxed relative overflow-hidden">
+               <div className="absolute top-0 left-0 w-1 h-full bg-zinc-800" />
+               <div className="text-zinc-600 mb-2">// Traditional SSG (Pre-v16)</div>
+               <div><span className="text-purple-400">export default async function</span> <span className="text-blue-400">Page</span>() &#123;</div>
+               <div className="pl-4 opacity-50"><span className="text-zinc-500">// Next.js tries to guess...</span></div>
+               <div className="pl-4"><span className="text-purple-400">const</span> res = <span className="text-purple-400">await</span> <span className="text-yellow-200">fetch</span>(<span className="text-green-300">'...'</span>);</div>
+               <div className="pl-4 text-red-500/50 italic line-through decoration-red-500/80">
+                  const buildTime = new Date(); <span className="text-[9px] ml-2 font-sans opacity-100 text-red-400 tracking-tighter uppercase font-black">! Forces Dynamic</span>
+               </div>
+               <div className="pl-4"><span className="text-purple-400">return</span> &lt;<span className="text-blue-400">main</span>&gt;...&lt;/<span className="text-blue-400">main</span>&gt;;</div>
+               <div>&#125;</div>
+            </div>
+          </div>
+
+          {/* Modern Unified Approach */}
+          <div className="group relative p-8 rounded-[2.5rem] bg-zinc-950 border border-green-500/20 flex flex-col transition-all hover:border-green-500/40 shadow-2xl shadow-green-500/5 overflow-hidden">
+            <div className="absolute -top-12 -right-12 w-32 h-32 bg-green-500/10 rounded-full blur-3xl transition-all group-hover:bg-green-500/20" />
+            <div className="absolute top-6 right-8">
+               <span className="px-2 py-1 rounded bg-green-500/10 border border-green-500/20 text-[9px] font-bold text-green-500 uppercase tracking-tighter">Unified v16</span>
+            </div>
+            
+            <div className="space-y-4 mb-8">
+              <h4 className="text-xl font-black text-white italic uppercase">Explicitly Static</h4>
+              <p className="text-xs text-zinc-500 leading-relaxed font-medium">
+                Using <code className="text-green-400 font-bold italic">'use cache'</code> forces the compiler to snapshot the component. This <span className="text-white">freezes</span> the result of dynamic functions into the static build.
+              </p>
+            </div>
+
+            <div className="mt-auto p-6 rounded-2xl bg-black/60 border border-green-900/30 font-mono text-[11px] leading-relaxed relative overflow-hidden shadow-inner">
+               <div className="absolute top-0 left-0 w-1 h-full bg-green-500" />
+               <div className="text-zinc-600 mb-2">// Modern SSG (Next.js 16)</div>
+               <div><span className="text-purple-400">export default async function</span> <span className="text-blue-400">Page</span>() &#123;</div>
+               <div className="pl-4 text-white font-bold tracking-tight italic select-none">
+                  'use cache'; <span className="text-[9px] ml-2 font-sans text-green-500 tracking-tighter uppercase font-black">🟢 Opt-In Success</span>
+               </div>
+               <div className="pl-4"><span className="text-purple-400">const</span> res = <span className="text-purple-400">await</span> <span className="text-yellow-200">fetch</span>(<span className="text-green-300">'...'</span>);</div>
+               <div className="pl-4 text-green-400 font-bold underline decoration-green-500/20">
+                  const buildTime = new Date(); <span className="text-[9px] ml-2 font-sans text-green-500 tracking-tighter uppercase font-black italic">✓ Captured at build</span>
+               </div>
+               <div className="pl-4"><span className="text-purple-400">return</span> &lt;<span className="text-blue-400">main</span>&gt;...&lt;/<span className="text-blue-400">main</span>&gt;;</div>
+               <div>&#125;</div>
+            </div>
+          </div>
+        </div>
+
+        <div className="p-8 rounded-[2.5rem] bg-gradient-to-br from-zinc-900 to-black border border-zinc-800 shadow-2xl">
+          <div className="flex flex-col md:flex-row gap-8 items-start">
+            <div className="p-4 rounded-[2rem] bg-green-500/10 border border-green-500/20 shrink-0">
+               <Layout className="w-8 h-8 text-green-500" />
+            </div>
+            <div className="space-y-4">
+              <h4 className="text-lg font-black text-white italic uppercase tracking-widest">When to deploy 'use cache'?</h4>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div className="space-y-2">
+                  <div className="text-[10px] font-bold text-green-500 uppercase">Scenario A</div>
+                  <p className="text-xs text-zinc-400 leading-relaxed"><span className="text-zinc-100 font-bold">Build Snapshots</span>: When you need a "Last Updated" timestamp on every page without triggering SSR.</p>
+                </div>
+                <div className="space-y-2">
+                  <div className="text-[10px] font-bold text-green-500 uppercase">Scenario B</div>
+                  <p className="text-xs text-zinc-400 leading-relaxed"><span className="text-zinc-100 font-bold">Query Isolation</span>: When a component performs a heavy DB query that only needs to run during build.</p>
+                </div>
+                <div className="space-y-2">
+                  <div className="text-[10px] font-bold text-green-500 uppercase">Scenario C</div>
+                  <p className="text-xs text-zinc-400 leading-relaxed"><span className="text-zinc-100 font-bold">Static Islands</span>: When using PPR to make specific parts of a dynamic route perfectly static.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
       <NextTopic 
         title="Incremental Static Regeneration"
         href="/rendering/isr"
