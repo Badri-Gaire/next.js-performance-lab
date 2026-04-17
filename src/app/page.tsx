@@ -15,6 +15,7 @@ import {
   ShieldAlert,
 } from "lucide-react";
 import { RenderingBadge } from "@/features/rendering/components/RenderingBadge";
+import { HeroAnimation } from "@/features/rendering/components/HeroAnimation";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -166,65 +167,130 @@ export default function Home() {
   const architecture = demos.slice(10);
 
   return (
-    <div className="space-y-24 animate-in fade-in slide-in-from-bottom-6 duration-1000">
+    <div className="space-y-24 animate-in fade-in slide-in-from-bottom-6 duration-1000 overflow-x-hidden">
       {/* Hero Section */}
       <section className="text-center space-y-8 md:py-16 relative">
         <div className="absolute inset-0 bg-blue-600/5 blur-[120px] -z-10" />
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-zinc-900 border border-zinc-800 text-[11px] font-bold text-blue-400 uppercase tracking-widest my-4 shadow-xl">
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-zinc-900 border border-zinc-800 text-[11px] font-bold text-blue-400 uppercase tracking-widest my-4 md:my-0 shadow-xl">
           <Cpu className="w-3.5 h-3.5" />
           Advanced System Architecture
         </div>
-        <h1 className="text-5xl sm:text-6xl md:text-8xl font-black tracking-tight text-white leading-[1.1] px-4">
+        <h1 className="text-4xl sm:text-6xl md:text-8xl font-black tracking-tight text-white leading-[1.1] px-4">
           Next.js <br />
-          <span className="relative group block sm:inline mt-2 sm:mt-0 px-4 cursor-pointer py-1 min-w-[280px] h-[1em] sm:h-auto inline-flex items-center justify-center overflow-visible select-none outline-none">
-            {/* The Text - Entirely hidden on hover */}
-            <span className="relative z-10 bg-linear-to-r from-blue-400 to-indigo-600 bg-clip-text text-transparent uppercase italic tracking-tighter transition-all duration-300 group-hover:opacity-0 group-active:opacity-0 group-hover:scale-50 group-active:scale-50 group-hover:blur-sm group-active:blur-sm px-2">
-              Performance Lab
-            </span>
-            
-            {/* TURBO MODE OVERDRIVE ANIMATION (Hover & Tap) */}
-            <div className="absolute inset-0 z-20 flex items-center justify-center pointer-events-none opacity-0 group-hover:opacity-100 group-active:opacity-100 transition-all duration-300 scale-75 group-hover:scale-100 group-active:scale-100">
-               {/* 10 concentric rings with varying sizes and speeds */}
-               {[...Array(10)].map((_, i) => (
-                 <div 
-                   key={i} 
-                   className="absolute border-[1px] border-blue-500/20 rounded-full animate-spin transition-all duration-700 group-hover:translate-y-0 group-active:translate-y-0 translate-y-12 opacity-0 group-hover:opacity-100 group-active:opacity-100"
-                   style={{ 
-                     width: `${60 + i * 12}px`, 
-                     height: `${60 + i * 12}px`, 
-                     animationDuration: `${0.6 - i * 0.04}s`,
-                     borderTopColor: i % 2 === 0 ? '#60a5fa' : '#818cf8',
-                     borderRightColor: 'transparent',
-                     transitionDelay: `${i * 0.04}s`
-                   }}
-                 />
-               ))}
-               
-               {/* Core Overdrive Spark */}
-               <div className="absolute w-4 h-4 rounded-full bg-blue-500 shadow-[0_0_30px_rgba(59,130,246,1)] animate-ping" />
-               <div className="absolute w-2 h-2 rounded-full bg-white shadow-[0_0_10px_white]" />
+          <HeroAnimation 
+            animationOverlay={
+              <>
+                {/* HUD Grid Background (New) */}
+                <div className="absolute inset-[-50%] bg-[linear-gradient(rgba(59,130,246,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(59,130,246,0.05)_1px,transparent_1px)] bg-[size:12px_12px] [mask-image:radial-gradient(ellipse_at_center,black,transparent_80%)] -z-10" />
+                
+                {/* 10 concentric rings with varying sizes and speeds */}
+                {[...Array(10)].map((_, i) => (
+                  <div 
+                    key={i} 
+                    className="absolute border-[1px] border-blue-500/20 rounded-full animate-spin transition-all duration-700 group-hover:translate-y-0 group-[.is-playing]:translate-y-0 group-active:translate-y-0 translate-y-12 opacity-0 group-hover:opacity-100 group-[.is-playing]:opacity-100 group-active:opacity-100"
+                    style={{ 
+                      width: `${60 + i * 12}px`, 
+                      height: `${60 + i * 12}px`, 
+                      animationDuration: `${0.6 - i * 0.04}s`,
+                      borderTopColor: i % 2 === 0 ? '#60a5fa' : '#818cf8',
+                      borderRightColor: 'transparent',
+                      transitionDelay: `${i * 0.04}s`
+                    }}
+                  />
+                ))}
+                
+                {/* Core Overdrive Spark */}
+                <div className="absolute w-4 h-4 rounded-full bg-blue-500 shadow-[0_0_30px_rgba(59,130,246,1)] animate-ping" />
+                <div className="absolute w-2 h-2 rounded-full bg-white shadow-[0_0_10px_white]" />
 
-               {/* Rapid Performance Metrics */}
-               <div className="absolute -inset-10 flex items-center justify-center">
-                  <span className="absolute top-0 left-0 text-[10px] font-mono text-blue-400 animate-flash" style={{ animationDelay: '0s' }}>TTFB: 1.2ms</span>
-                  <span className="absolute bottom-0 right-0 text-[10px] font-mono text-green-400 animate-flash" style={{ animationDelay: '0.1s' }}>LCP: 0.4s</span>
-                  <span className="absolute top-1/4 right-0 text-[10px] font-mono text-indigo-400 animate-flash" style={{ animationDelay: '0.2s' }}>FPS: 144</span>
-                  <span className="absolute bottom-1/4 left-0 text-[10px] font-mono text-white animate-flash" style={{ animationDelay: '0.3s' }}>FID: 0ms</span>
-                  <span className="absolute top-0 right-4 text-[8px] font-mono text-zinc-500 animate-flash" style={{ animationDelay: '0.4s' }}>CLS: 0.00</span>
-               </div>
+                {/* Sonic Boom Rings (New) */}
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="absolute w-12 h-12 border border-blue-400/50 rounded-full animate-ping opacity-0 group-hover:opacity-100 group-[.is-playing]:opacity-100 group-active:opacity-100" style={{ animationDuration: '0.5s' }} />
+                  <div className="absolute w-24 h-24 border border-indigo-400/30 rounded-full animate-ping opacity-0 group-hover:opacity-100 group-[.is-playing]:opacity-100 group-active:opacity-100" style={{ animationDuration: '0.8s', animationDelay: '0.2s' }} />
+                </div>
 
-               {/* Flying Data Particles */}
-               <div className="absolute inset-0">
-                  <div className="absolute top-1/2 left-0 w-1 h-1 bg-blue-400 rounded-full animate-float-up" style={{ animationDelay: '0.1s' }} />
-                  <div className="absolute top-1/3 right-1/4 w-1.5 h-1.5 bg-white rounded-full animate-float-up" style={{ animationDelay: '0.3s' }} />
-                  <div className="absolute bottom-1/4 left-1/3 w-1 h-1 bg-indigo-500 rounded-full animate-float-up" style={{ animationDelay: '0.5s' }} />
-                  <div className="absolute top-2/3 right-0 w-1 h-1 bg-blue-600 rounded-full animate-float-up" style={{ animationDelay: '0.7s' }} />
+                {/* Rapid Performance Metrics - Fixed for Mobile Visibility */}
+                <div className="absolute -inset-4 sm:-inset-12 flex items-center justify-center">
+                  <span className="absolute top-0 left-2 sm:left-0 text-[9px] sm:text-[10px] font-mono text-blue-400 animate-pulse whitespace-nowrap">TTFB: 1.2ms</span>
+                  <span className="absolute bottom-0 right-2 sm:right-0 text-[9px] sm:text-[10px] font-mono text-green-400 animate-pulse whitespace-nowrap">LCP: 0.4s</span>
+                  <span className="absolute top-1/4 -right-4 sm:right-0 text-[9px] sm:text-[10px] font-mono text-indigo-400 animate-pulse whitespace-nowrap">FPS: 144</span>
+                  <span className="absolute bottom-1/4 -left-4 sm:left-0 text-[9px] sm:text-[10px] font-mono text-white animate-pulse whitespace-nowrap">FID: 0ms</span>
+                  <span className="absolute -top-4 right-4 text-[8px] font-mono text-zinc-500 animate-pulse">CLS: 0.00</span>
+                </div>
+
+                {/* Floating Rendering Pages - Reconstituting the UI (New) */}
+                <div className="absolute inset-x-[-15%] inset-y-0 pointer-events-none">
+                  {[
+                    { name: 'SSR', color: 'orange' },
+                    { name: 'SSG', color: 'green' },
+                    { name: 'ISR', color: 'blue' },
+                    { name: 'CSR', color: 'purple' },
+                    { name: 'RSC', color: 'indigo' },
+                    { name: 'PPR', color: 'teal' }
+                  ].map((method, i) => (
+                    <div 
+                      key={method.name}
+                      className={`absolute bg-zinc-950/90 border rounded-lg p-2 animate-random-float opacity-0 group-hover:opacity-100 group-[.is-playing]:opacity-100 group-active:opacity-100 flex flex-col gap-1.5 shadow-2xl scale-75 sm:scale-100
+                        ${method.color === 'orange' ? 'border-orange-500/40 shadow-orange-500/10' : 
+                          method.color === 'green' ? 'border-green-500/40 shadow-green-500/10' : 
+                          method.color === 'blue' ? 'border-blue-500/40 shadow-blue-500/10' : 
+                          method.color === 'purple' ? 'border-purple-500/40 shadow-purple-500/10' : 
+                          method.color === 'indigo' ? 'border-indigo-500/40 shadow-indigo-500/10' : 
+                          'border-teal-500/40 shadow-teal-500/10'}`}
+                      style={{
+                        width: '55px',
+                        height: '70px',
+                        left: `${5 + i * 16}%`,
+                        bottom: `${-20 - (i % 3) * 20}px`,
+                        animationDelay: `${i * 0.1}s`,
+                        animationDuration: `${1.2 + (i % 2) * 0.3}s`
+                      }}
+                    >
+                      {/* Page Header with Mini Progress */}
+                      <div className="h-1.5 w-full bg-zinc-800 rounded-full overflow-hidden">
+                        <div className={`h-full animate-speed-scan w-full
+                          ${method.color === 'orange' ? 'bg-orange-500' : 
+                            method.color === 'green' ? 'bg-green-500' : 
+                            method.color === 'blue' ? 'bg-blue-500' : 
+                            method.color === 'purple' ? 'bg-purple-500' : 
+                            method.color === 'indigo' ? 'bg-indigo-500' : 
+                            'bg-teal-500'}`} 
+                          style={{ animationDuration: '0.4s' }} />
+                      </div>
+                      
+                      {/* Method Label */}
+                      <span className={`text-[8px] font-black italic tracking-tighter
+                        ${method.color === 'orange' ? 'text-orange-400' : 
+                          method.color === 'green' ? 'text-green-400' : 
+                          method.color === 'blue' ? 'text-blue-400' : 
+                          method.color === 'purple' ? 'text-purple-400' : 
+                          method.color === 'indigo' ? 'text-indigo-400' : 
+                          'text-teal-400'}`}>{method.name}</span>
+                      
+                      {/* Skeleton Content "Filling" */}
+                      <div className="flex-1 flex flex-col gap-1 pt-1">
+                         <div className="h-1 w-full bg-zinc-800/50 rounded-xs" />
+                         <div className="h-1 w-[85%] bg-zinc-800/50 rounded-xs" />
+                         <div className="h-1 w-[60%] bg-zinc-800/50 rounded-xs" />
+                         <div className={`mt-auto h-2 w-full rounded-xs border
+                           ${method.color === 'orange' ? 'bg-orange-500/10 border-orange-500/20' : 
+                             method.color === 'green' ? 'bg-green-500/10 border-green-500/20' : 
+                             method.color === 'blue' ? 'bg-blue-500/10 border-blue-500/20' : 
+                             method.color === 'purple' ? 'bg-purple-500/10 border-purple-500/20' : 
+                             method.color === 'indigo' ? 'bg-indigo-500/10 border-indigo-500/20' : 
+                             'bg-teal-500/10 border-teal-500/20'}`} />
+                      </div>
+                    </div>
+                  ))}
                </div>
 
                {/* High Speed Scanning Beam */}
-               <div className="absolute inset-0 bg-linear-to-r from-transparent via-blue-400/30 to-transparent -translate-x-full animate-speed-scan opacity-0 group-hover:opacity-100 group-active:opacity-100" />
-            </div>
-          </span>
+               <div className="absolute inset-0 bg-linear-to-r from-transparent via-blue-400/40 to-transparent -translate-x-full animate-speed-scan opacity-0 group-hover:opacity-100 group-[.is-playing]:opacity-100 group-active:opacity-100" />
+              </>
+            }
+          >
+            Performance Lab
+          </HeroAnimation>
         </h1>
         <p className="text-zinc-400 max-w-2xl mx-auto text-lg sm:text-xl leading-relaxed font-medium px-6">
           Advanced showcase of Rendering Strategies & Performance Patterns in

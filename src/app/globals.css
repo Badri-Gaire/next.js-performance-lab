@@ -106,5 +106,28 @@ body {
   .animate-flash {
     animation: flash 0.2s ease-in-out infinite;
   }
-}
 
+  @keyframes fall-and-fade {
+    0% { transform: translateY(-30px) scale(1.1); opacity: 0; }
+    20% { opacity: 0.8; }
+    80% { opacity: 0.8; transform: translateY(10px) scale(0.9); }
+    100% { transform: translateY(30px) scale(0.8); opacity: 0; }
+  }
+
+  .animate-fall-and-fade {
+    animation: fall-and-fade 0.4s ease-in infinite;
+  }
+
+  @keyframes random-float {
+    0% { transform: translateY(40px) translateX(0) scale(0.8); opacity: 0; }
+    20% { opacity: 1; transform: translateY(10px) translateX(-15px) scale(1); }
+    40% { transform: translateY(-20px) translateX(10px) scale(1.05); }
+    60% { transform: translateY(-50px) translateX(-10px) scale(1); }
+    80% { opacity: 1; transform: translateY(-80px) translateX(15px) scale(0.95); }
+    100% { transform: translateY(-110px) translateX(0) scale(0.9); opacity: 0; }
+  }
+
+  .animate-random-float {
+    animation: random-float 1.8s ease-in-out infinite;
+  }
+}
