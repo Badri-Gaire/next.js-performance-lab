@@ -176,7 +176,7 @@ export default function Home() {
         </div>
         <h1 className="text-5xl sm:text-6xl md:text-8xl font-black tracking-tight text-white leading-[1.1] px-4">
           Next.js <br />
-          <span className="relative group block sm:inline mt-2 sm:mt-0 px-4 cursor-default py-1 min-w-[280px] h-[1em] sm:h-auto inline-flex items-center justify-center overflow-visible">
+          <span className="relative group block sm:inline mt-2 sm:mt-0 px-4 cursor-pointer py-1 min-w-[280px] h-[1em] sm:h-auto inline-flex items-center justify-center overflow-visible select-none outline-none">
             {/* The Text - Entirely hidden on hover */}
             <span className="relative z-10 bg-linear-to-r from-blue-400 to-indigo-600 bg-clip-text text-transparent uppercase italic tracking-tighter transition-all duration-300 group-hover:opacity-0 group-active:opacity-0 group-hover:scale-50 group-active:scale-50 group-hover:blur-sm group-active:blur-sm px-2">
               Performance Lab
