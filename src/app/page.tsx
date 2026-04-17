@@ -170,7 +170,7 @@ export default function Home() {
       {/* Hero Section */}
       <section className="text-center space-y-8 md:py-16 relative">
         <div className="absolute inset-0 bg-blue-600/5 blur-[120px] -z-10" />
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-zinc-900 border border-zinc-800 text-[11px] font-bold text-blue-400 uppercase tracking-widest mb-4 shadow-xl">
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-zinc-900 border border-zinc-800 text-[11px] font-bold text-blue-400 uppercase tracking-widest my-4 shadow-xl">
           <Cpu className="w-3.5 h-3.5" />
           Advanced System Architecture
         </div>
