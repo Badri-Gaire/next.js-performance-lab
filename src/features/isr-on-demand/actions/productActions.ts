@@ -9,7 +9,7 @@ export async function getProducts(): Promise<Product[]> {
   const products = await prisma.product.findMany({
     orderBy: { createdAt: "desc" },
   });
-  return products.map(p => ({
+  return products.map((p: any) => ({
     id: p.id,
     name: p.name,
     description: p.description,
