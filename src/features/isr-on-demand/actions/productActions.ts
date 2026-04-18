@@ -80,9 +80,9 @@ export async function addProduct(
     revalidateTag("isr-products", {});
 
     return { success: true };
-  } catch (error) {
+  } catch (error: any) {
     console.error("Error adding product:", error);
-    return { success: false, error: "Failed to add product" };
+    return { success: false, error: error?.message || String(error) || "Failed to add product" };
   }
 }
 

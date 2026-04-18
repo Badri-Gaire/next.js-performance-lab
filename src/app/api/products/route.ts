@@ -64,8 +64,8 @@ export async function POST(request: Request) {
     }).catch(console.error);
 
     return NextResponse.json(product);
-  } catch (error) {
+  } catch (error: any) {
     console.error("Failed to add product:", error);
-    return NextResponse.json({ error: "Failed to add product" }, { status: 500 });
+    return NextResponse.json({ error: error?.message || "Failed to add product", details: String(error) }, { status: 500 });
   }
 }
