@@ -12,7 +12,7 @@ export async function revalidateInventoryAction() {
   
   // 2. Invalidate the specific tag used by Zone 2 components
   // @ts-ignore - Next.js 16 typing mismatch in some build environments
-  revalidateTag('inventory-data');
+  revalidateTag('inventory-data', {});
   
   return { success: true };
 }

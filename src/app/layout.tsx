@@ -100,7 +100,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${inter.variable} ${lexend.variable} antialiased font-sans bg-black text-white min-h-screen flex flex-col`}
+        className={`${inter.variable} ${lexend.variable} antialiased font-sans bg-black text-white min-h-screen flex flex-col max-w-7xl mx-auto`}
       >
         <header className="sticky top-0 z-50 border-b border-zinc-900 bg-black/80 backdrop-blur-md">
           <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between gap-4">
@@ -141,7 +141,7 @@ export default function RootLayout({
           </div>
         </header>
 
-        <main className="flex-1 max-w-7xl mx-auto px-2 md:px-6 md:py-12 w-full">
+        <main className="flex-1 w-full">
           {children}
         </main>
 

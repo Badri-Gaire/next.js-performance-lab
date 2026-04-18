@@ -43,3 +43,10 @@ next-env.d.ts
 # project specific
 PROJECT_MANIFEST.md
 SEO.md
+SKILLS.md
+
+/src/generated/prisma
+
+/src/generated/prisma
+
+/src/generated/prisma

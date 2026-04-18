@@ -13,6 +13,7 @@ import {
   Boxes,
   Activity,
   ShieldAlert,
+  RefreshCcw,
 } from "lucide-react";
 import { RenderingBadge } from "@/features/rendering/components/RenderingBadge";
 import { HeroAnimation } from "@/features/rendering/components/HeroAnimation";
@@ -167,7 +168,7 @@ export default function Home() {
   const architecture = demos.slice(10);
 
   return (
-    <div className="space-y-24 animate-in fade-in slide-in-from-bottom-6 duration-1000 overflow-x-hidden">
+    <div className="max-w-7xl mx-auto px-4 md:px-8 py-12 space-y-24 animate-in fade-in slide-in-from-bottom-6 duration-1000 overflow-x-hidden">
       {/* Hero Section */}
       <section className="text-center space-y-8 md:py-16 relative">
         <div className="absolute inset-0 bg-blue-600/5 blur-[120px] -z-10" />
@@ -294,7 +295,7 @@ export default function Home() {
         </h1>
         <p className="text-zinc-400 max-w-2xl mx-auto text-lg sm:text-xl leading-relaxed font-medium px-6">
           Advanced showcase of Rendering Strategies & Performance Patterns in
-          Next.js 15+ and modern architecture.
+          Next.js 16 and modern architecture.
         </p>
 
         <div className="flex justify-center pt-4">
@@ -306,6 +307,67 @@ export default function Home() {
             <ArrowRight className="w-5 h-5" />
           </Link>
         </div>
+      </section>
+
+      {/* Featured Lab: ISR on Demand */}
+      <section className="px-4 animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-300">
+        <Link 
+          href="/rendering/isr-on-demand"
+          className="group relative block p-1 bg-linear-to-br from-blue-500/20 via-transparent to-indigo-500/20 rounded-[2.5rem] transition-all hover:scale-[1.01] active:scale-95"
+        >
+          <div className="relative overflow-hidden bg-zinc-950 rounded-[2.2rem] p-8 sm:p-12 border border-zinc-900 group-hover:border-blue-500/30 transition-colors">
+            {/* Background Decorative Elements */}
+            <div className="absolute top-0 right-0 w-64 h-64 bg-blue-500/5 blur-[100px] -z-10 group-hover:bg-blue-500/10 transition-colors" />
+            <div className="absolute bottom-0 left-0 w-64 h-64 bg-indigo-500/5 blur-[100px] -z-10 group-hover:bg-indigo-500/10 transition-colors" />
+            
+            <div className="flex flex-col lg:flex-row items-center gap-12">
+              <div className="space-y-6 flex-1 text-center lg:text-left">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-[10px] font-black text-blue-400 uppercase tracking-[0.2em]">
+                  <span className="relative flex h-2 w-2">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
+                  </span>
+                  New Featured Lab
+                </div>
+                <div className="space-y-2">
+                  <h2 className="text-4xl sm:text-5xl font-black italic tracking-tighter text-white uppercase leading-none">
+                    ISR on Demand <br />
+                    <span className="text-blue-500">with Webhooks</span>
+                  </h2>
+                  <p className="text-zinc-400 text-lg font-medium max-w-xl">
+                    Experience the future of surgical caching. See how real-time data updates trigger instant cache revalidation without rebuilding your site.
+                  </p>
+                </div>
+                <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-4">
+                  <div className="flex items-center gap-2 px-4 py-2 rounded-xl bg-zinc-900 border border-zinc-800 text-[10px] font-bold text-zinc-400">
+                    <RefreshCcw className="w-3.5 h-3.5" />
+                    SURGICAL PURGE
+                  </div>
+                  <div className="flex items-center gap-2 px-4 py-2 rounded-xl bg-zinc-900 border border-zinc-800 text-[10px] font-bold text-zinc-400">
+                    <Database className="w-3.5 h-3.5" />
+                    ON-DEMAND SYNC
+                  </div>
+                </div>
+              </div>
+
+              {/* Visual Preview Placeholder */}
+              <div className="relative w-full lg:w-[400px] aspect-square rounded-3xl bg-zinc-900/50 border border-zinc-800 overflow-hidden flex items-center justify-center group-hover:border-blue-500/20 transition-all">
+                <div className="absolute inset-0 bg-linear-to-br from-blue-500/5 to-transparent" />
+                <div className="relative space-y-4 text-center">
+                  <div className="w-20 h-20 rounded-2xl bg-zinc-950 border border-zinc-800 flex items-center justify-center mx-auto shadow-2xl group-hover:scale-110 transition-transform duration-500">
+                    <RefreshCcw className="w-10 h-10 text-blue-500 animate-spin-slow" />
+                  </div>
+                  <div className="space-y-1">
+                    <div className="h-2 w-24 bg-zinc-800 rounded-full mx-auto overflow-hidden">
+                      <div className="h-full bg-blue-500 w-1/2 animate-speed-scan" />
+                    </div>
+                    <div className="h-2 w-16 bg-zinc-800 rounded-full mx-auto" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </Link>
       </section>
 
       {/* Methods Section - Compact Cards */}
