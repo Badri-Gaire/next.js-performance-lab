@@ -56,11 +56,12 @@ export default function AddProductModal({ isOpen, onClose, onAdd, isAdding }: Ad
             initial={{ scale: 0.9, opacity: 0, y: 20 }}
             animate={{ scale: 1, opacity: 1, y: 0 }}
             exit={{ scale: 0.9, opacity: 0, y: 20 }}
-            className="relative w-full max-w-2xl overflow-hidden rounded-2xl border border-white/10 bg-[#0a0a0a] shadow-2xl"
+            className="relative w-full max-w-2xl max-h-[95dvh] sm:max-h-[90vh] flex flex-col overflow-hidden rounded-2xl border border-white/10 bg-[#0a0a0a] shadow-2xl"
           >
-            <div className="flex items-center justify-between border-b border-white/10 p-6">
+            <div className="flex-none flex items-center justify-between border-b border-white/10 p-4 sm:p-6">
               <h2 className="text-xl font-bold text-white">Add New Product</h2>
               <button
+                type="button"
                 onClick={onClose}
                 className="rounded-full p-2 text-white/50 hover:bg-white/10 hover:text-white transition-colors"
               >
@@ -68,9 +69,10 @@ export default function AddProductModal({ isOpen, onClose, onAdd, isAdding }: Ad
               </button>
             </div>
 
-            <form onSubmit={handleSubmit} className="p-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                {/* Left Side: Image Preview */}
+            <form onSubmit={handleSubmit} className="flex flex-col flex-1 overflow-hidden">
+              <div className="flex-1 overflow-y-auto p-4 sm:p-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
+                  {/* Left Side: Image Preview */}
                 <div className="space-y-4">
                   <label className="block text-sm font-medium text-white/50 uppercase tracking-wider">
                     Asset Preview
@@ -146,8 +148,9 @@ export default function AddProductModal({ isOpen, onClose, onAdd, isAdding }: Ad
                   </div>
                 </div>
               </div>
+            </div>
 
-              <div className="mt-8 flex justify-end gap-4 border-t border-white/10 pt-6">
+            <div className="flex-none flex justify-end gap-3 sm:gap-4 border-t border-white/10 p-4 sm:p-6 bg-[#0a0a0a]">
                 <button
                   type="button"
                   onClick={onClose}

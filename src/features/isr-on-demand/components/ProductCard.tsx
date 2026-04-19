@@ -21,9 +21,9 @@ export function ProductCard({ product }: ProductCardProps) {
       
       {/* Top Header */}
       <div className="flex items-center justify-between px-1">
-         <span className="text-xs font-bold text-zinc-400 uppercase tracking-widest flex items-center gap-1">
+         {/* <span className="text-xs font-bold text-zinc-400 uppercase tracking-widest flex items-center gap-1">
            Edit <Edit2 className="w-3 h-3" />
-         </span>
+         </span> */}
          {isNew && (
             <span className="px-2 py-0.5 rounded-sm bg-blue-500 text-white text-[9px] font-bold uppercase tracking-wider animate-pulse">
               New
@@ -44,7 +44,7 @@ export function ProductCard({ product }: ProductCardProps) {
 
       {/* Product Info */}
       <div className="space-y-2 px-1 pb-2">
-        <h3 className="text-base font-bold text-white truncate">
+        <h3 className="text-base font-bold text-white truncate capitalize">
           {product.name}
         </h3>
         <div className="space-y-1.5">

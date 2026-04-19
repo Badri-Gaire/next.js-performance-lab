@@ -64,10 +64,10 @@ export function IsrDemoContainer() {
           )}
         </div>
         <div className="flex items-center gap-2 px-6 text-xs font-mono text-zinc-500 animate-in fade-in slide-in-from-left-2 duration-500">
-          <ChevronRight className="w-3 h-3 text-blue-500" />
+          {isAdding && <ChevronRight className="w-3 h-3 text-blue-500" />}
           {isAdding ? "Posting new product..." : lastNotification 
             ? `Product with id ${lastNotification.id} has been change on time: ${lastNotification.timestamp}` 
-            : "Product with id ... has been change on time: ..."}
+            : "Product added. Revalidate timer is set to " + revalidateTime + " seconds. You can change it in the Revalidation Controller section."}
         </div>
       </div>
 
@@ -77,9 +77,6 @@ export function IsrDemoContainer() {
           {/* Showcase Section */}
           <div className="space-y-6">
             <div className="flex flex-col space-y-4">
-              <h2 className="text-zinc-400 text-sm font-semibold tracking-wide">
-                Showcase After Product Add From User to all Pipeline
-              </h2>
               <div className="flex flex-wrap items-center gap-4">
                 <h3 className="text-5xl font-black italic tracking-tighter text-white">
                   Add product
@@ -147,12 +144,6 @@ export function IsrDemoContainer() {
         <div className="lg:col-span-7 space-y-6 pl-0 lg:pl-10 lg:border-l-2 lg:border-zinc-800">
           
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-            <div className="inline-flex items-center justify-center px-6 py-2 rounded-lg border-2 border-zinc-700 bg-zinc-900">
-              <span className="text-sm font-bold text-zinc-300 uppercase tracking-widest">
-                Cache changed
-              </span>
-            </div>
-            
             <div className={`flex items-center gap-3 px-4 py-2 rounded-xl border transition-all duration-500 ${
               cacheStatus === 'Fresh' 
                 ? 'bg-green-500/10 border-green-500/20 text-green-400' 

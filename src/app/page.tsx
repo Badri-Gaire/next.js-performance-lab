@@ -309,7 +309,50 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Featured Lab: ISR on Demand */}
+     
+
+      {/* Methods Section - Compact Cards */}
+      <section className="space-y-10">
+        <div className="flex items-center gap-4 px-4">
+          <div className="h-px bg-zinc-900 flex-1" />
+          <h2 className="text-xs font-black text-zinc-600 uppercase tracking-[0.3em] italic">
+            Rendering Methods
+          </h2>
+          <div className="h-px bg-zinc-900 flex-1" />
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 px-4">
+          {methods.map((demo) => (
+            <Link
+              key={demo.href}
+              href={demo.href}
+              className="group p-6 rounded-3xl bg-zinc-950 border border-zinc-900 transition-all duration-300 hover:border-zinc-700 hover:bg-zinc-900/40 hover:-translate-y-1 shadow-xl flex flex-col justify-between h-full"
+            >
+              <div>
+                <div
+                  className={`w-10 h-10 rounded-xl ${demo.bg} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform`}
+                >
+                  <demo.icon className={`w-5 h-5 ${demo.color}`} />
+                </div>
+                <h3 className="text-lg font-bold text-white mb-2 group-hover:text-blue-400 transition-colors line-clamp-1">
+                  {demo.title}
+                </h3>
+                <p className="text-zinc-500 text-xs leading-relaxed mb-6 font-medium line-clamp-2">
+                  {demo.description}
+                </p>
+              </div>
+              <div className="flex items-center justify-between">
+                <RenderingBadge
+                  type={demo.type}
+                  className="px-2 py-0.5 text-[10px]"
+                />
+                <ArrowRight className="w-8 h-8 text-zinc-700 group-hover:text-blue-500 group-hover:translate-x-1 transition-all" />
+              </div>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+       {/* Featured Lab: ISR on Demand */}
       <section className="px-4 animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-300">
         <Link 
           href="/rendering/isr-on-demand"
@@ -368,47 +411,6 @@ export default function Home() {
             </div>
           </div>
         </Link>
-      </section>
-
-      {/* Methods Section - Compact Cards */}
-      <section className="space-y-10">
-        <div className="flex items-center gap-4 px-4">
-          <div className="h-px bg-zinc-900 flex-1" />
-          <h2 className="text-xs font-black text-zinc-600 uppercase tracking-[0.3em] italic">
-            Rendering Methods
-          </h2>
-          <div className="h-px bg-zinc-900 flex-1" />
-        </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 px-4">
-          {methods.map((demo) => (
-            <Link
-              key={demo.href}
-              href={demo.href}
-              className="group p-6 rounded-3xl bg-zinc-950 border border-zinc-900 transition-all duration-300 hover:border-zinc-700 hover:bg-zinc-900/40 hover:-translate-y-1 shadow-xl flex flex-col justify-between h-full"
-            >
-              <div>
-                <div
-                  className={`w-10 h-10 rounded-xl ${demo.bg} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform`}
-                >
-                  <demo.icon className={`w-5 h-5 ${demo.color}`} />
-                </div>
-                <h3 className="text-lg font-bold text-white mb-2 group-hover:text-blue-400 transition-colors line-clamp-1">
-                  {demo.title}
-                </h3>
-                <p className="text-zinc-500 text-xs leading-relaxed mb-6 font-medium line-clamp-2">
-                  {demo.description}
-                </p>
-              </div>
-              <div className="flex items-center justify-between">
-                <RenderingBadge
-                  type={demo.type}
-                  className="px-2 py-0.5 text-[10px]"
-                />
-                <ArrowRight className="w-8 h-8 text-zinc-700 group-hover:text-blue-500 group-hover:translate-x-1 transition-all" />
-              </div>
-            </Link>
-          ))}
-        </div>
       </section>
 
       {/* Performance Section */}
