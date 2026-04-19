@@ -3,7 +3,7 @@ generator client {
 }
 
 datasource db {
-  provider  = "postgresql"
+  provider = "postgresql"
 }
 
 model Product {
@@ -17,8 +17,14 @@ model Product {
 }
 
 model RateLimit {
-  id        String   @id @default(uuid())
-  ip        String   @unique
-  count     Int      @default(0)
-  resetAt   DateTime
+  id      String   @id @default(uuid())
+  ip      String   @unique
+  count   Int      @default(0)
+  resetAt DateTime
+}
+
+model LabConfig {
+  id                String   @id @default("default")
+  revalidateSeconds Int      @default(30)
+  updatedAt         DateTime @updatedAt
 }

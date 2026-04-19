@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Plus, Image as ImageIcon, Info } from "lucide-react";
 import Image from "next/image";
@@ -10,6 +10,9 @@ interface AddProductModalProps {
   onClose: () => void;
   onAdd: (name: string, description: string, imageTag: string) => void;
   isAdding: boolean;
+  initialData?: { name: string; description: string; imageTag: string };
+  title?: string;
+  buttonText?: string;
 }
 
 const IMAGE_CATEGORIES = [
@@ -20,10 +23,26 @@ const IMAGE_CATEGORIES = [
   { id: "Speaker", color: "rose", hex: "f43f5e" },
 ];
 
-export default function AddProductModal({ isOpen, onClose, onAdd, isAdding }: AddProductModalProps) {
-  const [name, setName] = useState("");
-  const [description, setDescription] = useState("");
-  const [selectedTag, setSelectedTag] = useState(IMAGE_CATEGORIES[0].id);
+export default function AddProductModal({ 
+  isOpen, 
+  onClose, 
+  onAdd, 
+  isAdding,
+  initialData,
+  title = "Add New Product",
+  buttonText = "Create Product"
+}: AddProductModalProps) {
+  const [name, setName] = useState(initialData?.name || "");
+  const [description, setDescription] = useState(initialData?.description || "");
+  const [selectedTag, setSelectedTag] = useState(initialData?.imageTag || IMAGE_CATEGORIES[0].id);
+
+  useEffect(() => {
+    if (isOpen) {
+      setName(initialData?.name || "");
+      setDescription(initialData?.description || "");
+      setSelectedTag(initialData?.imageTag || IMAGE_CATEGORIES[0].id);
+    }
+  }, [isOpen, initialData]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -59,7 +78,7 @@ export default function AddProductModal({ isOpen, onClose, onAdd, isAdding }: Ad
             className="relative w-full max-w-2xl max-h-[95dvh] sm:max-h-[90vh] flex flex-col overflow-hidden rounded-2xl border border-white/10 bg-[#0a0a0a] shadow-2xl"
           >
             <div className="flex-none flex items-center justify-between border-b border-white/10 p-4 sm:p-6">
-              <h2 className="text-xl font-bold text-white">Add New Product</h2>
+              <h2 className="text-xl font-bold text-white">{title}</h2>
               <button
                 type="button"
                 onClick={onClose}
@@ -168,7 +187,7 @@ export default function AddProductModal({ isOpen, onClose, onAdd, isAdding }: Ad
                   ) : (
                     <Plus size={18} />
                   )}
-                  Create Product
+                  {buttonText}
                 </button>
               </div>
             </form>
