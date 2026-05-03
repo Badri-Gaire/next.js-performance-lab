@@ -31,19 +31,28 @@ export default async function ISRPage() {
     { 
       key: 'Cache-Control', 
       value: 'public, s-maxage=30, stale-while-revalidate', 
-      description: 'The CDN caches the page for 30s. If requested after 30s, it serves stale content while updating in the background.' 
+      description: 'The CDN caches the page for 30s. If requested after 30s, it serves stale content while updating in the background.',
+      lifecycle: { stage: 'Edge', impact: 'Prevents the origin server from re-rendering for every visitor.' }
     },
     { 
       key: 'X-Vercel-Cache', 
       value: 'STALE', 
       description: 'The request was served from cache, but a background revalidation was triggered.',
-      isVercelSpecific: true 
+      isVercelSpecific: true,
+      lifecycle: { stage: 'Edge', impact: 'Maintains zero-latency TTFB even when data is being updated.' }
     },
     { 
       key: 'X-Nextjs-Stale-Time', 
       value: '300', 
       description: 'The window in which stale content can be served while revalidating.',
-      isVercelSpecific: true 
+      isVercelSpecific: true,
+      lifecycle: { stage: 'Origin', impact: 'Defined by your cacheLife profile in the component code.' }
+    },
+    { 
+      key: 'Age', 
+      value: '42', 
+      description: 'The number of seconds the object has been in the CDN cache.',
+      lifecycle: { stage: 'Client', impact: 'Tells the browser how old the cached resource is.' }
     },
   ];
 

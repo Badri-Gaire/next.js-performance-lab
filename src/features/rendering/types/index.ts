@@ -18,6 +18,10 @@ export interface ExpectedHeader {
   value: string;
   description: string;
   isVercelSpecific?: boolean;
+  lifecycle?: {
+    stage: 'Request' | 'Edge' | 'Origin' | 'Client';
+    impact: string;
+  };
 }
 
 export interface RenderingMeta {

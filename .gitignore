@@ -44,9 +44,6 @@ next-env.d.ts
 PROJECT_MANIFEST.md
 SEO.md
 SKILLS.md
-
-/src/generated/prisma
-
-/src/generated/prisma
+WEBHOOK_SECRET_CONFIG.md
 
 /src/generated/prisma

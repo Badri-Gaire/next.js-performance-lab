@@ -25,24 +25,28 @@ export default async function SSGPage() {
     { 
       key: 'Cache-Control', 
       value: 'public, max-age=0, must-revalidate', 
-      description: 'The browser is told to always check with the server (revalidate), but the CDN handles the caching.' 
+      description: 'The browser is told to always check with the server (revalidate), but the CDN handles the caching.',
+      lifecycle: { stage: 'Edge', impact: 'Enables instant updates by forcing browser revalidation while CDN stays cached.' }
     },
     { 
       key: 'X-Vercel-Cache', 
       value: 'HIT', 
       description: 'Indicates the page was served from Vercel\'s Edge Cache without hitting the origin server.',
-      isVercelSpecific: true 
+      isVercelSpecific: true,
+      lifecycle: { stage: 'Edge', impact: 'Reduces TTFB to milliseconds by avoiding server computation.' }
     },
     { 
       key: 'X-Nextjs-Prerender', 
       value: '1', 
       description: 'Confirms that this page was pre-rendered at build time (SSG).',
-      isVercelSpecific: true 
+      isVercelSpecific: true,
+      lifecycle: { stage: 'Origin', impact: 'Determined at build-time by the "use cache" directive.' }
     },
     { 
       key: 'Age', 
       value: '722', 
-      description: 'The number of seconds the object has been in the CDN cache.' 
+      description: 'The number of seconds the object has been in the CDN cache.',
+      lifecycle: { stage: 'Client', impact: 'Indicates how long the static asset has lived on the edge node.' }
     },
   ];
 
