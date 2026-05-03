@@ -1,10 +1,12 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { RenderingType } from '../types';
+import { ExpectedHeader, RenderingType } from '../types';
 import { RenderingBadge } from './RenderingBadge';
 import { formatDate } from '@/lib/utils';
 import { Clock, Cpu, Layout, Activity, MousePointer2 } from 'lucide-react';
+
+import { ResponseHeaderVisualizer } from './ResponseHeaderVisualizer';
 
 interface RenderingHeaderProps {
   type: RenderingType;
@@ -12,9 +14,17 @@ interface RenderingHeaderProps {
   description: string;
   strategyMarkdown: string;
   serverTime?: string; // Optional: provided by server components
+  expectedHeaders?: ExpectedHeader[];
 }
 
-export function RenderingHeader({ type, title, description, strategyMarkdown, serverTime }: RenderingHeaderProps) {
+export function RenderingHeader({ 
+  type, 
+  title, 
+  description, 
+  strategyMarkdown, 
+  serverTime,
+  expectedHeaders = []
+}: RenderingHeaderProps) {
   const [hydrationState, setHydrationState] = useState({
     mounted: false,
     // Use serverTime if provided, otherwise fallback to hydration time
@@ -117,26 +127,11 @@ export function RenderingHeader({ type, title, description, strategyMarkdown, se
           </p>
         </div>
 
-        <div className="p-6 rounded-2xl bg-zinc-950 border border-zinc-800 border-dashed hover:border-zinc-600 transition-all group lg:col-span-1 md:col-span-2">
-          <h3 className="text-xs font-black text-zinc-500 uppercase tracking-widest flex items-center gap-2 mb-3">
-            <MousePointer2 className="w-4 h-4 text-orange-500" />
-            Inspect Network
-          </h3>
-          <p className="text-[11px] text-zinc-500 leading-relaxed font-semibold">
-            Open DevTools {'>'} Network. Look for 
-            <code className="text-orange-400 mx-1 bg-zinc-900 px-1 py-0.5 rounded">Cache-Control</code> 
-            header. For {type}, you will see 
-            <span className="text-zinc-300 ml-1 italic font-mono uppercase">
-              {type === 'SSR' || type === 'RSC' || type === 'PPR' || type === 'CSR' || type === 'HYBRID'
-                ? 'no-store / no-cache' 
-                : type === 'CRP'
-                  ? 's-maxage=31536000'
-                  : type === 'SSG' 
-                    ? 'public, max-age=31536000' 
-                    : 's-maxage=30, stale-while-revalidate'}
-            </span>
-          </p>
-        </div>
+        {expectedHeaders.length > 0 && (
+          <div className="lg:col-span-3">
+            <ResponseHeaderVisualizer type={type} headers={expectedHeaders} />
+          </div>
+        )}
       </div>
     </div>
   );

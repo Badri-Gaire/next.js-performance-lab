@@ -6,6 +6,7 @@ import { NextTopic } from '@/features/shared/components/NextTopic';
 import { Metadata } from 'next';
 import { Database } from 'lucide-react';
 import { connection } from 'next/server';
+import { ExpectedHeader } from '@/features/rendering/types';
 
 export const metadata: Metadata = {
   title: "SSR Architecture",
@@ -21,6 +22,26 @@ export default async function SSRPage() {
   const requestTime = new Date().toISOString();
   // We pass cache: 'no-store' to ensure the database call is NEVER cached
   const products = await getProducts(8, 1000, { cache: 'no-store' }); 
+
+  const ssrHeaders: ExpectedHeader[] = [
+    { 
+      key: 'Cache-Control', 
+      value: 'private, no-cache, no-store, max-age=0, must-revalidate', 
+      description: 'Standard dynamic behavior. Tells both the browser and CDN never to store the response.' 
+    },
+    { 
+      key: 'X-Vercel-Cache', 
+      value: 'MISS', 
+      description: 'The request bypassed the edge cache and was handled by your origin server (Compute).',
+      isVercelSpecific: true 
+    },
+    { 
+      key: 'X-Matched-Path', 
+      value: '/rendering/ssr', 
+      description: 'The internal route path matched by the Next.js router.',
+      isVercelSpecific: true 
+    },
+  ];
 
   const ssrSteps: { icon: 'User' | 'Server' | 'Database' | 'Globe'; title: string; desc: string }[] = [
     { icon: 'User', title: 'Request Received', desc: 'Browser requests the page. No cached version is served.' },
@@ -50,6 +71,7 @@ export default async function Page() {
         description="In Next.js 16 with dynamicIO, this is the default state: Dynamic by Default. The server executes your logic on every request, ensuring fresh content without any specialized configuration."
         serverTime={requestTime}
         strategyMarkdown="Fetch data at request time using `force-dynamic` or `cache: 'no-store'`. Best for dynamic content that changes per-user or per-request."
+        expectedHeaders={ssrHeaders}
       />
 
       <CodeBlueprint 

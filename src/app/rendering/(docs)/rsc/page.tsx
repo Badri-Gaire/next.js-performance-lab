@@ -7,6 +7,7 @@ import { Cpu, Box, Zap, History, Code2, ArrowDown, Database } from 'lucide-react
 import { Metadata } from 'next';
 import { getProducts } from '@/features/rendering/services/product-service';
 import { ProductCard } from '@/features/rendering/components/ProductCard';
+import { ExpectedHeader } from '@/features/rendering/types';
 
 export const metadata: Metadata = {
   title: "RSC & Waterfalls",
@@ -19,6 +20,31 @@ export default async function RSCPage() {
   'use cache'; // ⚡ Next.js 16 Optimization: Explicitly cache this Server Component
   
   const products = await getProducts(4, 800);
+
+  const rscHeaders: ExpectedHeader[] = [
+    { 
+      key: 'Cache-Control', 
+      value: 'public, max-age=0, must-revalidate', 
+      description: 'The browser revalidates, but the RSC payload is cached at the Edge via "use cache".' 
+    },
+    { 
+      key: 'X-Vercel-Cache', 
+      value: 'HIT', 
+      description: 'The RSC data was served from the Edge cache, making the "server" logic nearly zero-latency.',
+      isVercelSpecific: true 
+    },
+    { 
+      key: 'Content-Type', 
+      value: 'text/x-component', 
+      description: 'The specialized MIME type for React Server Component serialized data.' 
+    },
+    { 
+      key: 'X-Nextjs-Prerender', 
+      value: '1', 
+      description: 'Indicates the RSC output was generated during the build process.',
+      isVercelSpecific: true 
+    },
+  ];
 
   const rscSteps: { icon: 'Server' | 'Database' | 'Layers' | 'Globe'; title: string; desc: string }[] = [
     { icon: 'Server', title: 'Server Execution', desc: 'The component executes ONLY on the server. Zero JS is sent to the client for this logic.' },
@@ -50,6 +76,7 @@ export default async function Page() {
         title="RSC Architecture & Waterfalls"
         description="React Server Components (RSC) are now Dynamic by Default in Next.js 16. While they eliminate client-side waterfalls, they execute on the server for every request unless explicitly optimized with the 'use cache' directive."
         strategyMarkdown="Modern Standard: Server-First rendering. In the latest Next.js versions, we shift from 'guessing' cache-ability to an explicit 'Opt-In' performance model."
+        expectedHeaders={rscHeaders}
       />
 
       <CodeBlueprint 

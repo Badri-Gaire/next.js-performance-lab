@@ -5,6 +5,7 @@ import { CodeBlueprint } from '@/features/rendering/components/CodeBlueprint';
 import { NextTopic } from '@/features/shared/components/NextTopic';
 import { Metadata } from 'next';
 import { Layout } from 'lucide-react';
+import { ExpectedHeader } from '@/features/rendering/types';
 
 export const metadata: Metadata = {
   title: 'SSG Guide',
@@ -19,6 +20,31 @@ export default async function SSGPage() {
   'use cache'; // 🟢 Next.js 16: Explicitly opt-in to Static Generation (Dynamic by Default model)
   const buildTime = new Date().toISOString();
   const products = await getProducts(8, 0); 
+
+  const ssgHeaders: ExpectedHeader[] = [
+    { 
+      key: 'Cache-Control', 
+      value: 'public, max-age=0, must-revalidate', 
+      description: 'The browser is told to always check with the server (revalidate), but the CDN handles the caching.' 
+    },
+    { 
+      key: 'X-Vercel-Cache', 
+      value: 'HIT', 
+      description: 'Indicates the page was served from Vercel\'s Edge Cache without hitting the origin server.',
+      isVercelSpecific: true 
+    },
+    { 
+      key: 'X-Nextjs-Prerender', 
+      value: '1', 
+      description: 'Confirms that this page was pre-rendered at build time (SSG).',
+      isVercelSpecific: true 
+    },
+    { 
+      key: 'Age', 
+      value: '722', 
+      description: 'The number of seconds the object has been in the CDN cache.' 
+    },
+  ];
 
   const ssgSteps: { icon: 'Cpu' | 'Package' | 'Cloud' | 'Globe'; title: string; desc: string }[] = [
     { icon: 'Cpu', title: 'Build Time', desc: 'Next.js fetches data and generates HTML during "npm run build".' },
@@ -48,6 +74,7 @@ export default async function Page() {
         description="With Next.js 16, everything is Dynamic by Default. We now use 'use cache' to explicitly pre-render this page at build time. This ensures you receive a pre-built HTML file from the CDN nearly instantly."
         serverTime={buildTime}
         strategyMarkdown="Static Opt-In: Using 'use cache', we manually restore the SSG behavior in the modern dynamic-first pipeline."
+        expectedHeaders={ssgHeaders}
       />
 
       <CodeBlueprint 

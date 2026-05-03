@@ -9,6 +9,7 @@ import { RefreshCcw } from 'lucide-react';
 import { NextTopic } from '@/features/shared/components/NextTopic';
 import { Metadata } from 'next';
 import { cacheLife } from 'next/cache';
+import { ExpectedHeader } from '@/features/rendering/types';
 
 export const metadata: Metadata = {
   title: "ISR Patterns",
@@ -25,6 +26,26 @@ export default async function ISRPage() {
 
   const revalidationTime = new Date().toISOString();
   const products = await getProducts(8, 0);
+
+  const isrHeaders: ExpectedHeader[] = [
+    { 
+      key: 'Cache-Control', 
+      value: 'public, s-maxage=30, stale-while-revalidate', 
+      description: 'The CDN caches the page for 30s. If requested after 30s, it serves stale content while updating in the background.' 
+    },
+    { 
+      key: 'X-Vercel-Cache', 
+      value: 'STALE', 
+      description: 'The request was served from cache, but a background revalidation was triggered.',
+      isVercelSpecific: true 
+    },
+    { 
+      key: 'X-Nextjs-Stale-Time', 
+      value: '300', 
+      description: 'The window in which stale content can be served while revalidating.',
+      isVercelSpecific: true 
+    },
+  ];
 
   const isrSteps: { icon: 'Globe' | 'RefreshCcw' | 'Server' | 'Database'; title: string; desc: string }[] = [
     { icon: 'Globe', title: 'Cache Hit', desc: 'The component is served from the Unified Cache.' },
@@ -63,6 +84,7 @@ export default async function Page() {
         description="With cacheComponents enabled, we no longer use page-level exports. Instead, we use the 'use cache' directive and the 'cacheLife' profile to define our revalidation window."
         serverTime={revalidationTime}
         strategyMarkdown="Unified ISR: Uses the 'use cache' directive paired with 'cacheLife' for granular, component-level revalidation."
+        expectedHeaders={isrHeaders}
       />
 
       <CodeBlueprint 

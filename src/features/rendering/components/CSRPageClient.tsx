@@ -11,7 +11,27 @@ import { NextTopic } from '@/features/shared/components/NextTopic';
 import { MousePointer2, Loader2, Search } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
+import { ExpectedHeader } from '@/features/rendering/types';
+
 export function CSRPageClient() {
+  const csrHeaders: ExpectedHeader[] = [
+    { 
+      key: 'Cache-Control', 
+      value: 'public, max-age=0, must-revalidate', 
+      description: 'The HTML shell is served instantly, but it tells the browser to always check for updates.' 
+    },
+    { 
+      key: 'Vary', 
+      value: 'Accept-Encoding, Cookie', 
+      description: 'Tells the cache that the response might differ based on the request headers.' 
+    },
+    { 
+      key: 'X-Vercel-Cache', 
+      value: 'HIT', 
+      description: 'The initial HTML shell (the "empty" page) is served from the edge cache.',
+      isVercelSpecific: true 
+    },
+  ];
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState('');
@@ -62,6 +82,7 @@ export default function Page() {
         title="Client-Side Rendering"
         description="The browser receives an empty shell and then fetches the data using JavaScript. This allows for rich interactive experiences like real-time filtering and complex state management, but can be slower on initial load."
         strategyMarkdown="Rendered entirely in the browser using `useEffect`. Ideal for interactive dashboards, search interfaces, and private user areas."
+        expectedHeaders={csrHeaders}
       />
 
       <CodeBlueprint 

@@ -10,6 +10,7 @@ import { Suspense } from 'react';
 import { Sparkles, Layout, CheckCircle2, XCircle, Info, HelpCircle, Zap } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Metadata } from 'next';
+import { ExpectedHeader } from '@/features/rendering/types';
 
 export const metadata: Metadata = {
   title: "PPR (Partial Prerendering)",
@@ -19,6 +20,31 @@ export const metadata: Metadata = {
 };
 
 export default async function PPRPage() {
+  const pprHeaders: ExpectedHeader[] = [
+    { 
+      key: 'Cache-Control', 
+      value: 'public, max-age=0, must-revalidate', 
+      description: 'The static shell is served from CDN cache, but the stream allows for dynamic holes.' 
+    },
+    { 
+      key: 'X-Vercel-Cache', 
+      value: 'HIT', 
+      description: 'The static portion (shell) of the page was served instantly from the Edge.',
+      isVercelSpecific: true 
+    },
+    { 
+      key: 'Transfer-Encoding', 
+      value: 'chunked', 
+      description: 'Indicates the response is being streamed in chunks (the "holes" filling in).' 
+    },
+    { 
+      key: 'X-Nextjs-Prerender', 
+      value: '1', 
+      description: 'Confirms that a static shell exists for this route.',
+      isVercelSpecific: true 
+    },
+  ];
+
   const useCaseData = [
     { title: 'Landing Pages', use: true, reason: 'Instant SEO Shell + Promo data' },
     { title: 'User Settings', use: false, reason: 'Highly private, no static benefit' },
@@ -33,6 +59,7 @@ export default async function PPRPage() {
         title="Partial Prerendering (PPR)"
         description="PPR is the ultimate rendering optimization. It pre-renders the static shell of your page at build time and streams dynamic content into 'holes' as soon as it's ready."
         strategyMarkdown="Evolutionary Path: Introduced as experimental in **Next.js 14**, refined in **v15**, and now fully integrated with the **Cache Components** model in **v16**. See our [Migration Guide](./NEXTJS_16_MIGRATION.md) for build details."
+        expectedHeaders={pprHeaders}
       />
 
       {/* The PPR Evolution: Standard vs Unified */}

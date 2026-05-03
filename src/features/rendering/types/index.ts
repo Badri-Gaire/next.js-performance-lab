@@ -13,10 +13,18 @@ export interface Product {
 
 export type RenderingType = 'SSR' | 'SSG' | 'ISR' | 'CSR' | 'PPR' | 'RSC' | 'CRP' | 'DOM' | 'HYBRID' | 'ERROR' | 'CACHE';
 
+export interface ExpectedHeader {
+  key: string;
+  value: string;
+  description: string;
+  isVercelSpecific?: boolean;
+}
+
 export interface RenderingMeta {
   type: RenderingType;
   title: string;
   description: string;
   benefit: string;
   strategy: string;
+  expectedHeaders: ExpectedHeader[];
 }
